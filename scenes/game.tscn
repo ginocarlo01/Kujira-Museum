@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3ifq7sb13vbw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
+bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dls55"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jjdsp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Rows" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+
+[node name="GameInfo" type="PanelContainer" parent="Background/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dls55")
