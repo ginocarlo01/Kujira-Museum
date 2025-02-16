@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://currxaw7xo502"]
+
+[ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_dbqja"]
+[ext_resource type="Script" path="res://scenes/room.gd" id="1_my3ek"]
+
+[node name="Room" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 200)
+offset_right = 250.0
+offset_bottom = 200.0
+script = ExtResource("1_my3ek")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="RoomName" type="Label" parent="MarginContainer/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_dbqja")
+theme_override_font_sizes/font_size = 24
+text = "Room Name"
+horizontal_alignment = 1
+
+[node name="RoomDescription" type="Label" parent="MarginContainer/Rows"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_dbqja")
+theme_override_font_sizes/font_size = 16
+text = "This is the description"
+autowrap_mode = 3

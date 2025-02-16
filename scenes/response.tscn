@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c08gthf74m502"]
+
+[ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_2aojf"]
+
+[node name="Response" type="Label"]
+theme_override_fonts/font = ExtResource("1_2aojf")
+theme_override_font_sizes/font_size = 28
+text = "This is the response"
+autowrap_mode = 3

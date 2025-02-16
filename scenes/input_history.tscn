@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2yalhval7dis"]
+
+[ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_xj2rp"]
+
+[node name="InputHistory" type="Label"]
+theme_override_colors/font_color = Color(0.61339, 0.61339, 0.61339, 1)
+theme_override_fonts/font = ExtResource("1_xj2rp")
+theme_override_font_sizes/font_size = 24
+text = " > This is what the user typed"
+autowrap_mode = 3
