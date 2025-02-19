@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://ceut34p8usg2"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_kkv0g"]
+
+[resource]
+script = ExtResource("1_kkv0g")
+item_name = "Green Key"
+item_type = 0

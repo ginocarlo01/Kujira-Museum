@@ -15,9 +15,11 @@ const InputResponse = preload("res://scenes/input_response.tscn")
 func _ready() -> void:
 	scrollbar.changed.connect(handle_scrollbar_changed)
 	
-	command_processor.response_generated.connect(handle_response_generated)
-	command_processor.initialize(command_processor.get_child(0))
+	create_response("Welcome to the retro text adventure ! You can type help to see available commands")
 	
+	#command_processor.response_generated.connect(handle_response_generated)
+	var starting_room_response =  command_processor.initialize(room_manager.get_child(0))
+	create_response(starting_room_response)
 	
 func handle_scrollbar_changed():
 	scroll.scroll_vertical = scrollbar.max_value
@@ -29,10 +31,9 @@ func _on_input_text_submitted(new_text: String) -> void:
 	var response = command_processor.process_command(new_text)
 	var input_response = InputResponse.instantiate()
 	input_response.set_text(new_text, response)
-	history_rows.add_child(input_response)
 	add_response_to_history(input_response)
 	
-func handle_response_generated(response_text):
+func create_response(response_text : String):
 	var response = Response.instantiate()
 	response.text = response_text
 	add_response_to_history(response)
