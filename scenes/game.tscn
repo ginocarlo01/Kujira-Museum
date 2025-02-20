@@ -48,6 +48,14 @@ offset_right = 309.0
 offset_bottom = -322.0
 room_name = "House"
 
+[node name="Garden" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -278.0
+offset_top = -523.0
+offset_right = -28.0
+offset_bottom = -323.0
+room_name = "Garden"
+room_description = "There is a gate"
+
 [node name="OutsideRoom" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 444.0
 offset_top = -521.0
@@ -63,6 +71,30 @@ offset_right = 700.0
 offset_bottom = -604.0
 room_name = "a shed"
 room_description = "a dusty old shed used for storage"
+
+[node name="Forest" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 821.0
+offset_top = -532.0
+offset_right = 1071.0
+offset_bottom = -332.0
+room_name = "forest"
+room_description = "forest"
+
+[node name="SmallHouse" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1165.0
+offset_top = -538.0
+offset_right = 1415.0
+offset_bottom = -338.0
+room_name = "Small House"
+room_description = "its a good house"
+
+[node name="EndPath" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 827.0
+offset_top = -249.0
+offset_right = 1077.0
+offset_bottom = -49.0
+room_name = "End of the Path"
+room_description = "End of the Path"
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1

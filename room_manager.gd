@@ -8,10 +8,17 @@ func _ready() -> void:
 	
 	# HOUSE :
 	$House.connect_exit("east", $OutsideRoom) 
+	$House.connect_exit("path", $EndPath) 
+	$House.connect_exit("garden", $Garden,"gate") 
 	
 	# OUTSIDE:
 	$OutsideRoom.add_item(key)
 	$OutsideRoom.connect_exit("north", $ShedRoom)
 	$OutsideRoom.lock_exit("north", $OutsideRoom)
+	$OutsideRoom.connect_exit("east", $Forest)
+	
+	# FOREST:
+	$Forest.connect_exit("south", $EndPath)
+	$Forest.connect_exit("inside", $SmallHouse)
 	
 	

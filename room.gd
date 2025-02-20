@@ -62,18 +62,28 @@ func unlock_exit(direction : String, room):
 func check_exit_locked(direction : String) -> bool:
 	return exits[direction].is_room_locked(self)
 	
-func connect_exit(direction : String, room):
+func connect_exit(direction : String, room, override_room_2 = "null"):
 	var exit = Exit.new()
 	exit.room_1 = self
 	exit.room_2 = room
 	exits[direction] = exit
 	
-	match direction:
-		"west":
-			room.exits["east"] = exit
-		"east":
-			room.exits["west"] = exit
-		"south":
-			room.exits["north"] = exit
-		"north":
-			room.exits["south"] = exit
+	#With override, you don't have to add into the possible item list
+	if override_room_2 != "null":
+		room.exits[override_room_2] = exit
+	else:
+		match direction:
+			"west":
+				room.exits["east"] = exit
+			"east":
+				room.exits["west"] = exit
+			"south":
+				room.exits["north"] = exit
+			"north":
+				room.exits["south"] = exit
+			"path":
+				room.exits["path"] = exit
+			"inside":
+				room.exits["outside"] = exit
+			"outside":
+				room.exits["inside"] = exit
