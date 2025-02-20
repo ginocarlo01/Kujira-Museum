@@ -98,10 +98,10 @@ func use(second_word : String, third_word : String) -> String:
 						return "This is not a valid direction"
 				_:
 					return "This is not a valid item"
-		else:
-			"You can't use this item here."
 		
-	return "There is no item with this name in this room."
+			
+		
+	return "This is not a valid item from your inventory."
 	
 func inventory() -> String:
 	return player.get_inventory()
