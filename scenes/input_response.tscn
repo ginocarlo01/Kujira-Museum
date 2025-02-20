@@ -20,3 +20,5 @@ layout_mode = 2
 
 [node name="Response" parent="Rows" instance=ExtResource("3_bcfgu")]
 layout_mode = 2
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/normal_font_size = 24

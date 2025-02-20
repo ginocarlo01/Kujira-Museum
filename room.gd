@@ -50,7 +50,7 @@ func get_full_description() -> String:
 	return full_description_string
 	
 func get_room_description() -> String:
-	return "You are now in " + room_name + ". " + room_description	
+	return "You are now in " + Types.wrap_location_text(room_name) + ". " + room_description	
 
 func get_items_description() -> String:
 	if items.size() == 0:
@@ -63,7 +63,7 @@ func get_items_description() -> String:
 			all_items += ", "	
 		all_items += i.item_name
 		
-	return "Items: " + all_items
+	return "Items: " + Types.wrap_item_text(all_items)
 	
 func get_npcs_description() -> String:
 	if npcs.size() == 0:
@@ -76,13 +76,13 @@ func get_npcs_description() -> String:
 			all_npcs += ", "	
 		all_npcs += i.npc_name
 		
-	return "NPCs: " + all_npcs
+	return "NPCs: " + Types.wrap_npc_text(all_npcs)
 
 func get_exits_description() -> String:
 	if exits.keys().size() == 0:
 		return ""
 		
-	return "Exits: " + " ".join(PackedStringArray(exits.keys()))
+	return "Exits: " + Types.wrap_location_text(" ".join(PackedStringArray(exits.keys())))
 	
 func lock_exit(direction : String, room):
 	exits[direction].lock_exit_of_room(room)
