@@ -7,6 +7,7 @@ class_name Room
 @export_multiline var room_description := "This is the description" : set = set_room_description
 
 var exits : Dictionary = {}
+var npcs : Array = []
 var items : Array = []
 
 func set_room_name(new_name : String):
@@ -23,23 +24,37 @@ func add_item(item: Item):
 func remove_item(item: Item):
 	items.erase(item)
 	
+func add_npc(npc: NPC):
+	npcs.append(npc)
+	
+func remove_npc(npc: NPC):
+	npcs.erase(npc)
+	
 func get_full_description() -> String:
-	var descriptions = PackedStringArray([
-		get_room_description(),
-		get_items(),
-		get_exits()
-	])
+	var full_description = PackedStringArray([get_room_description()])
+	# NPCs :
+	var npcs_description = get_npcs_description()
+	if npcs_description != "":
+		full_description.append(npcs_description)
+	# Items :	
+	var items_description = get_items_description()
+	if items_description != "":
+		full_description.append(items_description)
+	# Items :
+	var exits_description = get_exits_description()
+	if exits_description != "":
+		full_description.append(exits_description)
+		
+	var full_description_string = "\n".join(full_description)
 	
-	var full_description = "\n".join(descriptions)
-	
-	return full_description
+	return full_description_string
 	
 func get_room_description() -> String:
 	return "You are now in " + room_name + ". " + room_description	
 
-func get_items() -> String:
+func get_items_description() -> String:
 	if items.size() == 0:
-		return "No items to pickup"
+		return ""
 	
 	var all_items = ""
 	
@@ -49,8 +64,24 @@ func get_items() -> String:
 		all_items += i.item_name
 		
 	return "Items: " + all_items
+	
+func get_npcs_description() -> String:
+	if npcs.size() == 0:
+		return ""
+	
+	var all_npcs = ""
+	
+	for i in npcs:
+		if all_npcs != "":
+			all_npcs += ", "	
+		all_npcs += i.npc_name
+		
+	return "NPCs: " + all_npcs
 
-func get_exits() -> String:
+func get_exits_description() -> String:
+	if exits.keys().size() == 0:
+		return ""
+		
 	return "Exits: " + " ".join(PackedStringArray(exits.keys()))
 	
 func lock_exit(direction : String, room):

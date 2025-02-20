@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://b58vd8f4uag46"]
+
+[ext_resource type="Resource" uid="uid://chetv7dkon64e" path="res://Items/guard_sword.tres" id="1_m28ns"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_yxsw7"]
+[ext_resource type="Resource" uid="uid://ceut34p8usg2" path="res://Items/key.tres" id="2_bw5eb"]
+
+[resource]
+script = ExtResource("1_yxsw7")
+npc_name = "Guard"
+initial_dialog = "Give me a sword and I will unlock the exit"
+post_quest_dialog = "Thanks ! Now you can pass through"
+quest_item = ExtResource("1_m28ns")
+reward_item = ExtResource("2_bw5eb")

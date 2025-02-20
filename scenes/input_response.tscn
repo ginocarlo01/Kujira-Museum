@@ -4,12 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://c2yalhval7dis" path="res://scenes/input_history.tscn" id="2_bv02p"]
 [ext_resource type="PackedScene" uid="uid://c08gthf74m502" path="res://scenes/response.tscn" id="3_bcfgu"]
 
-[node name="InputResponse" type="VBoxContainer"]
-theme_override_constants/separation = 0
+[node name="InputResponse" type="MarginContainer"]
+offset_top = 1844.0
+offset_right = 1.0
+offset_bottom = 1844.0
+theme_override_constants/margin_right = 5
 script = ExtResource("1_5o5xw")
 
-[node name="InputHistory" parent="." instance=ExtResource("2_bv02p")]
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="InputHistory" parent="Rows" instance=ExtResource("2_bv02p")]
 layout_mode = 2
 
-[node name="Response" parent="." instance=ExtResource("3_bcfgu")]
+[node name="Response" parent="Rows" instance=ExtResource("3_bcfgu")]
 layout_mode = 2

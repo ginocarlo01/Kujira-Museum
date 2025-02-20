@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_kkv0g")
-item_name = "Green Key"
+item_name = "Green_Key"
 item_type = 0
+use_value_description = "Use value description"

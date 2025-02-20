@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c08gthf74m502"]
+[gd_scene load_steps=3 format=3 uid="uid://c08gthf74m502"]
 
 [ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_2aojf"]
+[ext_resource type="FontFile" uid="uid://davubpwtd4k6c" path="res://fonts/IBMPlexMono-SemiBoldItalic.ttf" id="2_4jfwx"]
 
-[node name="Response" type="Label"]
-theme_override_fonts/font = ExtResource("1_2aojf")
-theme_override_font_sizes/font_size = 28
+[node name="Response" type="RichTextLabel"]
+offset_right = 1.0
+offset_bottom = 797.0
+theme_override_fonts/normal_font = ExtResource("1_2aojf")
+theme_override_fonts/italics_font = ExtResource("2_4jfwx")
+bbcode_enabled = true
 text = "This is the response"
-autowrap_mode = 3
+fit_content = true

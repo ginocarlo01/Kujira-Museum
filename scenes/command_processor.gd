@@ -32,6 +32,10 @@ func process_command(input : String) -> String:
 			return drop(second_word)
 		"use":
 			return use(second_word, third_word)
+		"give":
+			return give(second_word, third_word)
+		"talk":
+			return talk(second_word)
 		"help":
 			return help()
 		"inventory":
@@ -98,16 +102,48 @@ func use(second_word : String, third_word : String) -> String:
 						return "This is not a valid direction"
 				_:
 					return "This is not a valid item"
-		
-			
-		
+				
 	return "This is not a valid item from your inventory."
+	
+func give(second_word : String, third_word : String) -> String:
+	if second_word == "":
+		return "Give what?"
+		
+	if third_word == "":
+		return "To whom?"
+		
+	for i in player.inventory:
+		if second_word.to_lower() == i.item_name.to_lower():
+			for npc in current_room.npcs:
+				if third_word.to_lower() == npc.npc_name.to_lower():
+					if npc.quest_item.item_name.to_lower() == i.item_name.to_lower():
+						npc.receive_quest_item()
+						player.drop_item(i)
+						var reward : Item = npc.give_reward_to_player()
+						player.take_item(reward)
+						return "You give %s to %s and have received %s as a reward!" % [second_word, third_word, reward.item_name]
+					else:
+						return "This person doesn't need this item"
+						
+			return "There no person with this name in this room"
+				
+	return "This is not a valid item from your inventory."
+	
+func talk(second_word : String) -> String:
+	if second_word == "":
+		return "Talk to whom?"
+		
+	for npc in current_room.npcs:
+		if second_word.to_lower() == npc.npc_name.to_lower():
+			return npc.npc_name + ": \"" + npc.get_dialog() + "\""
+		
+	return "That person is not in this room."
 	
 func inventory() -> String:
 	return player.get_inventory()
 	
 func help() -> String:
-	return "You can use these commands: go [location], take [item], drop [item], use [item][direction], inventory, help"
+	return "You can use these commands: go [location], take [item], drop [item], use [item] [direction], talk [npc], give [item] [npc],inventory, help"
 	
 func change_room(new_room : Room) -> String:
 	current_room = new_room
