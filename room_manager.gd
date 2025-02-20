@@ -1,9 +1,17 @@
 extends Node
 
 func _ready() -> void:
-	# HOUSE :
+	# KEYS :
 	var key = Item.new()
-	key.initialize("Blue Key", Types.ItemTypes.KEY)
-	$House.connect_exit("east", $OutsideRoom)
-	$House.add_item(key)
+	key.initialize("Blue_Key", Types.ItemTypes.KEY)
+	key.use_value = $OutsideRoom
+	
+	# HOUSE :
+	$House.connect_exit("east", $OutsideRoom) 
+	
+	# OUTSIDE:
+	$OutsideRoom.add_item(key)
+	$OutsideRoom.connect_exit("north", $ShedRoom)
+	$OutsideRoom.lock_exit("north", $OutsideRoom)
+	
 	

@@ -20,6 +20,9 @@ func set_room_description(new_description : String):
 func add_item(item: Item):
 	items.append(item)
 	
+func remove_item(item: Item):
+	items.erase(item)
+	
 func get_full_description() -> String:
 	var descriptions = PackedStringArray([
 		get_room_description(),
@@ -41,12 +44,23 @@ func get_items() -> String:
 	var all_items = ""
 	
 	for i in items:
-		all_items += i.item_name + " "	
+		if all_items != "":
+			all_items += ", "	
+		all_items += i.item_name
 		
 	return "Items: " + all_items
 
 func get_exits() -> String:
 	return "Exits: " + " ".join(PackedStringArray(exits.keys()))
+	
+func lock_exit(direction : String, room):
+	exits[direction].lock_exit_of_room(room)
+	
+func unlock_exit(direction : String, room):
+	exits[direction].unlock_exit_of_room(room)
+	
+func check_exit_locked(direction : String) -> bool:
+	return exits[direction].is_room_locked(self)
 	
 func connect_exit(direction : String, room):
 	var exit = Exit.new()

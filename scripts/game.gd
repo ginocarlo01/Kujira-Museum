@@ -8,6 +8,7 @@ const InputResponse = preload("res://scenes/input_response.tscn")
 @onready var command_processor = $CommandProcessor
 @onready var room_manager = $RoomManager
 @onready var scroll = $Background/MarginContainer/Rows/GameInfo/Scroll
+@onready var player = $Player
 @onready var scrollbar = scroll.get_v_scroll_bar()
 
 @export var max_lines_remembered := 30 
@@ -18,7 +19,7 @@ func _ready() -> void:
 	create_response("Welcome to the retro text adventure ! You can type help to see available commands")
 	
 	#command_processor.response_generated.connect(handle_response_generated)
-	var starting_room_response =  command_processor.initialize(room_manager.get_child(0))
+	var starting_room_response =  command_processor.initialize(room_manager.get_child(0), player)
 	create_response(starting_room_response)
 	
 func handle_scrollbar_changed():
