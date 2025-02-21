@@ -38,5 +38,5 @@ func _add_response_to_history(response: Control):
 	history_rows.add_child(response)
 	if !should_zebra:
 		response.zebra.hide()
-	should_zebra != should_zebra
+	should_zebra = !should_zebra
 	_delete_history_beyond_limit()

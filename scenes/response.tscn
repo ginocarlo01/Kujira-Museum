@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://davubpwtd4k6c" path="res://fonts/IBMPlexMono-SemiBoldItalic.ttf" id="2_4jfwx"]
 
 [node name="Response" type="RichTextLabel"]
-offset_right = 1.0
+offset_right = 183.0
 offset_bottom = 797.0
 theme_override_fonts/normal_font = ExtResource("1_2aojf")
 theme_override_fonts/italics_font = ExtResource("2_4jfwx")
