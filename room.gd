@@ -94,6 +94,34 @@ func unlock_exit(direction : String, room):
 func check_exit_locked(direction : String) -> bool:
 	return exits[direction].is_room_locked(self)
 	
+func has_item_on_room(item : String) -> Item:
+	for i in items:
+		var item_names = i.item_name.split(" ", false)
+		var item_first_name = ""
+		if item_names.size() > 1:
+			item_first_name = item_names[0].to_lower()
+		else:
+			item_first_name = i.item_name.to_lower()
+			
+		if item == item_first_name:
+			return i
+	
+	return null
+	
+func is_npc_on_room(npc_wanted : String) -> NPC:
+	for npc in npcs:
+		var npc_names = npc.npc_name.split(" ", false)
+		var npc_name = ""
+		if npc_names.size() > 1:
+			npc_name = npc_names[0].to_lower()
+		else:
+			npc_name = npc.npc_name.to_lower()
+		
+		if npc_wanted == npc_name:
+			return npc
+	
+	return null
+	
 func connect_exit(direction : String, room, override_room_2 = "null"):
 	var exit = Exit.new()
 	exit.room_1 = self

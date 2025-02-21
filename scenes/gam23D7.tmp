@@ -1,0 +1,146 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3ifq7sb13vbw"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ox0k4"]
+[ext_resource type="Script" path="res://scripts/input.gd" id="1_qo538"]
+[ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_w3cli"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_2mk6h"]
+[ext_resource type="Script" path="res://scenes/command_processor.gd" id="2_es8au"]
+[ext_resource type="Script" path="res://room_manager.gd" id="3_5j5y6"]
+[ext_resource type="PackedScene" uid="uid://currxaw7xo502" path="res://scenes/room.tscn" id="3_66d0a"]
+[ext_resource type="PackedScene" uid="uid://d2bdos3uc656x" path="res://scenes/game_info.tscn" id="6_dbgmv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
+bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcsjt"]
+bg_color = Color(0.405241, 0.414107, 0.374296, 1)
+border_color = Color(0.165949, 0.150108, 0.0417952, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r01j7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5linq"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ox0k4")
+initial_text = "Você é um humano e foi em um museu de criaturas aquáticas. De repente, há um grande barulho, a luz apaga e quando acende novamente, todas as pessoas que estavam com você desapareceram. Perdido, você procura as salas do museu para entender o que ocorreu e encontrar uma saída. "
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_2mk6h")
+
+[node name="CommandProcessor" type="Node" parent="."]
+script = ExtResource("2_es8au")
+
+[node name="RoomManager" type="Node" parent="."]
+script = ExtResource("3_5j5y6")
+
+[node name="PalcoInicial" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 59.0
+offset_top = -522.0
+offset_right = 309.0
+offset_bottom = -322.0
+room_name = "Palco inicial"
+room_description = "Você está na sala inicial do museu. Na sua frente, modelos de lulas gigantes são engolidos por um grande cachalote."
+
+[node name="SalaCientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -278.0
+offset_top = -523.0
+offset_right = -28.0
+offset_bottom = -323.0
+room_name = "Sala do Cientista"
+room_description = "Você está em uma sala com vários equipamentos científicos. Todos parecem estar quebrados e há vários barulhos de máquinas quebradas. Algo definitivamente está errado"
+
+[node name="Pocilga" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -285.0
+offset_top = -801.0
+offset_right = -35.0
+offset_bottom = -601.0
+room_name = "Pocilga"
+room_description = "Você está em uma sala com muita grama e vários compartimentos para os animais. "
+
+[node name="ArmazemCientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -647.0
+offset_top = -510.0
+offset_right = -397.0
+offset_bottom = -310.0
+room_name = "Armazém do Cientista"
+room_description = "Você está em um armazém. Provavelmente foi utilizado pelo cientista para guardar seus equipamentos."
+
+[node name="Forest" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 821.0
+offset_top = -532.0
+offset_right = 1071.0
+offset_bottom = -332.0
+room_name = "forest"
+room_description = "forest"
+
+[node name="SmallHouse" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1165.0
+offset_top = -538.0
+offset_right = 1415.0
+offset_bottom = -338.0
+room_name = "Small House"
+room_description = "its a good house"
+
+[node name="EndPath" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 827.0
+offset_top = -249.0
+offset_right = 1077.0
+offset_bottom = -49.0
+room_name = "End of the Path"
+room_description = "End of the Path"
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jjdsp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Rows" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="GameInfo" parent="Background/MarginContainer/Rows" instance=ExtResource("6_dbgmv")]
+layout_mode = 2
+
+[node name="InputArea" type="PanelContainer" parent="Background/MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lcsjt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/Rows/InputArea"]
+layout_mode = 2
+
+[node name="Caret" type="Label" parent="Background/MarginContainer/Rows/InputArea/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_w3cli")
+theme_override_font_sizes/font_size = 24
+text = " > "
+
+[node name="Input" type="LineEdit" parent="Background/MarginContainer/Rows/InputArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_w3cli")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r01j7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5linq")
+max_length = 48
+script = ExtResource("1_qo538")
+
+[connection signal="text_submitted" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_input_text_submitted"]
+[connection signal="text_submitted" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_text_submitted"]

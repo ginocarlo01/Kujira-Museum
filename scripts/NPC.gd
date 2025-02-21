@@ -4,18 +4,26 @@ class_name NPC
 @export var npc_name = "NPC name"
 @export_multiline var initial_dialog = ""
 @export_multiline var post_quest_dialog = ""
+@export_multiline var translated_dialog = ""
 
 @export var quest_item : Item
 @export var reward_item : Item
 @export var type : Types.NPCTypes
 
 var has_received_quest_item := false
+var has_talked_to_npc := false
 
 func get_dialog() -> String:
+	has_talked_to_npc = true
 	if !has_received_quest_item:
 		return initial_dialog
 	else:
 		return post_quest_dialog
+
+		
+func get_translated_dialog() -> String:
+	has_talked_to_npc = true
+	return translated_dialog
 		
 func get_type() -> Types.NPCTypes:
 	return type

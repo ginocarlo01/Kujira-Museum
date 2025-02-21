@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://dt8nop6f56tnw"]
-
-[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_30ugc"]
-
-[resource]
-script = ExtResource("1_30ugc")
-npc_name = "Innkeeper"
-initial_dialog = "Hi traveler, if you want to get a key, give me my sword"
-post_quest_dialog = ""

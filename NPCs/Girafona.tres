@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://dgjserc183ib4"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_mybyk"]
+
+[resource]
+script = ExtResource("1_mybyk")
+npc_name = "Girafona"
+initial_dialog = "nfwiufw jdjdadjq jxjxjxjx zzzz"
+post_quest_dialog = ""
+translated_dialog = "Acho que me transferiram para a sala errada… E ainda me deixaram com uma [color=#BA55D3]chave[/color] (grifar chave)… Vou deixar ela ali no meio da grama, se quiser pegar para você hahaha…."
+type = 3

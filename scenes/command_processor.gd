@@ -69,50 +69,28 @@ func take(second_word : String) -> String:
 	if second_word == "":
 		return Types.wrap_system_text("Pegar o que?")
 		
-	for i in current_room.items:
-		var item_names = i.item_name.split(" ", false)
-		var item_name = ""
-		if item_names.size() > 1:
-			item_name = item_names[0].to_lower()
-		else:
-			item_name = i.item_name.to_lower()
-			
-		if second_word.to_lower() == item_name:
-			current_room.remove_item(i)
-			player.take_item(i)
-			return "Você pegou " + Types.wrap_item_text(i.item_name)
+	var item_wanted : Item
+	
+	item_wanted = current_room.has_item_on_room(second_word.to_lower())
+	
+	if item_wanted != null:
+		current_room.remove_item(item_wanted)
+		player.take_item(item_wanted)
+		return "Você pegou " + Types.wrap_item_text(item_wanted.item_name)
 		
 	return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
 	
-func describe_item(second_word : String) -> String:
-	var item_wanted : Item
-	
+func describe_item(second_word : String) -> String:	
 	if second_word == "":
 		return Types.wrap_system_text("Descrever o que?")
 		
-	for i in current_room.items:
-		var item_names = i.item_name.split(" ", false)
-		var item_name = ""
-		if item_names.size() > 1:
-			item_name = item_names[0].to_lower()
-		else:
-			item_name = i.item_name.to_lower()
-			
-		if second_word.to_lower() == item_name:
-			item_wanted = i
-			
+	var item_wanted : Item
+	
+	item_wanted = current_room.has_item_on_room(second_word.to_lower())
+	
 	if item_wanted == null:	
-		for i in player.inventory:
-			var item_names = i.item_name.split(" ", false)
-			var item_name = ""
-			if item_names.size() > 1:
-				item_name = item_names[0].to_lower()
-			else:
-				item_name = i.item_name.to_lower()
+		item_wanted = player.has_item_on_inventory(second_word.to_lower())
 				
-			if second_word.to_lower() == item_name:
-				item_wanted = i
-			
 	if item_wanted != null:
 		return "Sobre " + Types.wrap_item_text(item_wanted.item_name) + ": " + item_wanted.use_value_description
 	else:	
@@ -123,85 +101,108 @@ func drop(second_word : String) -> String:
 	if second_word == "":
 		return Types.wrap_system_text("Drop what?")
 		
-	for i in player.inventory:
-		if second_word.to_lower() == i.item_name.to_lower():
-			current_room.add_item(i)
-			player.drop_item(i)
-			return "You drop " + Types.wrap_item_text(i.item_name)
-		
-	return Types.wrap_system_text("There is no item with this name in your inventory.")
+	var item_wanted : Item
+	
+	item_wanted = player.has_item_on_inventory(second_word.to_lower())
+	
+	if item_wanted != null:
+		return "Você dropou " + Types.wrap_item_text(item_wanted.item_name)
+	else:
+		return Types.wrap_system_text("Você não tem esse item no seu inventário.")
 	
 func use(second_word : String, third_word : String) -> String:
 	if second_word == "":
-		return Types.wrap_system_text("Use what?")
+		return Types.wrap_system_text("Usar o que?")
 		
 	if third_word == "":
-		return Types.wrap_system_text("In which exit?")
+		return Types.wrap_system_text("Em qual saída?")
 		
-	for i in player.inventory:
-		if second_word.to_lower() == i.item_name.to_lower():
-			match i.item_type:
-				Types.ItemTypes.KEY:
-					if current_room.exits.keys().has(third_word):
-						var current_exit = current_room.exits[third_word] 
-						current_exit.unlock_exit_of_room(current_room)
-						player.drop_item(i)
-						return "You unlocked the " + Types.wrap_location_text(third_word) + " direction!"
-					else:
-						return Types.wrap_system_text("This is not a valid direction")
-				_:
-					return Types.wrap_system_text("This is not a valid item")
-				
-	return Types.wrap_system_text("This is not a valid item from your inventory.")
+	var item_wanted : Item
+	
+	item_wanted = player.has_item_on_inventory(second_word.to_lower())
+	
+	if item_wanted != null:
+		match item_wanted.item_type:
+			Types.ItemTypes.KEY:
+				if current_room.exits.keys().has(third_word):
+					var current_exit = current_room.exits[third_word] 
+					current_exit.unlock_exit_of_room(current_room)
+					player.drop_item(item_wanted)
+					return "Você desbloqueou a passagem " + Types.wrap_location_text(third_word) 
+				else:
+					return Types.wrap_system_text("Essa não é uma direção válida")
+			_:
+				return Types.wrap_system_text("Esse não é um item válido")
+			
+	return Types.wrap_system_text("Você não tem esse item no seu inventário.")
 	
 func give(second_word : String, third_word : String) -> String:
 	if second_word == "":
-		return Types.wrap_system_text("Give what?")
+		return Types.wrap_system_text("Dar o que?")
 		
 	if third_word == "":
-		return Types.wrap_system_text("To whom?")
+		return Types.wrap_system_text("Para quem?")
 		
-	for i in player.inventory:
-		if second_word.to_lower() == i.item_name.to_lower():
-			for npc in current_room.npcs:
-				if third_word.to_lower() == npc.npc_name.to_lower():
-					if npc.quest_item.item_name.to_lower() == i.item_name.to_lower():
-						npc.receive_quest_item()
-						player.drop_item(i)
-						var reward : Item = npc.give_reward_to_player()
-						player.take_item(reward)
-						return "You give " + Types.wrap_item_text(second_word) + " to " + Types.wrap_npc_text(third_word) + " and have received " + Types.wrap_item_text(reward.item_name) + " as a reward!"
-					else:
-						return Types.wrap_system_text("This person doesn't need this item")
-						
-			return Types.wrap_system_text("There no person with this name in this room")
+	var item_wanted : Item
+	
+	item_wanted = player.has_item_on_inventory(second_word.to_lower())
+	
+	if item_wanted != null:
+		var npc_wanted : NPC
+		npc_wanted = current_room.is_npc_on_room(third_word.to_lower())
+		if npc_wanted != null:
+			if npc_wanted.quest_item.item_name.to_lower() == item_wanted.item_name.to_lower():
+				npc_wanted.receive_quest_item()
+				player.drop_item(item_wanted)
+				var reward : Item = npc_wanted.give_reward_to_player()
+				player.take_item(reward)
+				return "You give " + Types.wrap_item_text(second_word) + " to " + Types.wrap_npc_text(third_word) + " and have received " + Types.wrap_item_text(reward.item_name) + " as a reward!"
+			else:
+				return Types.wrap_system_text("This person doesn't need this item")
 				
+		return Types.wrap_system_text("There no person with this name in this room")
+			
 	return Types.wrap_system_text("This is not a valid item from your inventory.")
 	
 func talk(second_word : String) -> String:
 	if second_word == "":
 		return Types.wrap_system_text("Talk to whom?")
 		
-	for npc in current_room.npcs:
-		var npc_names = npc.npc_name.split(" ", false)
-		var npc_name = ""
-		if npc_names.size() > 1:
-			npc_name = npc_names[0].to_lower()
-		else:
-			npc_name = npc.npc_name.to_lower()
+	var npc_wanted : NPC
+	
+	npc_wanted = current_room.is_npc_on_room(second_word.to_lower())
 		
-		if second_word.to_lower() == npc_name:
-			var npc_type : Types.NPCTypes = npc.get_type()
-			match npc_type:
-				Types.NPCTypes.SCIENTIST:
-					var quest = load("res://Quests/SalvarRoger.tres")
-					room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
-					room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
-					return Types.wrap_npc_text(npc.npc_name) + ": \"" + npc.get_dialog() + "\" \n" + player.add_quest(quest) + "\n" + current_room.get_exits_description()
-				_:
-					pass
-			return Types.wrap_npc_text(npc.npc_name) + ": \"" + npc.get_dialog() + "\""
-		
+	if npc_wanted != null:
+		var npc_type : Types.NPCTypes = npc_wanted.get_type()
+		match npc_type:
+			Types.NPCTypes.SCIENTIST:
+				var quest = load("res://Quests/SalvarRoger.tres")
+				room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
+				room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
+				current_room.remove_npc(npc_wanted)
+				return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(quest) + "\n" + current_room.get_exits_description()
+			
+			Types.NPCTypes.ARTIO:
+				var item_wanted : Item
+				item_wanted = player.has_item_on_inventory("artiodáctilo")
+			
+				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				if item_wanted != null:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
+			
+			Types.NPCTypes.ARTIO_GIRAFFE:
+				var item_wanted : Item
+				item_wanted = player.has_item_on_inventory("artiodáctilo")
+			
+				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				if item_wanted != null:
+					if !npc_wanted.has_talked_to_npc:
+						room_manager.add_item(current_room, "ChaveCavalista")
+						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
+			_:
+				pass
+		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+	
 	return Types.wrap_system_text("Essa pessoa não está aqui!")
 	
 func inventory() -> String:
