@@ -7,6 +7,7 @@ class_name NPC
 
 @export var quest_item : Item
 @export var reward_item : Item
+@export var type : Types.NPCTypes
 
 var has_received_quest_item := false
 
@@ -15,6 +16,9 @@ func get_dialog() -> String:
 		return initial_dialog
 	else:
 		return post_quest_dialog
+		
+func get_type() -> Types.NPCTypes:
+	return type
 
 func receive_quest_item():
 	has_received_quest_item = true

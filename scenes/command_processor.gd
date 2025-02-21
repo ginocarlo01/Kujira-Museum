@@ -2,9 +2,11 @@ extends Node
 
 var current_room : Room = null
 var player : Player = null
+var room_manager : RoomManager = null
 
-func initialize(starting_room, player) -> String:
+func initialize(starting_room, player, room_manager : RoomManager) -> String:
 	self.player = player
+	self.room_manager = room_manager
 	return change_room(starting_room)
 
 func process_command(input : String) -> String:
@@ -24,24 +26,30 @@ func process_command(input : String) -> String:
 		third_word = words[2]
 		
 	match first_word:
-		"go":
+		"ir":
 			return go(second_word)
-		"take":
+		"pegar":
 			return take(second_word)
-		"drop":
+		"dropar":
 			return drop(second_word)
-		"use":
+		"usar":
 			return use(second_word, third_word)
-		"give":
+		"dar":
 			return give(second_word, third_word)
-		"talk":
+		"falar":
 			return talk(second_word)
-		"help":
-			return help()
-		"inventory":
+		"inventário":
 			return inventory()
+		"missões":
+			return quests()	
+		"saídas":
+			return exits()	
+		"descrever":
+			return describe_item(second_word)
+		"ajuda":
+			return help()
 		_:
-			return Types.wrap_system_text("Unrecognized command, please try again !")
+			return Types.wrap_system_text("Comando não identificado ! Tente novamente ou digite ajuda")
 			
 func go(second_word : String) -> String:
 	if second_word == "":
@@ -51,23 +59,65 @@ func go(second_word : String) -> String:
 		#var change_response = change_room(current_room.exits[second_word])
 		if !current_room.check_exit_locked(second_word):
 			var change_response = change_room(current_room.exits[second_word].get_other_room(current_room))
-			return "\n".join(PackedStringArray(["You go " + Types.wrap_location_text(second_word), change_response]))
+			return "\n".join(PackedStringArray(["Você foi para " + Types.wrap_location_text(second_word), change_response]))
 		else:
 			return "The way " + Types.wrap_location_text(second_word) + " is currently " + Types.wrap_system_text("locked!")
 	else:	
-		return Types.wrap_system_text("This is not a valid direction.")
+		return Types.wrap_system_text("Essa não é uma direção válida...")
 
 func take(second_word : String) -> String:
 	if second_word == "":
-		return Types.wrap_system_text("Take what?")
+		return Types.wrap_system_text("Pegar o que?")
 		
 	for i in current_room.items:
-		if second_word.to_lower() == i.item_name.to_lower():
+		var item_names = i.item_name.split(" ", false)
+		var item_name = ""
+		if item_names.size() > 1:
+			item_name = item_names[0].to_lower()
+		else:
+			item_name = i.item_name.to_lower()
+			
+		if second_word.to_lower() == item_name:
 			current_room.remove_item(i)
 			player.take_item(i)
-			return "You take " + Types.wrap_item_text(i.item_name)
+			return "Você pegou " + Types.wrap_item_text(i.item_name)
 		
-	return Types.wrap_system_text("There is no item with this name in this room.")
+	return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
+	
+func describe_item(second_word : String) -> String:
+	var item_wanted : Item
+	
+	if second_word == "":
+		return Types.wrap_system_text("Descrever o que?")
+		
+	for i in current_room.items:
+		var item_names = i.item_name.split(" ", false)
+		var item_name = ""
+		if item_names.size() > 1:
+			item_name = item_names[0].to_lower()
+		else:
+			item_name = i.item_name.to_lower()
+			
+		if second_word.to_lower() == item_name:
+			item_wanted = i
+			
+	if item_wanted == null:	
+		for i in player.inventory:
+			var item_names = i.item_name.split(" ", false)
+			var item_name = ""
+			if item_names.size() > 1:
+				item_name = item_names[0].to_lower()
+			else:
+				item_name = i.item_name.to_lower()
+				
+			if second_word.to_lower() == item_name:
+				item_wanted = i
+			
+	if item_wanted != null:
+		return "Sobre " + Types.wrap_item_text(item_wanted.item_name) + ": " + item_wanted.use_value_description
+	else:	
+		return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
+	
 	
 func drop(second_word : String) -> String:
 	if second_word == "":
@@ -133,25 +183,50 @@ func talk(second_word : String) -> String:
 		return Types.wrap_system_text("Talk to whom?")
 		
 	for npc in current_room.npcs:
-		if second_word.to_lower() == npc.npc_name.to_lower():
+		var npc_names = npc.npc_name.split(" ", false)
+		var npc_name = ""
+		if npc_names.size() > 1:
+			npc_name = npc_names[0].to_lower()
+		else:
+			npc_name = npc.npc_name.to_lower()
+		
+		if second_word.to_lower() == npc_name:
+			var npc_type : Types.NPCTypes = npc.get_type()
+			match npc_type:
+				Types.NPCTypes.SCIENTIST:
+					var quest = load("res://Quests/SalvarRoger.tres")
+					room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
+					room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
+					return Types.wrap_npc_text(npc.npc_name) + ": \"" + npc.get_dialog() + "\" \n" + player.add_quest(quest) + "\n" + current_room.get_exits_description()
+				_:
+					pass
 			return Types.wrap_npc_text(npc.npc_name) + ": \"" + npc.get_dialog() + "\""
 		
-	return Types.wrap_system_text("That person is not in this room.")
+	return Types.wrap_system_text("Essa pessoa não está aqui!")
 	
 func inventory() -> String:
 	return player.get_inventory()
 	
+func quests() -> String:
+	return player.get_quests()
+	
+func exits() -> String:
+	return current_room.get_exits_description()
+	
 func help() -> String:
 	return "\n".join(PackedStringArray([
-		"You can use these commands: ",
-		" go " + Types.wrap_location_text("[location]") + ",",
-		" take " + Types.wrap_item_text("[item]") + ",",
-		" drop " + Types.wrap_item_text("[item]") + ",",
-		" use " + Types.wrap_item_text("[item]") + Types.wrap_location_text(" [direction],"),
-		" talk " + Types.wrap_npc_text("[npc]") + ",",
-		" give " + Types.wrap_item_text("[item]") + " " + Types.wrap_npc_text("[npc]") + ",",
-		" inventory,",
-		" help"
+		"Você pode usar os comando abaixo: ",
+		" ir " + Types.wrap_location_text("[direção ou local]") + ",",
+		" pegar " + Types.wrap_item_text("[item(primeiro nome)]") + ",",
+		" dropar " + Types.wrap_item_text("[item]") + ",",
+		" usar " + Types.wrap_item_text("[item]") + Types.wrap_location_text(" [direction],"),
+		" falar " + Types.wrap_npc_text("[entidade(primeiro nome)]") + ",",
+		" dar " + Types.wrap_item_text("[item]") + " " + Types.wrap_npc_text("[npc]") + ",",
+		" inventário,",
+		" missões,",
+		" saídas,",
+		" descrever "+ Types.wrap_item_text("[primeiro nome do item]" + ","),
+		" ajuda"
 	]))
 
 func change_room(new_room : Room) -> String:

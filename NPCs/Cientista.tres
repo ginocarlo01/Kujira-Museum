@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://b58vd8f4uag46"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_dy2wd"]
+
+[resource]
+script = ExtResource("1_dy2wd")
+npc_name = "Roger Payne"
+initial_dialog = "O que está acontecendo? Quem é você? Estou preocupado, meus experimentos deram errado. Estava pesquisando sobre a origem das baleias… Oh … Oh não … Não consigo sentir meus braços! Me ajude!..."
+post_quest_dialog = "Thanks ! Now you can pass through"
+type = 1

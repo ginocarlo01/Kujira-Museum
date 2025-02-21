@@ -52,24 +52,24 @@ offset_left = -278.0
 offset_top = -523.0
 offset_right = -28.0
 offset_bottom = -323.0
-room_name = "Sala do Cientista"
+room_name = "Armazém do Cientist"
 room_description = "Você está em uma sala com vários equipamentos científicos. Todos parecem estar quebrados e há vários barulhos de máquinas quebradas. Algo definitivamente está errado"
 
-[node name="Pocilga" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = -285.0
-offset_top = -801.0
-offset_right = -35.0
-offset_bottom = -601.0
-room_name = "Pocilga"
-room_description = "Você está em uma sala com muita grama e vários compartimentos para os animais. "
+[node name="OutsideRoom" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 444.0
+offset_top = -521.0
+offset_right = 694.0
+offset_bottom = -321.0
+room_name = "outside"
+room_description = "This is the outside of the village"
 
-[node name="ArmazemCientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = -647.0
-offset_top = -510.0
-offset_right = -397.0
-offset_bottom = -310.0
-room_name = "Armazém do Cientista"
-room_description = "Você está em um armazém. Provavelmente foi utilizado pelo cientista para guardar seus equipamentos."
+[node name="ShedRoom" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 450.0
+offset_top = -804.0
+offset_right = 700.0
+offset_bottom = -604.0
+room_name = "a shed"
+room_description = "a dusty old shed used for storage"
 
 [node name="Forest" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 821.0

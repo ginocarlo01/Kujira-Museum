@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://cjiqp2paojqhy"]
+
+[ext_resource type="Script" path="res://scripts/Quest.gd" id="1_kth8t"]
+
+[resource]
+script = ExtResource("1_kth8t")
+quest_name = "Salvar Roger Payne"
+quest_description = "Ache a localização de Roger, o pesquisador de baleias."

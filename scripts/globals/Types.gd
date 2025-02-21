@@ -2,7 +2,14 @@ extends Node
 
 enum ItemTypes {
 	KEY,
-	QUEST_ITEM
+	QUEST_ITEM,
+	TRANSLATOR
+}
+
+enum NPCTypes{
+	DEFAULT,
+	SCIENTIST,
+	ARTIO
 }
 
 const COLOR_NPC = Color("#ff9a94")
@@ -10,6 +17,10 @@ const COLOR_ITEM = Color("#94b9ff")
 const COLOR_SPEECH = Color("#c3ff94")
 const COLOR_LOCATION = Color("#faff94")
 const COLOR_SYSTEM = Color("#ffd394")
+const COLOR_MISSION = Color("#6495ED")
+
+func wrap_mission_text(text : String) -> String:
+	return "[color=#%s]%s[/color]" % [COLOR_MISSION.to_html(), text]
 
 func wrap_system_text(text : String) -> String:
 	return "[color=#%s]%s[/color]" % [COLOR_SYSTEM.to_html(), text]

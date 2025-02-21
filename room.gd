@@ -50,7 +50,8 @@ func get_full_description() -> String:
 	return full_description_string
 	
 func get_room_description() -> String:
-	return "You are now in " + Types.wrap_location_text(room_name) + ". " + room_description	
+	#return "You are now in " + Types.wrap_location_text(room_name) + ". " + room_description	
+	return room_description	
 
 func get_items_description() -> String:
 	if items.size() == 0:
@@ -76,13 +77,13 @@ func get_npcs_description() -> String:
 			all_npcs += ", "	
 		all_npcs += i.npc_name
 		
-	return "NPCs: " + Types.wrap_npc_text(all_npcs)
+	return "Entidades: " + Types.wrap_npc_text(all_npcs)
 
 func get_exits_description() -> String:
 	if exits.keys().size() == 0:
 		return ""
 		
-	return "Exits: " + Types.wrap_location_text(" ".join(PackedStringArray(exits.keys())))
+	return "Saídas: " + Types.wrap_location_text(" ".join(PackedStringArray(exits.keys())))
 	
 func lock_exit(direction : String, room):
 	exits[direction].lock_exit_of_room(room)
@@ -104,17 +105,17 @@ func connect_exit(direction : String, room, override_room_2 = "null"):
 		room.exits[override_room_2] = exit
 	else:
 		match direction:
-			"west":
-				room.exits["east"] = exit
-			"east":
-				room.exits["west"] = exit
-			"south":
-				room.exits["north"] = exit
-			"north":
-				room.exits["south"] = exit
-			"path":
-				room.exits["path"] = exit
-			"inside":
-				room.exits["outside"] = exit
-			"outside":
-				room.exits["inside"] = exit
+			"sul":
+				room.exits["norte"] = exit
+			"norte":
+				room.exits["sul"] = exit
+			"oeste":
+				room.exits["leste"] = exit
+			"leste":
+				room.exits["oeste"] = exit
+			"atalho":
+				room.exits["atalho"] = exit
+			"dentro":
+				room.exits["fora"] = exit
+			"fora":
+				room.exits["dentro"] = exit

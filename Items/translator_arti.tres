@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bso3537aw26ko"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_fdnbs"]
+
+[resource]
+script = ExtResource("1_fdnbs")
+item_name = "Artiodáctilo Tradutor"
+item_type = 2
+use_value_description = "Ajuda a traduzir as falas dos animais que possuem números pares de dedos"
