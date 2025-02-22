@@ -12,7 +12,8 @@ enum NPCTypes{
 	ARTIO,
 	ARTIO_GIRAFFE,
 	PERISSO,
-	PERISSO_EPONA
+	PERISSO_EPONA,
+	SEAL_PUP
 }
 
 const COLOR_NPC = Color("#ff9a94")

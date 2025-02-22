@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://djvsrmjs7cffj"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_iehiw"]
+
+[resource]
+script = ExtResource("1_iehiw")
+npc_name = "Baleia Jubarte"
+initial_dialog = "Não ! Não sou herbívoro, na verdade eu sou um carnívoro! Adoro ir em um churrasco com meus manos baleeiros. "
+post_quest_dialog = ""
+translated_dialog = ""
+type = 0

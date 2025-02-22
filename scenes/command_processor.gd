@@ -199,6 +199,26 @@ func talk(second_word : String) -> String:
 					if !npc_wanted.has_talked_to_npc:
 						room_manager.add_item(current_room, "ChaveCavalista")
 						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
+					else:
+						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
+					
+			Types.NPCTypes.PERISSO:
+				var item_wanted : Item
+				item_wanted = player.has_item_on_inventory("Tradutor Perissodáctilo", true)
+			
+				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				if item_wanted != null:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
+					
+			Types.NPCTypes.PERISSO_EPONA:
+				var item_wanted : Item
+				item_wanted = player.has_item_on_inventory("Tradutor Perissodáctilo", true)
+			
+				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				if item_wanted != null:
+					room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
+					current_room.remove_npc(npc_wanted)
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
 			_:
 				pass
 		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""

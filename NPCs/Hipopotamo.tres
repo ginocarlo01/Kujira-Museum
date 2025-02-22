@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://dq6favo8q5c0m"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_j78f8"]
+
+[resource]
+script = ExtResource("1_j78f8")
+npc_name = "Hipopótamo"
+initial_dialog = "Opa ! Olha só, um humano, que raridade. Diferente dos outros, você parece ser muito legal. Sabia que todos os meus irmãos são África? Pois é, poucos sabem dessa curiosidade…"
+post_quest_dialog = ""
+translated_dialog = ""
+type = 0

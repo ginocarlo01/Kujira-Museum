@@ -8,4 +8,4 @@ npc_name = "Epona"
 initial_dialog = "haayaaaah"
 post_quest_dialog = ""
 translated_dialog = "Vejo que você está perdido, mas já conseguiu os tradutores. Uma pequena aula para você, então! O grupo de mamíferos com número ímpar de dedos chama-se Perissodactyla, por isso você consegue me entender com seu tradutor perissodáctilo agora, já que eu tenho 1 dedo apenas ! O mesmo vale para o seu tradutor artiodáctilo, que traduz as falas dos animais que têm número ímpar de dedos, como os porcos e as girafas. Agora que você aprendeu mais sobre a vida dos animais, vou liberar o caminho para o leste, onde você pode encontrar vários novos animais! Boa sorte"
-type = 2
+type = 5

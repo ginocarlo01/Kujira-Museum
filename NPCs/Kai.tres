@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://bsjegfdx27wkb"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_0oydw"]
+
+[resource]
+script = ExtResource("1_0oydw")
+npc_name = "Kai"
+initial_dialog = "toc reeeenc"
+post_quest_dialog = ""
+translated_dialog = "Finalmente você pode me entender! Meu nome é Kai (grifar o nome), depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
+type = 4

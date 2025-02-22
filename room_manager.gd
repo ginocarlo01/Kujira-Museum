@@ -28,24 +28,29 @@ func _ready() -> void:
 	$Pocilga.add_npc(porcao)
 	$Pocilga.add_npc(porquinho)
 	$Pocilga.add_npc(girafona)
-	$Pocilga.connect_exit("estábulo", $Estabulo, "sul", true)
+	$Pocilga.connect_exit("norte", $Estabulo, "null", true)
 	
 	# Estábulo:
 	$Estabulo.connect_exit("norte", $ArmazemCavalo)
 	$Estabulo.lock_exit("norte", $Estabulo)
+	var kai = load_npc("Kai")
+	var epona = load_npc("Epona")
+	$Estabulo.add_npc(kai)
+	$Estabulo.add_npc(epona)
 	
-	#$OutsideRoom.add_npc(guard)
-	#$OutsideRoom.connect_exit("north", $ShedRoom)
-	#$OutsideRoom.lock_exit("north", $OutsideRoom)
-	#$OutsideRoom.connect_exit("east", $Forest)
-	#
-	## FOREST:
-	#$Forest.connect_exit("south", $EndPath)
-	#$Forest.lock_exit("south", $Forest)
-	#$Forest.connect_exit("inside", $SmallHouse)
-	#
-	## SMALL HOUSE:
-	#$SmallHouse.add_npc(innkeeper)
+	# ArmazemCavalo:
+	var translator_peri = load_item("translator_peri")
+	$ArmazemCavalo.add_item(translator_peri)
+	
+	#ExposicaoMar1
+	var baleia_jubarte = load_npc("Baleia")
+	var hipopotamo = load_npc("Hipopotamo")
+	$ExposicaoMar1.add_npc(baleia_jubarte)
+	$ExposicaoMar1.add_npc(hipopotamo)
+	$ExposicaoMar1.connect_exit("leste", $ExposicaoMar2)
+	$ExposicaoMar1.connect_exit("norte", $ExposicaoMar3)
+	
+	#ExposicaoMar2
 	
 func connect_exit(room_1 : String, direction : String, room_2 : String):
 	var node_1 = get_node(room_1)

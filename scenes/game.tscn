@@ -87,13 +87,29 @@ offset_bottom = -1138.0
 room_name = "Armazém dos cavalos"
 room_description = "Você está em um cômodo sem nenhum ser vivo. Você sente um silêncio estranho. Então, decide procurar pela sala em busca de algo…"
 
-[node name="EndPath" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 827.0
-offset_top = -249.0
-offset_right = 1077.0
-offset_bottom = -49.0
-room_name = "End of the Path"
-room_description = "End of the Path"
+[node name="ExposicaoMar1" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 55.0
+offset_top = -798.0
+offset_right = 305.0
+offset_bottom = -598.0
+room_name = "Exposição Marinha 1"
+room_description = "Você está em um local incrível. De repente, é como se estivesse debaixo da água. Ao mesmo tempo que você está respirando normalmente, você consegue sentir a água em sua pele."
+
+[node name="ExposicaoMar2" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 442.0
+offset_top = -798.0
+offset_right = 716.0
+offset_bottom = -590.0
+room_name = "Exposição Marinha 2"
+room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça um quebra-cabeça…"
+
+[node name="ExposicaoMar3" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 58.0
+offset_top = -1170.0
+offset_right = 332.0
+offset_bottom = -862.0
+room_name = "Exposição Marinha 3"
+room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça um quebra-cabeça…"
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1

@@ -17,14 +17,17 @@ func add_quest(quest : Quest) -> String:
 func remove_quest(quest : Quest):
 	quests.erase(quest)
 	
-func has_item_on_inventory(item : String) -> Item:
+func has_item_on_inventory(item : String, specific_name = false) -> Item:
+	var item_first_name = ""
 	for i in inventory:
-		var item_names = i.item_name.split(" ", false)
-		var item_first_name = ""
-		if item_names.size() > 1:
-			item_first_name = item_names[0].to_lower()
+		if !specific_name:
+			var item_names = i.item_name.split(" ", false)
+			if item_names.size() > 1:
+				item_first_name = item_names[0].to_lower()
+			else:
+				item_first_name = i.item_name.to_lower()
 		else:
-			item_first_name = i.item_name.to_lower()
+			item_first_name = i.item_name
 			
 		if item == item_first_name:
 			return i
