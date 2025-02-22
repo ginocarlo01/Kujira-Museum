@@ -1,6 +1,7 @@
 extends Node
 
 enum ItemTypes {
+	DEFAULT,
 	KEY,
 	QUEST_ITEM,
 	TRANSLATOR
@@ -15,7 +16,9 @@ enum NPCTypes{
 	PERISSO_EPONA,
 	SEAL_PUP,
 	SEAL_MOM,
-	INDOHYUS
+	INDOHYUS,
+	ARMALDO,
+	LOVE_SEASHELL
 }
 
 const COLOR_NPC = Color("#ff9a94")

@@ -62,10 +62,33 @@ func _ready() -> void:
 	$ExposicaoMar3.add_npc(focamom)
 	$ExposicaoMar3.add_npc(indohyus)
 	$ExposicaoMar3.connect_exit("leste", $SalaDocumentos)
+	$ExposicaoMar3.connect_exit("norte", $SalaCuriosos)
+	$ExposicaoMar3.lock_exit("norte", $ExposicaoMar3)
 	
 	#SalaDocumentos
 	var documento = load_item("Documento")
 	$SalaDocumentos.add_item(documento)
+	
+	#SalaCuriosos
+	var armaldo = load_item("Armaldo")
+	$SalaCuriosos.add_npc(armaldo)
+	
+	#Praia
+	$Praia.connect_exit("norte", $CasaPraia)
+	
+	#CasaPraia
+	var casca_de_molusco = load_item("Casca_de_molusco")
+	var espada = load_item("Espada")
+	var conchinha = load_item("Conchinha")
+	var madreperola = load_item("Madreperola")
+	$CasaPraia.add_item(casca_de_molusco)
+	$CasaPraia.add_item(espada)
+	$CasaPraia.add_item(conchinha)
+	$CasaPraia.add_item(madreperola)
+	
+	#FogueiraPraia
+	var guerreiro = load_npc("Guerreiro")
+	$FogueiraPraia.add_npc(guerreiro)
 	
 func connect_exit(room_1 : String, direction : String, room_2 : String):
 	var node_1 = get_node(room_1)

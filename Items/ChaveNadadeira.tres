@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bqr58kq3kghpx"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_jcxtk"]
+
+[resource]
+script = ExtResource("1_jcxtk")
+item_name = "Chave Curiosos"
+item_type = 0
+use_value_description = "Uma chave dada pelo Indohyus. Talvez ela desbloqueia um caminho perto da onde ele está, já que ele não está andando muito bem"
