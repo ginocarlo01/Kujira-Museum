@@ -219,6 +219,14 @@ func talk(second_word : String) -> String:
 					room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
 					current_room.remove_npc(npc_wanted)
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
+			
+			Types.NPCTypes.SEAL_PUP:
+				if !npc_wanted.has_talked_to_npc:
+					var quest = load("res://Quests/AjudarFoquinha.tres")
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest)
+				else:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+		
 			_:
 				pass
 		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""

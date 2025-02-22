@@ -51,6 +51,14 @@ func _ready() -> void:
 	$ExposicaoMar1.connect_exit("norte", $ExposicaoMar3)
 	
 	#ExposicaoMar2
+	var foquinha = load_npc("Foquinha")
+	var andrew = load_npc("Andrew")
+	$ExposicaoMar2.add_npc(foquinha)
+	$ExposicaoMar2.add_npc(foquinha)
+	
+	#ExposicaoMar3
+	
+	$ExposicaoMar3.connect_exit("leste", $SalaDocumentos)
 	
 func connect_exit(room_1 : String, direction : String, room_2 : String):
 	var node_1 = get_node(room_1)

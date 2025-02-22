@@ -111,6 +111,14 @@ offset_bottom = -862.0
 room_name = "Exposição Marinha 3"
 room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça um quebra-cabeça…"
 
+[node name="SalaDocumentos" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 434.0
+offset_top = -1164.0
+offset_right = 708.0
+offset_bottom = -856.0
+room_name = "Sala dos documentos"
+room_description = "Você está em uma sala cheia de documentos. Há pilhas e pilhas de folhas, algumas até chegando no teto. Com certeza foram feitas muitas pesquisas aqui, mas qual seria o tema…"
+
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15

@@ -8,4 +8,4 @@ npc_name = "Foquinha "
 initial_dialog = "Olá !!! Eu preciso de sua ajuda. Como sou uma filhotinha, tenho muitos pelos, o que me deixa lenta na hora de nadar. Eu quero cortar meus pelinhos, mas minha não deixa. Tem como você falar com ela??? Por favor !!!"
 post_quest_dialog = ""
 translated_dialog = ""
-type = 0
+type = 6
