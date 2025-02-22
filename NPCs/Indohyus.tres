@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://cmwjdlcx0e1fw"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_oobos"]
+
+[resource]
+script = ExtResource("1_oobos")
+npc_name = "Indohyus"
+initial_dialog = "Sou o lendário Indohyus. Muitos predadores tentaram me assassinar, mas graças a minha agilidade, fugia para os mares e eles desistiam de me perseguir. Bons tempos… Agora estou velho e mal consigo me locomover. Se você conseguir achar um documento para mim, seria incrível."
+post_quest_dialog = ""
+translated_dialog = ""
+extra_dialog = ""
+type = 8

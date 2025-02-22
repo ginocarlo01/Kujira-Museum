@@ -4,8 +4,9 @@ class_name Player
 var inventory : Array = []
 var quests : Array = []
 
-func take_item(item : Item):
+func take_item(item : Item) -> String:
 	inventory.append(item)
+	return "Você recebeu " + Types.wrap_item_text(item.item_name) 
 	
 func drop_item(item : Item):
 	inventory.erase(item)
@@ -16,6 +17,14 @@ func add_quest(quest : Quest) -> String:
 	
 func remove_quest(quest : Quest):
 	quests.erase(quest)
+	return "A missão " + Types.wrap_quest_text(quest.quest_name) + " foi completada."
+	
+func has_quest(quest : Quest):
+	for q in quests:
+		if q == quest:
+			return true
+			
+	return false
 	
 func has_item_on_inventory(item : String, specific_name = false) -> Item:
 	var item_first_name = ""

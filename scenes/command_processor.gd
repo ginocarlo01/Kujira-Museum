@@ -154,9 +154,13 @@ func give(second_word : String, third_word : String) -> String:
 			if npc_wanted.quest_item.item_name.to_lower() == item_wanted.item_name.to_lower():
 				npc_wanted.receive_quest_item()
 				player.drop_item(item_wanted)
-				var reward : Item = npc_wanted.give_reward_to_player()
-				player.take_item(reward)
-				return "You give " + Types.wrap_item_text(second_word) + " to " + Types.wrap_npc_text(third_word) + " and have received " + Types.wrap_item_text(reward.item_name) + " as a reward!"
+				var reward : Item
+				if npc_wanted.reward_item != null:
+					reward = npc_wanted.give_reward_to_player()
+					player.take_item(reward)
+					return "Você deu " + Types.wrap_item_text(second_word) + " para " + Types.wrap_npc_text(third_word) + " e recebeu " + Types.wrap_item_text(reward.item_name) + " como recompensa!"
+				else:
+					return "Você deu " + Types.wrap_item_text(second_word) + " para " + Types.wrap_npc_text(third_word) 
 			else:
 				return Types.wrap_system_text("This person doesn't need this item")
 				
@@ -221,12 +225,33 @@ func talk(second_word : String) -> String:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
 			
 			Types.NPCTypes.SEAL_PUP:
-				if !npc_wanted.has_talked_to_npc:
-					var quest = load("res://Quests/AjudarFoquinha.tres")
+				var quest : Quest = load("res://Quests/AjudarFoquinha.tres")
+				var player_has_quest = player.has_quest(quest)
+				
+				if !player_has_quest and !npc_wanted.has_received_quest_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest)
-				else:
+				elif player_has_quest and !npc_wanted.has_received_quest_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
-		
+				elif player_has_quest and npc_wanted.has_received_quest_item:
+					room_manager.connect_exit("ExposicaoMar2", "leste", "Praia")
+					return player.remove_quest(quest) + "\n" +Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
+				elif !player_has_quest and npc_wanted.has_received_quest_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
+			
+			Types.NPCTypes.SEAL_MOM:
+				var quest : Quest = load("res://Quests/AjudarFoquinha.tres")
+				var player_has_quest = player.has_quest(quest)
+				var item_wanted = player.has_item_on_inventory(npc_wanted.reward_item.item_name, true)
+				var npc_given_item = npc_wanted.has_given_reward
+				
+				if !player_has_quest and item_wanted == null:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest) + "\n" + player.take_item(npc_wanted.give_reward_to_player())
+				elif player_has_quest and item_wanted == null and !npc_given_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
+				elif player_has_quest and item_wanted != null and npc_given_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\""
+				elif !player_has_quest and item_wanted == null and npc_given_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_post_dialog()
 			_:
 				pass
 		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://d08t1u6onh7d"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_bpox7"]
+
+[resource]
+script = ExtResource("1_bpox7")
+item_name = "Tesoura"
+item_type = 1
+use_value_description = "Um documento especial que pertence a um ser lendário"

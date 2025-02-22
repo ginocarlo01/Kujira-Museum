@@ -54,11 +54,18 @@ func _ready() -> void:
 	var foquinha = load_npc("Foquinha")
 	var andrew = load_npc("Andrew")
 	$ExposicaoMar2.add_npc(foquinha)
-	$ExposicaoMar2.add_npc(foquinha)
+	$ExposicaoMar2.add_npc(andrew)
 	
 	#ExposicaoMar3
-	
+	var focamom = load_npc("Focamom")
+	var indohyus = load_npc("Indohyus")
+	$ExposicaoMar3.add_npc(focamom)
+	$ExposicaoMar3.add_npc(indohyus)
 	$ExposicaoMar3.connect_exit("leste", $SalaDocumentos)
+	
+	#SalaDocumentos
+	var documento = load_item("Documento")
+	$SalaDocumentos.add_item(documento)
 	
 func connect_exit(room_1 : String, direction : String, room_2 : String):
 	var node_1 = get_node(room_1)
