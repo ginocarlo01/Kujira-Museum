@@ -89,6 +89,30 @@ func _ready() -> void:
 	#FogueiraPraia
 	var guerreiro = load_npc("Guerreiro")
 	$FogueiraPraia.add_npc(guerreiro)
+	$FogueiraPraia.connect_exit("barco", $IlhaFlores, "praia")
+	$FogueiraPraia.lock_exit("barco", $FogueiraPraia)
+	
+	#IlhaFlores
+	var florensi = load_npc("Florensi")
+	$IlhaFlores.add_npc(florensi)
+	$IlhaFlores.connect_exit("leste", $IlhaMaron)
+	
+	#IlhaMaron
+	var fredo = load_npc("Fredo")
+	$IlhaMaron.add_npc(fredo)
+	$IlhaMaron.connect_exit("sul", $SalaFinal)
+	$IlhaMaron.lock_exit("sul", $IlhaMaron)
+	$IlhaMaron.connect_exit("leste", $IlhaBugada)
+	
+	#IlhaBugada
+	var chaveJubarte = load_item("ChaveJubarte")
+	$IlhaBugada.add_item(chaveJubarte)
+	
+	#SalaFinal
+	var roger = load_npc("FreRogerdo")
+	$SalaFinal.add_npc(roger)
+	var gnomo = load_npc("Gnomo")
+	$SalaFinal.add_npc(gnomo)
 	
 func connect_exit(room_1 : String, direction : String, room_2 : String):
 	var node_1 = get_node(room_1)

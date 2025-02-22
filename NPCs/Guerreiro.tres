@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://bb7pmq2vgxajo"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_kbxec"]
+[ext_resource type="Resource" uid="uid://dr476e8ikrjhv" path="res://Items/Espada.tres" id="1_mhm7w"]
+[ext_resource type="Resource" uid="uid://bqr58kq3kghpx" path="res://Items/ChaveNadadeira.tres" id="2_xk6ep"]
+
+[resource]
+script = ExtResource("1_kbxec")
+npc_name = "Guerreiro "
+initial_dialog = "Estou velho… Antes eu era um grande guerreiro, mas perdi meu melhor amigo em batalha e depois fiquei muito triste. Ele carregava uma [color=#94b9ff]espada de narval[/color]. Os narvais eram seres fenomenais, os chamados unicórnios do mar. Meu povo arrancava seu bico estupendo para fazer lanças e espadas. Provavelmente isso nos amaldiçoou e trouxe a perdição de meus irmãos."
+post_quest_dialog = "Não posso acreditar que recebi a espada de meu amigo Jonathan… Estou tão feliz e grato. Agora acho que posso voltar ao normal e ir em busca da minha amada Hatsune Miku."
+translated_dialog = ""
+extra_dialog = ""
+quest_item = ExtResource("1_mhm7w")
+reward_item = ExtResource("2_xk6ep")
+type = 0

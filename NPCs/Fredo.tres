@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://c2rtndb6xqu4n"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_3l7wg"]
+
+[resource]
+script = ExtResource("1_3l7wg")
+npc_name = "Florensi"
+initial_dialog = "Sou um grande aventureiro e amo o mar. As minhas melhores amigas são baleiazonas, mas também tem o meu querido amigo Baleião, adoro aquele camarada. Apesar de eu ser um pouco menor que um humano normal, sou tão incrível quanto. Também adoro pescar, mas não como peixes. Sim, sim, sei que não faz sentido, mas eu pesco os peixes para conversar com eles, geralmente faço isso nos finais de semana, a gente troca uma ideia."
+post_quest_dialog = ""
+translated_dialog = ""
+extra_dialog = "Enfim, vejo que você falou com o Armaldo. Porém ele não disse a verdade para você pois não gosta dos humanos, ele se acha um grande predador e não gosta de humanos pois sabe que eles destruíram ainda mais que ele. Armaldo é o líder do museu, ao lado de Indohyus. Armaldo fez um pacto com um mago e conseguiu prender toda essa praia e essa parte do mar dentro do museu. Não me pergunte como ele fez isso, mas eu sou o único que sabe. O motivo disso? Eu sou o maior amigo das baleias, e pelo jeito todo o museu foi construído para entender da onde as baleias vieram. Mas aparentemente eles nunca descobriram, o que também explica a raiva de Armaldo…"
+type = 11

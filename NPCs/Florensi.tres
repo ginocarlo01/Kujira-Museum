@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://38xs7nyjhi6j"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_xvhcr"]
+
+[resource]
+script = ExtResource("1_xvhcr")
+npc_name = "Florensi"
+initial_dialog = "Olááááá, meu nome completo é Homo floresiensis, mas pode me chamar de Florensi mesmo. Vivo nesta ilha em muita paz, espero nunca ser morto por seres de maior estatura que eu."
+post_quest_dialog = ""
+translated_dialog = "Não acredito que você tem a madrepérola no seu inventário. Que item incrível !! Meus parabéns por explorar a praia, você é uma pessoa aventureira."
+extra_dialog = ""
+type = 10

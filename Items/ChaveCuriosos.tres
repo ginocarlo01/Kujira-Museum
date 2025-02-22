@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_mro27")
-item_name = "Chave Curiosos"
+item_name = "Chave dos Curiosos"
 item_type = 0
 use_value_description = "Uma chave dada pelo Indohyus. Talvez ela desbloqueia um caminho perto da onde ele está, já que ele não está andando muito bem"

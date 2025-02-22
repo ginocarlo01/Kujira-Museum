@@ -119,6 +119,30 @@ offset_bottom = -48.0
 room_name = "Ilha de Flores"
 room_description = "Você está na Ilha de Flores. Aqui há um grande vulcão e várias florestas tropicais. Mitos dizem que aqui vivia uma espécie muito divertida de humanos. "
 
+[node name="IlhaMaron" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1576.0
+offset_top = -406.0
+offset_right = 1850.0
+offset_bottom = -48.0
+room_name = "Ilha Marôn"
+room_description = "Você está na Ilha Marôn. Há uma grande estátua que lembra um homem pequeno, com óculos e cabelo bem autênticos e uma camisa xadrez. Ele parece estar fazendo um movimento de dança. Ao redor da estátua, há um lago, e nele há vários peixes da família Scombridae. Os peixes parecem entrar e sair da água como se estivessem dançando em homenagem à estátua. "
+
+[node name="IlhaBugada" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1953.0
+offset_top = -422.0
+offset_right = 2227.0
+offset_bottom = -14.0
+room_name = "Ilha Bugada"
+room_description = "Você está em uma parte da ilha Marôn muito estranha. Tudo começa a falhar, como se a paisagem fosse uma projeção e não algo real. As nuvens começam a se comportar diferentes, como se estivessem sendo controladas. As ondas do mar começam a ir no sentido contrário. Os batimentos do seu coração disparam por medo desses fatores estranhos."
+
+[node name="SalaFinal" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1580.0
+offset_top = 67.0
+offset_right = 1854.0
+offset_bottom = 475.0
+room_name = "Sala Final"
+room_description = "Ao inserir a chave jubarte em uma porta solta na ilha, um portal se abriu e agora você está em um sala muito semelhante com a sala inicial do museu. Há um vazio, uma escuridão, o que lembra uma grande boca, mas sem dentes. Você está na boca de uma baleia jubarte!"
+
 [node name="CasaPraia" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 830.0
 offset_top = -1266.0

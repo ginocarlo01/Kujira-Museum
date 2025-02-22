@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://cvel0dvdf0kd4"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_hvspe"]
+
+[resource]
+script = ExtResource("1_hvspe")
+npc_name = "Porquinho"
+initial_dialog = "ronc ronc ronquinho"
+post_quest_dialog = ""
+translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o [color=#BA55D3]norte[/color]"
+extra_dialog = ""
+type = 2

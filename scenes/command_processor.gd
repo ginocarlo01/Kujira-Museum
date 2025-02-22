@@ -224,6 +224,25 @@ func talk(second_word : String) -> String:
 					current_room.remove_npc(npc_wanted)
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
 			
+			Types.NPCTypes.ARMALDO:
+				var player_has_item = player.has_item_on_inventory("Love Spell da Victoria's Secret", true)
+				
+				if !player_has_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
+	
+			Types.NPCTypes.LOVE_SEASHELL:
+				var player_has_item = player.has_item_on_inventory("Conchinha", true)
+				
+				if player_has_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
+							
+			Types.NPCTypes.LOVE_ARMALDO:
+				var player_has_item = player.has_item_on_inventory("Love Spell da Victoria's Secret", true)
+				
+				if player_has_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
+							
+			
 			Types.NPCTypes.SEAL_PUP:
 				var quest : Quest = load("res://Quests/AjudarFoquinha.tres")
 				var player_has_quest = player.has_quest(quest)

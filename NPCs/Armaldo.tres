@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://bx23v4bqtixou"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://bx23v4bqtixou"]
 
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_3284k"]
+[ext_resource type="Resource" uid="uid://favmlk7aiglh" path="res://Items/LoveSpell.tres" id="1_htwo6"]
 
 [resource]
 script = ExtResource("1_3284k")
-npc_name = "Armaldo "
-initial_dialog = "Não esperava ver um humano por aqui, somos tão distantes por tempo, mas não por espaço. Nós dois surgimos no mesmo mundo ! Não sei se posso te chamar de primo ou neto, mas definitivamente temos semelhanças. Bom te ver por aqui pesquisando sobre a história dos seus ancestrais HAHAHA. Está se perguntando sobre o trono? Pois é, eu era um superpredador, ou um Anomalocaris, como a sua espécie costuma me chamar. Eu destruía tudo que eu podia comer ! Nesse sentido, você é ainda pior, destrói tudo…"
+npc_name = "Armaldo"
+initial_dialog = "Não esperava ver um humano por aqui, somos tão distantes por tempo, mas não por espaço. Nós dois surgimos no mesmo mundo ! Não sei se posso te chamar de primo ou neto, mas definitivamente temos semelhanças. Bom te ver por aqui pesquisando sobre a história dos seus ancestrais HAHAHA. Está se perguntando sobre o trono? Pois é, eu era um superpredador, ou um Anomalocaris, como a sua espécie costuma me chamar. Eu destruía tudo que eu podia comer ! Nesse sentido, você é ainda pior, destrói tudo… "
 post_quest_dialog = ""
 translated_dialog = ""
-extra_dialog = ""
+extra_dialog = "Poucos sabem, mas sou um grande amante do perfume Love Spell. Como você parece legal, leve um desses com você. "
+reward_item = ExtResource("1_htwo6")
 type = 0
