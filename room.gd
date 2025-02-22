@@ -83,7 +83,14 @@ func get_exits_description() -> String:
 	if exits.keys().size() == 0:
 		return ""
 		
-	return "Saídas: " + Types.wrap_location_text(" ".join(PackedStringArray(exits.keys())))
+	var exits_description : Array = []
+		
+	for key in exits.keys():
+		var value = exits[key]
+		if !value.hidden:
+			exits_description.append(key)
+			
+	return "Saídas: " + Types.wrap_location_text(" ".join(PackedStringArray(exits_description)))
 	
 func lock_exit(direction : String, room):
 	exits[direction].lock_exit_of_room(room)
@@ -122,10 +129,11 @@ func is_npc_on_room(npc_wanted : String) -> NPC:
 	
 	return null
 	
-func connect_exit(direction : String, room, override_room_2 = "null"):
+func connect_exit(direction : String, room, override_room_2 = "null", hidden = false):
 	var exit = Exit.new()
 	exit.room_1 = self
 	exit.room_2 = room
+	exit.hidden = hidden
 	exits[direction] = exit
 	
 	#With override, you don't have to add into the possible item list

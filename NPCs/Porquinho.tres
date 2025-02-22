@@ -7,5 +7,5 @@ script = ExtResource("1_t17tn")
 npc_name = "Porquinho"
 initial_dialog = "ronc ronc ronquinho"
 post_quest_dialog = ""
-translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o estábulo (grifar estábulo)"
-type = 3
+translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o [color=#BA55D3]estábulo[/color]"
+type = 2

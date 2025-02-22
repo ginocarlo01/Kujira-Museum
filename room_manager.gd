@@ -28,9 +28,12 @@ func _ready() -> void:
 	$Pocilga.add_npc(porcao)
 	$Pocilga.add_npc(porquinho)
 	$Pocilga.add_npc(girafona)
+	$Pocilga.connect_exit("estábulo", $Estabulo, "sul", true)
 	
-	## OUTSIDE:
-	##$OutsideRoom.add_item(key)
+	# Estábulo:
+	$Estabulo.connect_exit("norte", $ArmazemCavalo)
+	$Estabulo.lock_exit("norte", $Estabulo)
+	
 	#$OutsideRoom.add_npc(guard)
 	#$OutsideRoom.connect_exit("north", $ShedRoom)
 	#$OutsideRoom.lock_exit("north", $OutsideRoom)

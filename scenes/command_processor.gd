@@ -61,7 +61,7 @@ func go(second_word : String) -> String:
 			var change_response = change_room(current_room.exits[second_word].get_other_room(current_room))
 			return "\n".join(PackedStringArray(["Você foi para " + Types.wrap_location_text(second_word), change_response]))
 		else:
-			return "The way " + Types.wrap_location_text(second_word) + " is currently " + Types.wrap_system_text("locked!")
+			return "A saída para " + Types.wrap_location_text(second_word) + " está " + Types.wrap_system_text("bloqueada!")
 	else:	
 		return Types.wrap_system_text("Essa não é uma direção válida...")
 
@@ -184,7 +184,7 @@ func talk(second_word : String) -> String:
 			
 			Types.NPCTypes.ARTIO:
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("artiodáctilo")
+				item_wanted = player.has_item_on_inventory("tradutor")
 			
 				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
 				if item_wanted != null:
@@ -192,7 +192,7 @@ func talk(second_word : String) -> String:
 			
 			Types.NPCTypes.ARTIO_GIRAFFE:
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("artiodáctilo")
+				item_wanted = player.has_item_on_inventory("tradutor")
 			
 				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
 				if item_wanted != null:

@@ -7,6 +7,8 @@ var room_1_is_locked := false
 var room_2 = null
 var room_2_is_locked := false
 
+@export var hidden := false
+
 func get_other_room(current_room):
 	var other_room = null
 	if current_room == room_1:

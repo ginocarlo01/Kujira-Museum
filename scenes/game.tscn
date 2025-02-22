@@ -71,21 +71,21 @@ offset_bottom = -310.0
 room_name = "Armazém do Cientista"
 room_description = "Você está em um armazém. Provavelmente foi utilizado pelo cientista para guardar seus equipamentos."
 
-[node name="Forest" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 821.0
-offset_top = -532.0
-offset_right = 1071.0
-offset_bottom = -332.0
-room_name = "forest"
-room_description = "forest"
+[node name="Estabulo" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -285.0
+offset_top = -1078.0
+offset_right = -35.0
+offset_bottom = -878.0
+room_name = "Estábulo"
+room_description = "Você está em uma sala com vários compartimentos e muito feno. O cheiro dos cavalos é forte por aqui. "
 
-[node name="SmallHouse" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 1165.0
-offset_top = -538.0
-offset_right = 1415.0
-offset_bottom = -338.0
-room_name = "Small House"
-room_description = "its a good house"
+[node name="ArmazemCavalo" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -299.0
+offset_top = -1338.0
+offset_right = -25.0
+offset_bottom = -1138.0
+room_name = "Armazém dos cavalos"
+room_description = "Você está em um cômodo sem nenhum ser vivo. Você sente um silêncio estranho. Então, decide procurar pela sala em busca de algo…"
 
 [node name="EndPath" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 827.0
