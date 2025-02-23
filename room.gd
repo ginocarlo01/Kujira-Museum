@@ -108,14 +108,17 @@ func unlock_exit(direction : String, room):
 func check_exit_locked(direction : String) -> bool:
 	return exits[direction].is_room_locked(self)
 	
-func has_item_on_room(item : String) -> Item:
+func has_item_on_room(item : String, specific_name = false) -> Item:
+	var item_first_name = ""
 	for i in items:
-		var item_names = i.item_name.split(" ", false)
-		var item_first_name = ""
-		if item_names.size() > 1:
-			item_first_name = item_names[0].to_lower()
+		if !specific_name:
+			var item_names = i.item_name.split(" ", false)
+			if item_names.size() > 1:
+				item_first_name = item_names[0].to_lower()
+			else:
+				item_first_name = i.item_name.to_lower()
 		else:
-			item_first_name = i.item_name.to_lower()
+			item_first_name = i.item_name
 			
 		if item == item_first_name:
 			return i

@@ -7,5 +7,6 @@ script = ExtResource("1_0oydw")
 npc_name = "Kai"
 initial_dialog = "toc reeeenc"
 post_quest_dialog = ""
-translated_dialog = "Finalmente você pode me entender! Meu nome é Kai (grifar o nome), depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
+translated_dialog = "Finalmente você pode me entender! Meu nome é @NPCKai@END, depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
+extra_dialog = ""
 type = 4

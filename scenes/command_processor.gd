@@ -54,7 +54,7 @@ func process_command(input : String) -> String:
 		"saídas":
 			return exits()	
 		"descrever":
-			return describe_item(second_word)
+			return describe_item(second_word, third_word)
 		"ajuda":
 			return help()
 		"sonhar":
@@ -94,17 +94,24 @@ func take(second_word : String) -> String:
 		
 	return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
 	
-func describe_item(second_word : String) -> String:	
+func describe_item(second_word : String, third_word : String = "") -> String:	
 	if second_word == "":
 		return Types.wrap_system_text("Descrever o que?")
 		
 	var item_wanted : Item
+	var item_wanted_name : String
 	
-	item_wanted = current_room.has_item_on_room(second_word.to_lower())
-	
-	if item_wanted == null:	
-		item_wanted = player.has_item_on_inventory(second_word.to_lower())
-				
+	if third_word == "":
+		item_wanted_name = second_word.to_lower()
+		item_wanted = current_room.has_item_on_room(item_wanted_name)
+		if item_wanted == null:	
+			item_wanted = player.has_item_on_inventory(item_wanted_name)
+	else:
+		item_wanted_name = second_word.to_lower().capitalize() + " " + third_word.to_lower().capitalize()
+		item_wanted = current_room.has_item_on_room(item_wanted_name, true)
+		if item_wanted == null:	
+			item_wanted = player.has_item_on_inventory(item_wanted_name, true)
+		
 	if item_wanted != null:
 		return "Sobre " + Types.wrap_item_text(item_wanted.item_name) + ": " + item_wanted.use_value_description
 	else:	
@@ -113,7 +120,7 @@ func describe_item(second_word : String) -> String:
 	
 func drop(second_word : String) -> String:
 	if second_word == "":
-		return Types.wrap_system_text("Drop what?")
+		return Types.wrap_system_text("Dropar o que?")
 		
 	var item_wanted : Item
 	
