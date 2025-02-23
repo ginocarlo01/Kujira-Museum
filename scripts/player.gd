@@ -26,6 +26,7 @@ func add_quest(quest : Quest) -> String:
 	return "A missão " + Types.wrap_quest_text(quest.quest_name) + " foi adicionada."
 	
 func remove_quest(quest : Quest):
+	SoundManager.play_sfx(SoundManager.SFXSounds.got_quest)
 	quests.erase(quest)
 	return "A missão " + Types.wrap_quest_text(quest.quest_name) + " foi completada."
 	

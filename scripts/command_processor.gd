@@ -135,7 +135,6 @@ func use(second_word : String, third_word : String) -> String:
 		match item_wanted.item_type:
 			Types.ItemTypes.KEY:
 				if current_room.exits.keys().has(third_word):
-					var current_exit = current_room.exits[third_word] 
 					player.drop_item(item_wanted)
 					return current_room.unlock_exit(third_word, current_room)
 					
@@ -242,7 +241,7 @@ func talk(second_word : String) -> String:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 	
 			Types.NPCTypes.LOVE_SEASHELL:
-				var player_has_item = player.has_item_on_inventory("Conchinha")
+				var player_has_item = player.has_item_on_inventory("conchinha")
 				
 				if player_has_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
@@ -318,8 +317,6 @@ func help() -> String:
 		" ajuda"
 	]))
 	
-
-
 func change_room(new_room : Room) -> String:
 	if current_room != null:
 		if current_room.audio != new_room.audio and new_room.audio != null:
