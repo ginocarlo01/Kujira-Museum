@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_yxex4")
 npc_name = "Focamom"
-initial_dialog = "Minha filha agora bancou de ser independente e quer sair por aí nadando! Mas não é assim que funciona… Nós focas perdemos nosso pelo com o tempo, e aí sim ficamos boas de nado. Mas essa juventude de hoje tá toda diferente. Bom, você parece ser legal, então fica com essa tesoura! Vê se ela fala para tomar cuidado na hora de ser cortar…"
+initial_dialog = "Minha filha agora bancou de ser independente e quer sair por aí nadando! Mas não é assim que funciona… Nós focas perdemos nosso pelo com o tempo, e aí sim ficamos boas de nado. Mas essa juventude de hoje tá toda diferente. Bom, você parece ser legal, então fica com essa @ITEMtesoura@END! Vê se ela fala para tomar cuidado na hora de ser cortar…"
 post_quest_dialog = "Obrigado por ter ajudado minha querida filha Foquinha..."
 translated_dialog = ""
 extra_dialog = "Vejo que você tem uma missão que menciona a foquinha, a minha querida. "

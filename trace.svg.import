@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gfrkibwuqf4l"
-path="res://.godot/imported/MPKHZb01.svg-a625328bae9c8d01a7453720e1dfe1e8.ctex"
+uid="uid://w4xkw3huar7a"
+path="res://.godot/imported/trace.svg-713b73d6b6fba702e31ce245af58a37e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MPKHZb01.svg"
-dest_files=["res://.godot/imported/MPKHZb01.svg-a625328bae9c8d01a7453720e1dfe1e8.ctex"]
+source_file="res://trace.svg"
+dest_files=["res://.godot/imported/trace.svg-713b73d6b6fba702e31ce245af58a37e.ctex"]
 
 [params]
 

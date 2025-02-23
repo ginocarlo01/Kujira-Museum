@@ -19,4 +19,5 @@ func _on_input_text_submitted(input_text: String) -> void:
 		return
 		
 	var response = command_processor.process_command(input_text)
+	response = Types.manipulate_string(response)
 	game_info.create_response_with_input(response, input_text)

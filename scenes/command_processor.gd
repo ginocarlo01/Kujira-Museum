@@ -341,7 +341,7 @@ func help() -> String:
 		" ir " + Types.wrap_location_text("[direção ou local]") + ",",
 		" pegar " + Types.wrap_item_text("[item(primeiro nome)]") + ",",
 		" dropar " + Types.wrap_item_text("[item]") + ",",
-		" usar " + Types.wrap_item_text("[item]") + Types.wrap_location_text(" [direction],"),
+		" usar " + Types.wrap_item_text("[item]") + Types.wrap_location_text(" [direção],"),
 		" falar " + Types.wrap_npc_text("[entidade(primeiro nome)]") + ",",
 		" dar " + Types.wrap_item_text("[item]") + " " + Types.wrap_npc_text("[npc]") + ",",
 		" inventário,",
@@ -350,6 +350,8 @@ func help() -> String:
 		" descrever "+ Types.wrap_item_text("[primeiro nome do item]" + ","),
 		" ajuda"
 	]))
+	
+
 
 func change_room(new_room : Room) -> String:
 	if current_room != null:

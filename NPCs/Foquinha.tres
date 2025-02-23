@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_uw2g2")
 npc_name = "Foquinha"
-initial_dialog = "Olá !!! Eu preciso de sua ajuda. Como sou uma filhotinha, tenho muitos pelos, o que me deixa lenta na hora de nadar. Eu quero cortar meus pelinhos, mas só minha mãe tem a [color=#BA55D3]tesoura[/color]. Tem como você falar com ela??? Por favor !!!"
-post_quest_dialog = "Finalmente posso nadar rapidamente! Obrigado … Como recompensa, agora você pode ir para a [color=#faff94]praia[/color]"
+initial_dialog = "Olá !!! Eu preciso de sua ajuda. Como sou uma filhotinha, tenho muitos pelos, o que me deixa lenta na hora de nadar. Eu quero cortar meus pelinhos, mas só minha mãe tem a @ITEMtesoura@END. Tem como você falar com ela??? Por favor !!!"
+post_quest_dialog = "Finalmente posso nadar rapidamente! Obrigado … Como recompensa, agora você pode ir para a @LOCATIONpraia@END"
 translated_dialog = ""
 extra_dialog = ""
 quest_item = ExtResource("1_8lcns")

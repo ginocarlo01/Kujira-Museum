@@ -9,6 +9,6 @@ npc_name = "Armaldo"
 initial_dialog = "Não esperava ver um humano por aqui, somos tão distantes por tempo, mas não por espaço. Nós dois surgimos no mesmo mundo ! Não sei se posso te chamar de primo ou neto, mas definitivamente temos semelhanças. Bom te ver por aqui pesquisando sobre a história dos seus ancestrais HAHAHA. Está se perguntando sobre o trono? Pois é, eu era um superpredador, ou um Anomalocaris, como a sua espécie costuma me chamar. Eu destruía tudo que eu podia comer ! Nesse sentido, você é ainda pior, destrói tudo… "
 post_quest_dialog = ""
 translated_dialog = ""
-extra_dialog = "Poucos sabem, mas sou um grande amante do perfume Love Spell. Como você parece legal, leve um desses com você. "
+extra_dialog = "Poucos sabem, mas sou um grande amante do perfume @ITEMLove Spell@END. Como você parece legal, leve um desses com você. "
 reward_item = ExtResource("1_htwo6")
 type = 9

@@ -96,7 +96,7 @@ offset_top = -510.0
 offset_right = -397.0
 offset_bottom = -310.0
 room_name = "Armazém do Cientista"
-room_description = "Você está em um armazém. o qual rovavelmente foi utilizado pelo pesquisador Roger para guardar seus equipamentos."
+room_description = "Você está em um armazém. o qual provavelmente foi utilizado pelo pesquisador Roger para guardar seus equipamentos."
 
 [node name="Estabulo" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -285.0

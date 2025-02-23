@@ -7,6 +7,6 @@ script = ExtResource("1_mybyk")
 npc_name = "Girafona"
 initial_dialog = "nfwiufw jdjdadjq jxjxjxjx zzzz"
 post_quest_dialog = ""
-translated_dialog = "Acho que me transferiram para a sala errada… E ainda me deixaram com uma [color=#BA55D3]chave[/color]… Vou deixar ela ali no meio da grama, se quiser pegar para você hahaha…"
+translated_dialog = "Acho que me transferiram para a sala errada… E ainda me deixaram com uma @ITEMchave@END… Vou deixar ela ali no meio da grama, se quiser pegar para você hahaha…"
 extra_dialog = ""
 type = 3
