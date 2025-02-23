@@ -4,15 +4,6 @@ var current_room : Room = null
 var player : Player = null
 var room_manager : RoomManager = null
 
-@onready var sfx_player = $"../SFXPlayer"
-
-@export var sfx_enter_room : AudioStream
-@export var sfx_unlocked : AudioStream
-@export var sfx_drop_item : AudioStream
-@export var sfx_get_item : AudioStream
-@export var sfx_got_quest : AudioStream
-@export var sfx_player_gave_item : AudioStream
-
 func initialize(starting_room, player, room_manager : RoomManager) -> String:
 	self.player = player
 	self.room_manager = room_manager
@@ -59,7 +50,7 @@ func process_command(input : String) -> String:
 			return help()
 		"sonhar":
 			get_tree().quit()
-			return "adeus"
+			return "_"
 		_:
 			return Types.wrap_system_text("Comando não identificado ! Tente novamente ou digite ajuda")
 			
@@ -68,7 +59,6 @@ func go(second_word : String) -> String:
 		return Types.wrap_system_text("Go where?")
 	
 	if current_room.exits.keys().has(second_word):
-		#var change_response = change_room(current_room.exits[second_word])
 		if !current_room.check_exit_locked(second_word):
 			var change_response = change_room(current_room.exits[second_word].get_other_room(current_room))
 			return "\n".join(PackedStringArray(["Você foi para " + Types.wrap_location_text(second_word), change_response]))
@@ -88,8 +78,6 @@ func take(second_word : String) -> String:
 	if item_wanted != null:
 		current_room.remove_item(item_wanted)
 		player.take_item(item_wanted)
-		sfx_player.stream = sfx_get_item
-		sfx_player.play()
 		return "Você pegou " + Types.wrap_item_text(item_wanted.item_name)
 		
 	return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
@@ -128,10 +116,7 @@ func drop(second_word : String) -> String:
 	
 	if item_wanted != null:
 		current_room.add_item(item_wanted)
-		player.drop_item(item_wanted)
-		sfx_player.stream = sfx_drop_item
-		sfx_player.play()
-		return "Você dropou " + Types.wrap_item_text(item_wanted.item_name)
+		return player.drop_item(item_wanted)
 	else:
 		return Types.wrap_system_text("Você não tem esse item no seu inventário.")
 	
@@ -151,11 +136,9 @@ func use(second_word : String, third_word : String) -> String:
 			Types.ItemTypes.KEY:
 				if current_room.exits.keys().has(third_word):
 					var current_exit = current_room.exits[third_word] 
-					current_exit.unlock_exit_of_room(current_room)
 					player.drop_item(item_wanted)
-					sfx_player.stream = sfx_unlocked
-					sfx_player.play()
-					return "Você desbloqueou a passagem " + Types.wrap_location_text(third_word) 
+					return current_room.unlock_exit(third_word, current_room)
+					
 				else:
 					return Types.wrap_system_text("Essa não é uma direção válida")
 			_:
@@ -180,18 +163,14 @@ func give(second_word : String, third_word : String) -> String:
 		if npc_wanted != null:
 			if npc_wanted.quest_item.item_name.to_lower() == item_wanted.item_name.to_lower():
 				npc_wanted.receive_quest_item()
-				player.drop_item(item_wanted)
+				
 				var reward : Item
 				if npc_wanted.reward_item != null:
 					reward = npc_wanted.give_reward_to_player()
-					player.take_item(reward)
-					sfx_player.stream = sfx_player_gave_item
-					sfx_player.play()
-					return "Você deu " + Types.wrap_item_text(second_word) + " para " + Types.wrap_npc_text(third_word) + " e recebeu " + Types.wrap_item_text(reward.item_name) + " como recompensa!"
+					player.take_item(reward, false)
+					return player.give_item(item_wanted) + " para " + Types.wrap_npc_text(third_word) + " e recebeu " + Types.wrap_item_text(reward.item_name) + " como recompensa!"
 				else:
-					sfx_player.stream = sfx_player_gave_item
-					sfx_player.play()
-					return "Você deu " + Types.wrap_item_text(second_word) + " para " + Types.wrap_npc_text(third_word) 
+					return player.give_item(item_wanted) + " para " + Types.wrap_npc_text(third_word) 
 			else:
 				return Types.wrap_system_text("This person doesn't need this item")
 				
@@ -233,8 +212,6 @@ func talk(second_word : String) -> String:
 				if item_wanted != null:
 					if !npc_wanted.has_given_reward:
 						room_manager.add_item(current_room, "ChaveCavalista")
-						sfx_player.stream = sfx_get_item
-						sfx_player.play()
 						npc_wanted.has_given_reward = true
 						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
 					else:
@@ -256,16 +233,12 @@ func talk(second_word : String) -> String:
 				if item_wanted != null:
 					room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
 					current_room.remove_npc(npc_wanted)
-					sfx_player.stream = sfx_unlocked
-					sfx_player.play()
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
 			
 			Types.NPCTypes.ARMALDO:
 				var player_has_item = player.has_item_on_inventory("Love Spell da Victoria's Secret", true)
 				
 				if !player_has_item:
-					sfx_player.stream = sfx_get_item
-					sfx_player.play()
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 	
 			Types.NPCTypes.LOVE_SEASHELL:
@@ -286,16 +259,11 @@ func talk(second_word : String) -> String:
 				var player_has_quest = player.has_quest(quest)
 				
 				if !player_has_quest and !npc_wanted.has_received_quest_item:
-					sfx_player.stream = sfx_got_quest
-					sfx_player.play()
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest)
 				elif player_has_quest and !npc_wanted.has_received_quest_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
 				elif player_has_quest and npc_wanted.has_received_quest_item:
 					current_room.connect_exit("praia", $"../RoomManager/Praia", "oeste", false)
-					#room_manager.connect_exit("ExposicaoMar2", "praia", "Praia")
-					sfx_player.stream = sfx_unlocked
-					sfx_player.play()
 					return player.remove_quest(quest) + "\n" +Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
 				elif !player_has_quest and npc_wanted.has_received_quest_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
@@ -307,12 +275,8 @@ func talk(second_word : String) -> String:
 				var npc_given_item = npc_wanted.has_given_reward
 				
 				if !player_has_quest and item_wanted == null:
-					sfx_player.stream = sfx_got_quest
-					sfx_player.play()
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest) + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 				elif player_has_quest and item_wanted == null and !npc_given_item:
-					sfx_player.stream = sfx_get_item
-					sfx_player.play()
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 				elif player_has_quest and item_wanted != null and npc_given_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\""
@@ -330,13 +294,9 @@ func talk(second_word : String) -> String:
 	return Types.wrap_system_text("Essa pessoa não está aqui!")
 	
 func inventory() -> String:
-	sfx_player.stream = sfx_get_item
-	sfx_player.play()
 	return player.get_inventory()
 	
 func quests() -> String:
-	sfx_player.stream = sfx_got_quest
-	sfx_player.play()
 	return player.get_quests()
 	
 func exits() -> String:
@@ -368,9 +328,7 @@ func change_room(new_room : Room) -> String:
 		new_room.play_audio()
 		
 	current_room = new_room
-	sfx_player.stream = sfx_enter_room
-	sfx_player.play()
-	 
+	
 	return new_room.get_full_description()
 	
 		

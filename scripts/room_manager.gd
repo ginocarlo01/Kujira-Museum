@@ -2,14 +2,7 @@ extends Node
 class_name RoomManager
 
 func _ready() -> void:
-	# KEYS :
-	#var key = Item.new()
-	#key.initialize("Blue_Key", Types.ItemTypes.KEY)
-	#var key = load_item("key")
-	#key.set_use_value($OutsideRoom, "You can use it to go outside")
-	
-	
-	
+
 	# Palco Inicial:
 	$PalcoInicial.connect_exit("oeste",$SalaCientista)
 	

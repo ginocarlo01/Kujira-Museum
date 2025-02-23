@@ -17,6 +17,7 @@ config/icon="res://MPKHZb01.svg"
 
 [autoload]
 
+SoundManager="*res://scripts/globals/Sound_manager.gd"
 Types="*res://scripts/globals/Types.gd"
 
 [rendering]

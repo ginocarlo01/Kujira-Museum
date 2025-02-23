@@ -1,26 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://b3ifq7sb13vbw"]
+[gd_scene load_steps=18 format=3 uid="uid://b3ifq7sb13vbw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ox0k4"]
 [ext_resource type="Script" path="res://scripts/input.gd" id="1_qo538"]
 [ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_w3cli"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_2mk6h"]
-[ext_resource type="Script" path="res://scenes/command_processor.gd" id="2_es8au"]
-[ext_resource type="Script" path="res://room_manager.gd" id="3_5j5y6"]
+[ext_resource type="Script" path="res://scripts/command_processor.gd" id="2_es8au"]
+[ext_resource type="Script" path="res://scripts/globals/Sound_manager.gd" id="2_yvk3h"]
+[ext_resource type="Script" path="res://scripts/room_manager.gd" id="3_5j5y6"]
 [ext_resource type="PackedScene" uid="uid://currxaw7xo502" path="res://scenes/room.tscn" id="3_66d0a"]
-[ext_resource type="AudioStream" uid="uid://jlh4vyljbsac" path="res://SFX/EntrouSala.ogg" id="4_blsjn"]
-[ext_resource type="AudioStream" uid="uid://ckg65yknkufi5" path="res://SFX/Desbloqueou.ogg" id="5_5fcpg"]
 [ext_resource type="PackedScene" uid="uid://d2bdos3uc656x" path="res://scenes/game_info.tscn" id="6_dbgmv"]
-[ext_resource type="AudioStream" uid="uid://bskd7dj4g2qoo" path="res://SFX/Dropou.ogg" id="6_ncybt"]
-[ext_resource type="AudioStream" uid="uid://bhvun01a3xwvu" path="res://SFX/PegouItem.ogg" id="7_re1fn"]
-[ext_resource type="AudioStream" uid="uid://mxcxlvcrw40b" path="res://SFX/PegouMissao.ogg" id="8_nj3bc"]
-[ext_resource type="AudioStream" uid="uid://chvouecys3lbf" path="res://SFX/DeuItem.ogg" id="9_irbyq"]
 [ext_resource type="AudioStream" uid="uid://cuxsyyntuh5n7" path="res://Soundtrack/pokemongeral.mp3" id="12_u8hwa"]
 [ext_resource type="AudioStream" uid="uid://0qr4lct3jhfd" path="res://Soundtrack/pokemon.mp3" id="13_b31ix"]
 [ext_resource type="AudioStream" uid="uid://fraoc2hy3kbj" path="res://Soundtrack/celeste.mp3" id="14_8xuw1"]
 
 [sub_resource type="AudioStream" id="AudioStream_6tkbf"]
-
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_oybs5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
 bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
@@ -47,20 +40,14 @@ initial_text = "Você é um humano e foi em um museu de criaturas aquáticas. De
 stream = SubResource("AudioStream_6tkbf")
 volume_db = -8.602
 
-[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamMP3_oybs5")
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("2_yvk3h")
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_2mk6h")
 
 [node name="CommandProcessor" type="Node" parent="."]
 script = ExtResource("2_es8au")
-sfx_enter_room = ExtResource("4_blsjn")
-sfx_unlocked = ExtResource("5_5fcpg")
-sfx_drop_item = ExtResource("6_ncybt")
-sfx_get_item = ExtResource("7_re1fn")
-sfx_got_quest = ExtResource("8_nj3bc")
-sfx_player_gave_item = ExtResource("9_irbyq")
 
 [node name="RoomManager" type="Node" parent="."]
 script = ExtResource("3_5j5y6")

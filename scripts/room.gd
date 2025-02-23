@@ -54,6 +54,7 @@ func get_full_description() -> String:
 		
 	var full_description_string = "\n".join(full_description)
 	
+	SoundManager.play_sfx(SoundManager.SFXSounds.enter_room)
 	return full_description_string
 	
 func get_room_description() -> String:
@@ -102,8 +103,9 @@ func get_exits_description() -> String:
 func lock_exit(direction : String, room):
 	exits[direction].lock_exit_of_room(room)
 	
-func unlock_exit(direction : String, room):
+func unlock_exit(direction : String, room) -> String:
 	exits[direction].unlock_exit_of_room(room)
+	return "Você desbloqueou a passagem para " + Types.wrap_location_text(room.room_name) + " na direção " + Types.wrap_location_text(direction)
 	
 func check_exit_locked(direction : String) -> bool:
 	return exits[direction].is_room_locked(self)
