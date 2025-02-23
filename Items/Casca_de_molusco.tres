@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_43eip")
 item_name = "Casca de molusco"
-item_type = 1
+item_type = 0
 use_value_description = "Um objeto muito lindo que você achou no norte da praia"

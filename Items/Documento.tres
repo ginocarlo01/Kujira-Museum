@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_bpox7")
-item_name = "Tesoura"
-item_type = 1
+item_name = "Documento Velho"
+item_type = 0
 use_value_description = "Um documento especial que pertence a um ser lendário"

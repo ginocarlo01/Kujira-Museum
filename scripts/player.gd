@@ -52,9 +52,9 @@ func get_inventory() -> String:
 	for i in inventory:
 		if inventory_description != "":
 			inventory_description += "\n > "	
-		inventory_description += i.item_name
+		inventory_description += Types.wrap_item_text(i.item_name)
 		
-	return "Os itens que você tem são: \n > " + Types.wrap_item_text(inventory_description)
+	return "Os itens que você tem são: \n > " + inventory_description
 	
 func get_quests() -> String:
 	if quests.size() == 0:

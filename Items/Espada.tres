@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_4ash0")
 item_name = "Espada de Narval"
-item_type = 1
+item_type = 2
 use_value_description = "Esta é uma espada muito pesada e grande. Deve ter sido usada por grandes guerreiros em um passado distante."

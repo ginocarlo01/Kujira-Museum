@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_us3f8")
 item_name = "Madrepérola"
-item_type = 1
+item_type = 0
 use_value_description = "Muito bonita. MUUUITO Bonita."

@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_fdnbs")
 item_name = "Tradutor Artiodáctilo"
-item_type = 2
+item_type = 3
 use_value_description = "Ajuda a traduzir as falas dos animais que possuem números pares de dedos"

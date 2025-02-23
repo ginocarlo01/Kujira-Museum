@@ -70,11 +70,12 @@ func _ready() -> void:
 	$SalaDocumentos.add_item(documento)
 	
 	#SalaCuriosos
-	var armaldo = load_item("Armaldo")
+	var armaldo = load_npc("Armaldo")
 	$SalaCuriosos.add_npc(armaldo)
 	
 	#Praia
 	$Praia.connect_exit("norte", $CasaPraia)
+	$Praia.connect_exit("sul", $FogueiraPraia)
 	
 	#CasaPraia
 	var casca_de_molusco = load_item("Casca_de_molusco")
@@ -89,7 +90,7 @@ func _ready() -> void:
 	#FogueiraPraia
 	var guerreiro = load_npc("Guerreiro")
 	$FogueiraPraia.add_npc(guerreiro)
-	$FogueiraPraia.connect_exit("barco", $IlhaFlores, "praia")
+	$FogueiraPraia.connect_exit("barco", $IlhaFlores, "fogueira")
 	$FogueiraPraia.lock_exit("barco", $FogueiraPraia)
 	
 	#IlhaFlores
@@ -109,7 +110,7 @@ func _ready() -> void:
 	$IlhaBugada.add_item(chaveJubarte)
 	
 	#SalaFinal
-	var roger = load_npc("FreRogerdo")
+	var roger = load_npc("Roger")
 	$SalaFinal.add_npc(roger)
 	var gnomo = load_npc("Gnomo")
 	$SalaFinal.add_npc(gnomo)

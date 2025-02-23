@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3ifq7sb13vbw"]
+[gd_scene load_steps=24 format=3 uid="uid://b3ifq7sb13vbw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ox0k4"]
 [ext_resource type="Script" path="res://scripts/input.gd" id="1_qo538"]
@@ -7,7 +7,20 @@
 [ext_resource type="Script" path="res://scenes/command_processor.gd" id="2_es8au"]
 [ext_resource type="Script" path="res://room_manager.gd" id="3_5j5y6"]
 [ext_resource type="PackedScene" uid="uid://currxaw7xo502" path="res://scenes/room.tscn" id="3_66d0a"]
+[ext_resource type="AudioStream" uid="uid://jlh4vyljbsac" path="res://SFX/EntrouSala.ogg" id="4_blsjn"]
+[ext_resource type="AudioStream" uid="uid://ckg65yknkufi5" path="res://SFX/Desbloqueou.ogg" id="5_5fcpg"]
 [ext_resource type="PackedScene" uid="uid://d2bdos3uc656x" path="res://scenes/game_info.tscn" id="6_dbgmv"]
+[ext_resource type="AudioStream" uid="uid://bskd7dj4g2qoo" path="res://SFX/Dropou.ogg" id="6_ncybt"]
+[ext_resource type="AudioStream" uid="uid://bhvun01a3xwvu" path="res://SFX/PegouItem.ogg" id="7_re1fn"]
+[ext_resource type="AudioStream" uid="uid://mxcxlvcrw40b" path="res://SFX/PegouMissao.ogg" id="8_nj3bc"]
+[ext_resource type="AudioStream" uid="uid://chvouecys3lbf" path="res://SFX/DeuItem.ogg" id="9_irbyq"]
+[ext_resource type="AudioStream" uid="uid://cuxsyyntuh5n7" path="res://Soundtrack/pokemongeral.mp3" id="12_u8hwa"]
+[ext_resource type="AudioStream" uid="uid://0qr4lct3jhfd" path="res://Soundtrack/pokemon.mp3" id="13_b31ix"]
+[ext_resource type="AudioStream" uid="uid://fraoc2hy3kbj" path="res://Soundtrack/celeste.mp3" id="14_8xuw1"]
+
+[sub_resource type="AudioStream" id="AudioStream_6tkbf"]
+
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_oybs5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
 bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
@@ -30,11 +43,24 @@ grow_vertical = 2
 script = ExtResource("1_ox0k4")
 initial_text = "Você é um humano e foi em um museu de criaturas aquáticas. De repente, há um grande barulho, a luz apaga e quando acende novamente, todas as pessoas que estavam com você desapareceram. Perdido, você procura as salas do museu para entender o que ocorreu e encontrar uma saída. "
 
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStream_6tkbf")
+volume_db = -8.602
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamMP3_oybs5")
+
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_2mk6h")
 
 [node name="CommandProcessor" type="Node" parent="."]
 script = ExtResource("2_es8au")
+sfx_enter_room = ExtResource("4_blsjn")
+sfx_unlocked = ExtResource("5_5fcpg")
+sfx_drop_item = ExtResource("6_ncybt")
+sfx_get_item = ExtResource("7_re1fn")
+sfx_got_quest = ExtResource("8_nj3bc")
+sfx_player_gave_item = ExtResource("9_irbyq")
 
 [node name="RoomManager" type="Node" parent="."]
 script = ExtResource("3_5j5y6")
@@ -45,7 +71,8 @@ offset_top = -522.0
 offset_right = 309.0
 offset_bottom = -322.0
 room_name = "Palco inicial"
-room_description = "Você está na sala inicial do museu. Na sua frente, modelos de lulas gigantes são engolidos por um grande cachalote."
+room_description = "Você está na sala inicial do museu. Na sua frente, modelos de lulas gigantes são engolidos por um grande cachalote. Você fica impressionado com o nível de detalhes nas molduras e por um momento até esquece do fato de que está em um museu."
+audio = ExtResource("12_u8hwa")
 
 [node name="SalaCientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -278.0
@@ -53,7 +80,7 @@ offset_top = -523.0
 offset_right = -28.0
 offset_bottom = -323.0
 room_name = "Sala do Cientista"
-room_description = "Você está em uma sala com vários equipamentos científicos. Todos parecem estar quebrados e há vários barulhos de máquinas quebradas. Algo definitivamente está errado"
+room_description = "Você está em uma sala com vários equipamentos científicos. Todos parecem estar quebrados e há vários barulhos de máquinas defeituosas. Algo definitivamente está errado."
 
 [node name="Pocilga" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -285.0
@@ -69,7 +96,7 @@ offset_top = -510.0
 offset_right = -397.0
 offset_bottom = -310.0
 room_name = "Armazém do Cientista"
-room_description = "Você está em um armazém. Provavelmente foi utilizado pelo cientista para guardar seus equipamentos."
+room_description = "Você está em um armazém. o qual rovavelmente foi utilizado pelo pesquisador Roger para guardar seus equipamentos."
 
 [node name="Estabulo" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -285.0
@@ -101,7 +128,7 @@ offset_top = -798.0
 offset_right = 716.0
 offset_bottom = -590.0
 room_name = "Exposição Marinha 2"
-room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça um quebra-cabeça…"
+room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça em um quebra-cabeça…"
 
 [node name="Praia" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 828.0
@@ -126,6 +153,7 @@ offset_right = 1850.0
 offset_bottom = -48.0
 room_name = "Ilha Marôn"
 room_description = "Você está na Ilha Marôn. Há uma grande estátua que lembra um homem pequeno, com óculos e cabelo bem autênticos e uma camisa xadrez. Ele parece estar fazendo um movimento de dança. Ao redor da estátua, há um lago, e nele há vários peixes da família Scombridae. Os peixes parecem entrar e sair da água como se estivessem dançando em homenagem à estátua. "
+audio = ExtResource("13_b31ix")
 
 [node name="IlhaBugada" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 1953.0
@@ -142,6 +170,7 @@ offset_right = 1854.0
 offset_bottom = 475.0
 room_name = "Sala Final"
 room_description = "Ao inserir a chave jubarte em uma porta solta na ilha, um portal se abriu e agora você está em um sala muito semelhante com a sala inicial do museu. Há um vazio, uma escuridão, o que lembra uma grande boca, mas sem dentes. Você está na boca de uma baleia jubarte!"
+audio = ExtResource("14_8xuw1")
 
 [node name="CasaPraia" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 830.0

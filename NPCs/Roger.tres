@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_hvspe")
-npc_name = "Porquinho"
-initial_dialog = "ronc ronc ronquinho"
+npc_name = "Roger Payne"
+initial_dialog = "É inacreditável que você tenha chegado até aqui, você tem meu respeito. Também não entendi o que ocorreu no começo, mas fique tranquilo, está tudo bem comigo e com o museu, todas as pessoas da excursão estão bem. Logo logo, tudo voltará ao normal, mas as memórias que você conquistou nunca serão esquecidas, e esse é o mais importante. "
 post_quest_dialog = ""
-translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o [color=#BA55D3]norte[/color]"
+translated_dialog = ""
 extra_dialog = ""
-type = 2
+type = 12

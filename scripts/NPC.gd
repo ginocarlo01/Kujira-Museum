@@ -41,9 +41,9 @@ func receive_quest_item():
 	has_received_quest_item = true
 	
 func give_reward_to_player() -> Item:
-	has_given_reward = true
 	if has_given_reward:
 		return
+	has_given_reward = true
 	if reward_item == null:
 		printerr("No reward item defined!")
 	return reward_item

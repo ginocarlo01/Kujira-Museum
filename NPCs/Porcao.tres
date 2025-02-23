@@ -7,5 +7,6 @@ script = ExtResource("1_i07qk")
 npc_name = "Porcão"
 initial_dialog = "ronc ronc roncão"
 post_quest_dialog = ""
-translated_dialog = "Olá ! Eu sou o porcão. Sei que você deve estar achando tudo estranho, porém falar com os animais é muito divertido. Você está com  cara de quem não sabe o que fazer. Fale com o meu filho, talvez ele possa te dar uma dica de onde ir…!"
+translated_dialog = "Olá ! Eu sou o porcão. Sei que você deve estar achando tudo estranho, porém falar com os animais é muito divertido. Você está com cara de quem não sabe o que fazer. Fale com o meu filho, talvez ele possa te dar uma dica de onde ir…!"
+extra_dialog = ""
 type = 2

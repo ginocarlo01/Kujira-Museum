@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_j78f8")
 npc_name = "Hipopótamo"
-initial_dialog = "Opa ! Olha só, um humano, que raridade. Diferente dos outros, você parece ser muito legal. Sabia que todos os meus irmãos são África? Pois é, poucos sabem dessa curiosidade…"
+initial_dialog = "Opa ! Olha só, um humano, que raridade. Diferente dos outros, você parece ser muito legal. Sabia que todos os meus irmãos são da África? Pois é, poucos sabem dessa curiosidade…"
 post_quest_dialog = ""
 translated_dialog = ""
+extra_dialog = ""
 type = 0

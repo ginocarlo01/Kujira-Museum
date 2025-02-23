@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_kbxec")
-npc_name = "Guerreiro "
+npc_name = "Guerreiro"
 initial_dialog = "Estou velho… Antes eu era um grande guerreiro, mas perdi meu melhor amigo em batalha e depois fiquei muito triste. Ele carregava uma [color=#94b9ff]espada de narval[/color]. Os narvais eram seres fenomenais, os chamados unicórnios do mar. Meu povo arrancava seu bico estupendo para fazer lanças e espadas. Provavelmente isso nos amaldiçoou e trouxe a perdição de meus irmãos."
 post_quest_dialog = "Não posso acreditar que recebi a espada de meu amigo Jonathan… Estou tão feliz e grato. Agora acho que posso voltar ao normal e ir em busca da minha amada Hatsune Miku."
 translated_dialog = ""

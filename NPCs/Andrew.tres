@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_jh5dl")
-npc_name = "Andrewsarchus "
+npc_name = "Andrewsarchus"
 initial_dialog = "Sou o Andrewsarchus. Os mais íntimos me chamam de Andrew, mas nós não somos íntimos assim. Sou um grande pesquisador da Mongólia. Se eu pudesse te dar um ensinamento que resume todas as minhas pesquisas é: “Quanto mais voltamos no tempo, mais semelhantes nós ficamos!”"
 post_quest_dialog = ""
 translated_dialog = ""
+extra_dialog = ""
 type = 0

@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_mju2t")
 item_name = "Conchinha"
-item_type = 1
+item_type = 0
 use_value_description = "É uma conchinha da praia."

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_t8gql")
-item_name = "Nadadeira dorsal"
-item_type = 0
-use_value_description = "As baleias tinham nadadeiras como essas. Tente usar em um barco. Parece estranho, mas é o que o Guerreiro disse..."
+item_name = "Tradutor Perissodáctilo"
+item_type = 3
+use_value_description = "Ajuda a traduzir as falas dos animais que possuem números ímpares de dedos"

@@ -11,4 +11,4 @@ post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = "Poucos sabem, mas sou um grande amante do perfume Love Spell. Como você parece legal, leve um desses com você. "
 reward_item = ExtResource("1_htwo6")
-type = 0
+type = 9

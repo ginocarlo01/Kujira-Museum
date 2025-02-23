@@ -5,11 +5,18 @@ class_name Room
 
 @export var room_name := "Room Name" : set = set_room_name
 @export_multiline var room_description := "This is the description" : set = set_room_description
+@export var audio : AudioStreamMP3
 
 var exits : Dictionary = {}
 var npcs : Array = []
 var items : Array = []
 
+
+func play_audio():
+	if audio != null:
+		$"../../AudioPlayer".stream = audio
+		$"../../AudioPlayer".play()
+	
 func set_room_name(new_name : String):
 	$MarginContainer/Rows/RoomName.text = new_name
 	room_name = new_name
@@ -122,7 +129,7 @@ func is_npc_on_room(npc_wanted : String) -> NPC:
 		if npc_names.size() > 1:
 			npc_name = npc_names[0].to_lower()
 		else:
-			npc_name = npc.npc_name.to_lower()
+			npc_name = npc.npc_name.to_lower()		
 		
 		if npc_wanted == npc_name:
 			return npc
