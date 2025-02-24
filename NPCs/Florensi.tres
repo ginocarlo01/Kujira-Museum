@@ -11,4 +11,4 @@ post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = " Não acredito que você tem uma @ITEMconchinha@END no seu inventário. Que item incrível !! Meus parabéns por explorar a praia, você é uma pessoa aventureira."
 quest_item = ExtResource("1_k5kqi")
-type = 10
+type = 14

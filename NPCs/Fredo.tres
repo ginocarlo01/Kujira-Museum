@@ -11,4 +11,4 @@ post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = " Enfim, vejo que você falou com o @NPCArmaldo@END. Porém ele não disse a verdade para você, já que ele não gosta dos humanos, ele se acha um grande predador e não gosta de humanos pois sabe que eles destruíram ainda mais que ele. @NPCArmaldo@END é um dos fundadores do museu, ao lado de Indohyus. @NPCArmaldo@END fez um pacto com um mago e conseguiu prender toda essa praia e essa parte do mar dentro do museu. Não me pergunte como ele fez isso, mas eu sou o único que sabe dessa história. O motivo disso? Eu sou o maior amigo das baleias, e pelo jeito todo o museu foi construído para entender da onde as baleias vieram. Mas aparentemente eles nunca descobriram, o que também explica a raiva de @NPCArmaldo@END…"
 quest_item = ExtResource("1_0komh")
-type = 11
+type = 14

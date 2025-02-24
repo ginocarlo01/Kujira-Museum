@@ -188,13 +188,13 @@ func talk(second_word : String) -> String:
 	if npc_wanted != null:
 		var npc_type : Types.NPCTypes = npc_wanted.get_type()
 		match npc_type:
+			
 			Types.NPCTypes.SCIENTIST:
 				room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
 				room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
 				current_room.remove_npc(npc_wanted)
 				return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) + "\n" + current_room.get_exits_description()
 			
-	
 			Types.NPCTypes.NEED_TRANSLATOR:
 				var item_wanted : Item
 				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
@@ -203,6 +203,10 @@ func talk(second_word : String) -> String:
 				if item_wanted != null:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
 				
+			Types.NPCTypes.NEED_ITEM:
+				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				if player_has_item:
+					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
 				
 			Types.NPCTypes.ARTIO_GIRAFFE:
 				var item_wanted : Item
@@ -234,18 +238,7 @@ func talk(second_word : String) -> String:
 				if !player_has_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 	
-			Types.NPCTypes.LOVE_SEASHELL:
-				#var player_has_item = player.has_item_on_inventory("conchinha")
-				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				if player_has_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
-							
-			Types.NPCTypes.LOVE_ARMALDO:
-				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				
-				if player_has_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
-							
+								
 			Types.NPCTypes.SEAL_PUP:
 				var quest : Quest = npc_wanted.quest_related
 				var player_has_quest = player.has_quest(quest)
