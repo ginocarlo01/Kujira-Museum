@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://m2o3ripka4j7"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://m2o3ripka4j7"]
 
+[ext_resource type="Resource" uid="uid://bso3537aw26ko" path="res://Items/translator_arti.tres" id="1_4xdus"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_t17tn"]
 
 [resource]
@@ -9,4 +10,5 @@ initial_dialog = "ronc ronc ronquinho"
 post_quest_dialog = ""
 translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o @LOCATIONnorte@END"
 extra_dialog = ""
-type = 2
+quest_item = ExtResource("1_4xdus")
+type = 13

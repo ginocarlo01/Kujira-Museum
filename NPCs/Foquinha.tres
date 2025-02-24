@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://d3a6hwghpdp6d"]
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://d3a6hwghpdp6d"]
 
 [ext_resource type="Resource" uid="uid://c1ogboyijcqmy" path="res://Items/Tesoura.tres" id="1_8lcns"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_uw2g2"]
+[ext_resource type="Resource" uid="uid://0fhmjksdfjtd" path="res://Quests/AjudarFoquinha.tres" id="2_5fqkn"]
 
 [resource]
 script = ExtResource("1_uw2g2")
@@ -12,3 +13,4 @@ translated_dialog = ""
 extra_dialog = ""
 quest_item = ExtResource("1_8lcns")
 type = 6
+quest_related = ExtResource("2_5fqkn")

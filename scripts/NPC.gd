@@ -10,6 +10,7 @@ class_name NPC
 @export var quest_item : Item
 @export var reward_item : Item
 @export var type : Types.NPCTypes
+@export var quest_related : Quest
 
 var has_received_quest_item := false
 var has_given_reward := false

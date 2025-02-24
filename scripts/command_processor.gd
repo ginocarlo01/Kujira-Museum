@@ -189,44 +189,38 @@ func talk(second_word : String) -> String:
 		var npc_type : Types.NPCTypes = npc_wanted.get_type()
 		match npc_type:
 			Types.NPCTypes.SCIENTIST:
-				var quest = load("res://Quests/SalvarRoger.tres")
 				room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
 				room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
 				current_room.remove_npc(npc_wanted)
-				return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(quest) + "\n" + current_room.get_exits_description()
+				return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) + "\n" + current_room.get_exits_description()
 			
-			Types.NPCTypes.ARTIO:
+	
+			Types.NPCTypes.NEED_TRANSLATOR:
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("tradutor")
-			
+				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				
 				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
 				if item_wanted != null:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
-			
+				
+				
 			Types.NPCTypes.ARTIO_GIRAFFE:
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("tradutor")
+				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
 			
 				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
 				if item_wanted != null:
 					if !npc_wanted.has_given_reward:
-						room_manager.add_item(current_room, "ChaveCavalista")
+						room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 						npc_wanted.has_given_reward = true
 						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
 					else:
 						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
 					
-			Types.NPCTypes.PERISSO:
-				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("Tradutor Perissodáctilo", true)
-			
-				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				if item_wanted != null:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
-					
+				
 			Types.NPCTypes.PERISSO_EPONA:
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory("Tradutor Perissodáctilo", true)
+				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
 			
 				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
 				if item_wanted != null:
@@ -235,26 +229,25 @@ func talk(second_word : String) -> String:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
 			
 			Types.NPCTypes.ARMALDO:
-				var player_has_item = player.has_item_on_inventory("Love Spell da Victoria's Secret", true)
+				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
 				
 				if !player_has_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
 	
 			Types.NPCTypes.LOVE_SEASHELL:
-				var player_has_item = player.has_item_on_inventory("conchinha")
-				
+				#var player_has_item = player.has_item_on_inventory("conchinha")
+				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
 				if player_has_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
 							
 			Types.NPCTypes.LOVE_ARMALDO:
-				var player_has_item = player.has_item_on_inventory("Love Spell da Victoria's Secret", true)
+				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
 				
 				if player_has_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
 							
-			
 			Types.NPCTypes.SEAL_PUP:
-				var quest : Quest = load("res://Quests/AjudarFoquinha.tres")
+				var quest : Quest = npc_wanted.quest_related
 				var player_has_quest = player.has_quest(quest)
 				
 				if !player_has_quest and !npc_wanted.has_received_quest_item:
@@ -268,7 +261,7 @@ func talk(second_word : String) -> String:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
 			
 			Types.NPCTypes.SEAL_MOM:
-				var quest : Quest = load("res://Quests/AjudarFoquinha.tres")
+				var quest : Quest = npc_wanted.quest_related
 				var player_has_quest = player.has_quest(quest)
 				var item_wanted = player.has_item_on_inventory(npc_wanted.reward_item.item_name, true)
 				var npc_given_item = npc_wanted.has_given_reward
@@ -281,13 +274,14 @@ func talk(second_word : String) -> String:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\""
 				elif !player_has_quest and item_wanted == null and npc_given_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_post_dialog()
+			
 			Types.NPCTypes.ROGER:
 				if !npc_wanted.has_talked_to_npc:
-					var quest : Quest = load("res://Quests/SalvarRoger.tres")
-					
+					var quest : Quest = npc_wanted.quest_related
 					return player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
 			_:
 				pass
+				
 		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
 	
 	return Types.wrap_system_text("Essa pessoa não está aqui!")

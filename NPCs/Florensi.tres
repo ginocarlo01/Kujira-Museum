@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://38xs7nyjhi6j"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://38xs7nyjhi6j"]
 
+[ext_resource type="Resource" uid="uid://du3oyvwohm6or" path="res://Items/Conchinha.tres" id="1_k5kqi"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_xvhcr"]
 
 [resource]
@@ -9,4 +10,5 @@ initial_dialog = "Olááááá, meu nome completo é Homo floresiensis, mas pode
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = " Não acredito que você tem uma @ITEMconchinha@END no seu inventário. Que item incrível !! Meus parabéns por explorar a praia, você é uma pessoa aventureira."
+quest_item = ExtResource("1_k5kqi")
 type = 10

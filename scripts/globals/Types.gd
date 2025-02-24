@@ -20,7 +20,10 @@ enum NPCTypes{
 	ARMALDO,
 	LOVE_SEASHELL,
 	LOVE_ARMALDO,
-	ROGER
+	ROGER,
+	NEED_TRANSLATOR,
+	NEED_ITEM
+	
 }
 
 const COLOR_NPC = Color("#ff9a94")

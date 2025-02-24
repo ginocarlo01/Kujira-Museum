@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://cenmeo68e3fb7"]
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://cenmeo68e3fb7"]
 
 [ext_resource type="Resource" uid="uid://c1ogboyijcqmy" path="res://Items/Tesoura.tres" id="1_6i6ug"]
+[ext_resource type="Resource" uid="uid://0fhmjksdfjtd" path="res://Quests/AjudarFoquinha.tres" id="1_krffs"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_yxex4"]
 
 [resource]
@@ -12,3 +13,4 @@ translated_dialog = ""
 extra_dialog = "Vejo que você tem uma missão que menciona a foquinha, a minha querida. "
 reward_item = ExtResource("1_6i6ug")
 type = 7
+quest_related = ExtResource("1_krffs")

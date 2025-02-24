@@ -10,5 +10,6 @@ initial_dialog = "Não esperava ver um humano por aqui, somos tão distantes por
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = "Poucos sabem, mas sou um grande amante do perfume @ITEMLove Spell@END. Como você parece legal, leve um desses com você. "
+quest_item = ExtResource("1_htwo6")
 reward_item = ExtResource("1_htwo6")
 type = 9

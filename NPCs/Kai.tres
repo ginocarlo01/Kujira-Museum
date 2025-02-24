@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://bsjegfdx27wkb"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://bsjegfdx27wkb"]
 
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_0oydw"]
+[ext_resource type="Resource" uid="uid://chtgy4wbjbnlk" path="res://Items/translator_peri.tres" id="1_rqop5"]
 
 [resource]
 script = ExtResource("1_0oydw")
@@ -9,4 +10,5 @@ initial_dialog = "toc reeeenc"
 post_quest_dialog = ""
 translated_dialog = "Finalmente você pode me entender! Meu nome é @NPCKai@END, depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
 extra_dialog = ""
-type = 4
+quest_item = ExtResource("1_rqop5")
+type = 13

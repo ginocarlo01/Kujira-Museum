@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://cvel0dvdf0kd4"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://cvel0dvdf0kd4"]
 
+[ext_resource type="Resource" uid="uid://cjiqp2paojqhy" path="res://Quests/SalvarRoger.tres" id="1_8hgw2"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_hvspe"]
 
 [resource]
@@ -10,3 +11,4 @@ post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = ""
 type = 12
+quest_related = ExtResource("1_8hgw2")
