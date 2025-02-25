@@ -4,6 +4,8 @@ var current_room : Room = null
 var player : Player = null
 var room_manager : RoomManager = null
 
+signal speed_changed(value)
+
 func initialize(starting_room, player, room_manager : RoomManager) -> String:
 	self.player = player
 	self.room_manager = room_manager
@@ -46,6 +48,8 @@ func process_command(input : String) -> String:
 			return exits()	
 		"descrever":
 			return describe_item(second_word, third_word)
+		"velocidade":
+			return change_speed(second_word)
 		"ajuda":
 			return help()
 		"sonhar":
@@ -56,7 +60,7 @@ func process_command(input : String) -> String:
 			
 func go(second_word : String) -> String:
 	if second_word == "":
-		return Types.wrap_system_text("Go where?")
+		return Types.wrap_system_text("Ir aonde?")
 	
 	if current_room.exits.keys().has(second_word):
 		if !current_room.check_exit_locked(second_word):
@@ -67,6 +71,17 @@ func go(second_word : String) -> String:
 	else:	
 		return Types.wrap_system_text("Essa não é uma direção válida...")
 
+func change_speed(second_word : String) -> String:
+	if second_word == "":
+		return Types.wrap_system_text("lenta, normal ou rápida?")
+	
+	if second_word in ["lenta", "normal", "rápida"]:
+		speed_changed.emit(second_word)
+		return "Velocidade alterada para " + Types.wrap_system_text(second_word)
+	else:
+		return "Esse valor de velocidade não é válido. Escolha entre lenta, normal ou rápida"
+		
+		
 func take(second_word : String) -> String:
 	if second_word == "":
 		return Types.wrap_system_text("Pegar o que?")
@@ -290,7 +305,7 @@ func exits() -> String:
 	
 func help() -> String:
 	return "\n".join(PackedStringArray([
-		"Você pode usar os comando abaixo: ",
+		"Você pode usar os comandos abaixo: ",
 		" ir " + Types.wrap_location_text("[direção ou local]") + ",",
 		" pegar " + Types.wrap_item_text("[item(primeiro nome)]") + ",",
 		" dropar " + Types.wrap_item_text("[item]") + ",",
@@ -301,6 +316,8 @@ func help() -> String:
 		" missões,",
 		" saídas,",
 		" descrever "+ Types.wrap_item_text("[primeiro nome do item]" + ","),
+		" velocidade " + Types.wrap_system_text("[lenta, normal, rápida]") + " altera a velocidade do texto"+ ",",
+		" aperte " + Types.wrap_attention_text("CTRL") + " para acelerar o texto"+ ",",
 		" ajuda"
 	]))
 	

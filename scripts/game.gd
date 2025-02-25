@@ -9,7 +9,7 @@ extends Control
 @export_multiline var initial_text := ""
 
 func _ready() -> void:
-	game_info.create_response(Types.wrap_system_text(initial_text) + "Para pedir orientações, digite " + Types.wrap_attention_text("ajuda"))
+	game_info.create_response(Types.wrap_system_text(initial_text) + "Para pedir orientações, digite " + Types.wrap_attention_text("ajuda"), true)
 	
 	var starting_room_response =  command_processor.initialize(room_manager.get_child(0), player, room_manager)
 	game_info.create_response(starting_room_response)
