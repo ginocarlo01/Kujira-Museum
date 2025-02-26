@@ -13,4 +13,5 @@ translated_dialog = ""
 extra_dialog = ""
 quest_related = ExtResource("1_8hgw2")
 paths_to_unlock = {}
+can_unlock_path = true
 disappear_after_talk = false

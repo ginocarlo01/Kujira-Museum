@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://c2rtndb6xqu4n"]
 
-[ext_resource type="Resource" uid="uid://favmlk7aiglh" path="res://Items/LoveSpell.tres" id="1_0komh"]
+[ext_resource type="Resource" uid="uid://favmlk7aiglh" path="res://Items/Love Spell da Victoria's Secret.tres" id="1_0komh"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_3l7wg"]
 
 [resource]

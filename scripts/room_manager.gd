@@ -108,10 +108,10 @@ func _ready() -> void:
 	var gnomo = load_npc("Gnomo")
 	$"Sala Final".add_npc(gnomo)
 	
-func connect_exit(room_1 : String, direction : String, room_2 : String) -> String:
+func connect_exit(room_1 : String, direction : String, room_2 : String, direction_back_override : String = "null") -> String:
 	var node_1 = get_node(room_1)
 	var node_2 = get_node(room_2)
-	node_1.connect_exit(direction,node_2)
+	node_1.connect_exit(direction,node_2, direction_back_override)
 	return Types.wrap_system_text("Nova direção encontrada: ") + Types.wrap_location_text(direction)
 	
 func add_item(room:Room, item_name : String):

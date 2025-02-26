@@ -17,10 +17,12 @@ class_name NPC
 @export var required_item : Item #used to unlock extra dialog or translation
 @export var reward_item : Item #given after you talk to the npc
 @export var paths_to_unlock: Dictionary #direction, Room\
+@export var can_unlock_path : bool = true
 @export var disappear_after_talk = false
 
 var has_received_quest_item := false
 var has_given_reward := false
+var has_given_reward_of_quest := false
 var has_talked_to_npc := false
 
 func get_dialog() -> String:
@@ -47,6 +49,7 @@ func get_type() -> Types.NPCTypes:
 
 func receive_quest_item():
 	has_received_quest_item = true
+	can_unlock_path = true
 	
 func give_reward_to_player() -> Item:
 	if has_given_reward:
@@ -55,4 +58,12 @@ func give_reward_to_player() -> Item:
 	if reward_item == null:
 		printerr("No reward item defined!")
 	return reward_item
+	
+func give_reward_of_quest_to_player() -> Item:
+	if has_given_reward_of_quest:
+		return
+	has_given_reward_of_quest = true
+	if reward_for_quest_item == null:
+		printerr("No reward item defined!")
+	return reward_for_quest_item
 	

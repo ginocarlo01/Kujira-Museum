@@ -216,8 +216,8 @@ func give(second_word : String, third_word : String) -> String:
 				var reward : Item
 				change_speed_by_enum(current_speed)
 				
-				if npc_wanted.reward_item != null:
-					reward = npc_wanted.give_reward_to_player()
+				if npc_wanted.reward_for_quest_item != null:
+					reward = npc_wanted.give_reward_of_quest_to_player()
 					player.take_item(reward, false)
 					return player.give_item(item_wanted) + " para " + Types.wrap_npc_text(third_word) + " e recebeu " + Types.wrap_item_text(reward.item_name) + " como recompensa!"
 				else:
@@ -232,7 +232,7 @@ func give(second_word : String, third_word : String) -> String:
 func talk(second_word : String) -> String:
 	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
-		return Types.wrap_system_text("Talk to whom?")
+		return Types.wrap_system_text("Falar com quem?")
 		
 	var npc_wanted : NPC
 	var return_string : String = ""
@@ -245,10 +245,6 @@ func talk(second_word : String) -> String:
 		
 		match npc_type:
 			
-			Types.NPCTypes.GIVE_QUEST:
-				if !npc_wanted.has_talked_to_npc:
-					return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) # + "\n" + current_room.get_exits_description()
-					
 			Types.NPCTypes.COMPLETE_QUEST:
 				if !npc_wanted.has_talked_to_npc:
 					var quest : Quest = npc_wanted.quest_related
@@ -261,6 +257,8 @@ func talk(second_word : String) -> String:
 				
 				if item_wanted != null:
 					
+					npc_wanted.can_unlock_path = true
+					
 					if npc_wanted.required_item.item_type == Types.ItemTypes.TRANSLATOR:
 						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
 					else:
@@ -269,51 +267,59 @@ func talk(second_word : String) -> String:
 					if npc_wanted.reward_item != null and !npc_wanted.has_given_reward:
 						room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 						npc_wanted.has_given_reward = true
-						return_string += "\n" + current_room.get_items_description()
-				
+						return_string += "\n" + current_room.get_items_description()			
 								
-			Types.NPCTypes.SEAL_PUP:
+			Types.NPCTypes.GIVE_QUEST: 
 				var quest : Quest = npc_wanted.quest_related
 				var player_has_quest = player.has_quest(quest)
 				
-				if !player_has_quest and !npc_wanted.has_received_quest_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest)
-				elif player_has_quest and !npc_wanted.has_received_quest_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
-				elif player_has_quest and npc_wanted.has_received_quest_item:
-					current_room.connect_exit("praia", $"../RoomManager/Praia", "oeste", false)
-					return player.remove_quest(quest) + "\n" +Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
-				elif !player_has_quest and npc_wanted.has_received_quest_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + current_room.get_exits_description()	
+				return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+				
+				if !npc_wanted.has_received_quest_item:
+					if !player_has_quest:
+						return_string += "\n" + player.add_quest(quest)
+				else:
+					if player_has_quest:
+						npc_wanted.can_unlock_path = true
+						return_string += "\n" + player.remove_quest(quest)
+										
+			Types.NPCTypes.RELATED_TO_QUEST:
+				var quest : Quest = npc_wanted.quest_related
+				var player_has_quest = player.has_quest(quest)
+				var item_wanted = player.has_item_on_inventory(npc_wanted.reward_for_quest_item.item_name, true)
 			
-			Types.NPCTypes.SEAL_MOM:
-				var quest : Quest = npc_wanted.quest_related
-				var player_has_quest = player.has_quest(quest)
-				var item_wanted = player.has_item_on_inventory(npc_wanted.reward_item.item_name, true)
-				var npc_given_item = npc_wanted.has_given_reward
-				
-				if !player_has_quest and item_wanted == null:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\"" + "\n" + player.add_quest(quest) + "\n" + player.take_item(npc_wanted.give_reward_to_player())
-				elif player_has_quest and item_wanted == null and !npc_given_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
-				elif player_has_quest and item_wanted != null and npc_given_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_extra_dialog() + npc_wanted.get_dialog() + "\""
-				elif !player_has_quest and item_wanted == null and npc_given_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_post_dialog()
+				if !npc_wanted.has_given_reward_of_quest:
+					return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+					if !player_has_quest:
+						return_string += "\n" + player.add_quest(quest)
+					else:
+						return_string += "\n" + "\"" + npc_wanted.get_extra_dialog() + "\""
+					return_string +=  "\n" + player.take_item(npc_wanted.give_reward_of_quest_to_player())
+				else:
+					if !player_has_quest:
+						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_post_dialog() + "\""
+					else:
+						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+						return_string += "\n" + "\"" + npc_wanted.get_extra_dialog() + "\""
 			
 			_:
 				pass
 		
-		if npc_wanted.paths_to_unlock.size() > 0:
+		
+		if npc_wanted.paths_to_unlock.size() > 0 and npc_wanted.can_unlock_path:
 			var paths_keys = npc_wanted.paths_to_unlock.keys()
 			for key in paths_keys:
-				return_string += "\n" + room_manager.connect_exit(current_room.room_name, str(key) , npc_wanted.paths_to_unlock[key])
-				
+				var result_path : Array = npc_wanted.paths_to_unlock[key]
+				if result_path.size() == 1:
+					return_string += "\n" + room_manager.connect_exit(current_room.room_name, str(key) , result_path[0])
+				else:
+					return_string += "\n" + room_manager.connect_exit(current_room.room_name, str(key) , result_path[0], result_path[1])
+					
 		if npc_wanted.disappear_after_talk:
-			current_room.remove_npc(npc_wanted)
 			return_string += "\n" + current_room.remove_npc(npc_wanted)
 			
 		if npc_wanted.reward_item != null and npc_wanted.required_item == null and !npc_wanted.has_given_reward:
+			return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
 			room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 			npc_wanted.has_given_reward = true
 			return_string += "\n" + current_room.get_items_description()

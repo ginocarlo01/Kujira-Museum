@@ -13,7 +13,8 @@ translated_dialog = ""
 extra_dialog = ""
 quest_related = ExtResource("1_f37qs")
 paths_to_unlock = {
-"norte": "Pocilga",
-"oeste": "Armazém do Cientista"
+"norte": ["Pocilga"],
+"oeste": ["Armazém do Cientista"]
 }
+can_unlock_path = true
 disappear_after_talk = true

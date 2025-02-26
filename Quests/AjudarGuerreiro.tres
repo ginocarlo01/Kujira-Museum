@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://6k8pfn2bdvb"]
+
+[ext_resource type="Script" path="res://scripts/Quest.gd" id="1_6a7sv"]
+
+[resource]
+script = ExtResource("1_6a7sv")
+quest_name = "Ajudar o Guerreiro"
+quest_description = "Ajude o Guerreiro a achar uma espada de narval"

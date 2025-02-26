@@ -13,4 +13,5 @@ translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o
 extra_dialog = ""
 required_item = ExtResource("1_4xdus")
 paths_to_unlock = {}
+can_unlock_path = false
 disappear_after_talk = false

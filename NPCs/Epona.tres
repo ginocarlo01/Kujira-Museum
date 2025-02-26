@@ -13,6 +13,7 @@ translated_dialog = "Vejo que você está perdido, mas já conseguiu os tradutor
 extra_dialog = ""
 required_item = ExtResource("1_432hg")
 paths_to_unlock = {
-"leste": "Exposição Marinha 1"
+"leste": ["Exposição Marinha 1"]
 }
-disappear_after_talk = true
+can_unlock_path = false
+disappear_after_talk = false
