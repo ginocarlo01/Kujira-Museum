@@ -151,7 +151,6 @@ func describe_item(second_word : String, third_word : String = "") -> String:
 	else:	
 		return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
 	
-	
 func drop(second_word : String) -> String:
 	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
@@ -244,86 +243,34 @@ func talk(second_word : String) -> String:
 		change_speed_by_enum(current_speed)
 		var npc_type : Types.NPCTypes = npc_wanted.get_type()
 		
-		
 		match npc_type:
 			
 			Types.NPCTypes.GIVE_QUEST:
 				if !npc_wanted.has_talked_to_npc:
 					return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) # + "\n" + current_room.get_exits_description()
-					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) + "\n" + current_room.get_exits_description()
-			
+					
 			Types.NPCTypes.COMPLETE_QUEST:
 				if !npc_wanted.has_talked_to_npc:
 					var quest : Quest = npc_wanted.quest_related
 					return_string += player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
-					#return player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
-			
-			#Types.NPCTypes.NEED_TRANSLATOR:
-				#var item_wanted : Item
-				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				#
-				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				#if item_wanted != null:
-					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
-				#
+					
 			Types.NPCTypes.NEED_ITEM:
-				
-				#verifica se tem o item
-				
+
 				var item_wanted : Item
 				item_wanted = player.has_item_on_inventory(npc_wanted.required_item.item_name, true)
 				
 				if item_wanted != null:
-					#verifica se item eh do tipo tradutor
-					if npc_wanted.required_item.item_type == Types.ItemTypes.TRANSLATOR:
-						#se for, pegue o translated dialog
-						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
-						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
 					
+					if npc_wanted.required_item.item_type == Types.ItemTypes.TRANSLATOR:
+						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
 					else:
-						#se nao for, adicione o dialogo extra
 						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
-						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
-				
+						
 					if npc_wanted.reward_item != null and !npc_wanted.has_given_reward:
 						room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 						npc_wanted.has_given_reward = true
 						return_string += "\n" + current_room.get_items_description()
 				
-				#var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				#if player_has_item:
-				#	return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
-				
-			#Types.NPCTypes.ARTIO_GIRAFFE:
-				#var item_wanted : Item
-				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-			#
-				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				#if item_wanted != null:
-					#if !npc_wanted.has_given_reward:
-						#room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
-						#npc_wanted.has_given_reward = true
-						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
-					#else:
-						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
-					#
-				#
-			#Types.NPCTypes.PERISSO_EPONA:
-				#var item_wanted : Item
-				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-			#
-				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				#if item_wanted != null:
-					#room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
-					#current_room.remove_npc(npc_wanted)
-					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
-			#
-			#Types.NPCTypes.ARMALDO:
-				#var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				#
-				#if !player_has_item:
-					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
-	#
 								
 			Types.NPCTypes.SEAL_PUP:
 				var quest : Quest = npc_wanted.quest_related
@@ -360,20 +307,16 @@ func talk(second_word : String) -> String:
 		if npc_wanted.paths_to_unlock.size() > 0:
 			var paths_keys = npc_wanted.paths_to_unlock.keys()
 			for key in paths_keys:
-				#room_manager.connect_exit(current_room.room_name, str(key) , npc_wanted.paths_to_unlock[key])
-				#return_string += "\n" + current_room.get_exits_description()
 				return_string += "\n" + room_manager.connect_exit(current_room.room_name, str(key) , npc_wanted.paths_to_unlock[key])
 				
 		if npc_wanted.disappear_after_talk:
 			current_room.remove_npc(npc_wanted)
 			return_string += "\n" + current_room.remove_npc(npc_wanted)
 			
-		# doesnt need item to reward
 		if npc_wanted.reward_item != null and npc_wanted.required_item == null and !npc_wanted.has_given_reward:
 			room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 			npc_wanted.has_given_reward = true
 			return_string += "\n" + current_room.get_items_description()
-		
 		
 		if return_string == "":		
 			return_string = Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
