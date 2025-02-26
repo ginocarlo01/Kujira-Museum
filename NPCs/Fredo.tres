@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_3l7wg")
 npc_name = "Fredo"
+type = 14
 initial_dialog = "Sou um grande aventureiro e amo o mar. As minhas melhores amigas são baleiazonas, mas também tem o meu querido amigo Baleião, adoro aquele camarada. Apesar de eu ser um pouco menor que um humano normal, sou tão incrível quanto. Também adoro pescar, mas não como peixes. Sim, sim, sei que não faz sentido, mas eu pesco os peixes para conversar com eles. Geralmente faço isso nos finais de semana, a gente troca uma ideia."
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = " Enfim, vejo que você falou com o @NPCArmaldo@END. Porém ele não disse a verdade para você, já que ele não gosta dos humanos, ele se acha um grande predador e não gosta de humanos pois sabe que eles destruíram ainda mais que ele. @NPCArmaldo@END é um dos fundadores do museu, ao lado de Indohyus. @NPCArmaldo@END fez um pacto com um mago e conseguiu prender toda essa praia e essa parte do mar dentro do museu. Não me pergunte como ele fez isso, mas eu sou o único que sabe dessa história. O motivo disso? Eu sou o maior amigo das baleias, e pelo jeito todo o museu foi construído para entender da onde as baleias vieram. Mas aparentemente eles nunca descobriram, o que também explica a raiva de @NPCArmaldo@END…"
-quest_item = ExtResource("1_0komh")
-type = 14
+required_item = ExtResource("1_0komh")
+paths_to_unlock = {}
+disappear_after_talk = false

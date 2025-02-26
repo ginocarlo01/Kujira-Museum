@@ -7,6 +7,20 @@ enum ItemTypes {
 	TRANSLATOR
 }
 
+enum SpeedTypes {
+	NONE,
+	SLOW,
+	NORMAL,
+	FAST
+}
+
+const SpeedValues = {
+	SpeedTypes.NONE: 0.0,
+	SpeedTypes.SLOW: 0.1,
+	SpeedTypes.NORMAL: 0.05,
+	SpeedTypes.FAST: 0.02
+}
+
 enum NPCTypes{
 	DEFAULT,
 	SCIENTIST,
@@ -22,7 +36,9 @@ enum NPCTypes{
 	LOVE_ARMALDO,
 	ROGER,
 	NEED_TRANSLATOR,
-	NEED_ITEM
+	NEED_ITEM,
+	GIVE_QUEST,
+	COMPLETE_QUEST
 	
 }
 

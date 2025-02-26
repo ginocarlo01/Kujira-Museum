@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_i07qk")
 npc_name = "Porcão"
+type = 14
 initial_dialog = "ronc ronc roncão"
 post_quest_dialog = ""
 translated_dialog = "Olá ! Eu sou o porcão. Sei que você deve estar achando tudo estranho, porém falar com os animais é muito divertido. Você está com cara de quem não sabe o que fazer. Fale com o meu filho, talvez ele possa te dar uma dica de onde ir…!"
 extra_dialog = ""
-quest_item = ExtResource("1_a5yv5")
-type = 13
+required_item = ExtResource("1_a5yv5")
+paths_to_unlock = {}
+disappear_after_talk = false

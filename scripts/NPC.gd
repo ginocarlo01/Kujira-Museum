@@ -2,15 +2,22 @@ extends Resource
 class_name NPC
 
 @export var npc_name = "NPC name"
+
+@export var type : Types.NPCTypes
+
 @export_multiline var initial_dialog = ""
 @export_multiline var post_quest_dialog = ""
 @export_multiline var translated_dialog = ""
 @export_multiline var extra_dialog = ""
 
-@export var quest_item : Item
-@export var reward_item : Item
-@export var type : Types.NPCTypes
 @export var quest_related : Quest
+@export var quest_item : Item 
+@export var reward_for_quest_item : Item #given after you give the quest item
+
+@export var required_item : Item #used to unlock extra dialog or translation
+@export var reward_item : Item #given after you talk to the npc
+@export var paths_to_unlock: Dictionary #direction, Room\
+@export var disappear_after_talk = false
 
 var has_received_quest_item := false
 var has_given_reward := false

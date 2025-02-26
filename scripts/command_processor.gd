@@ -4,7 +4,8 @@ var current_room : Room = null
 var player : Player = null
 var room_manager : RoomManager = null
 
-signal speed_changed(value)
+var current_speed : Types.SpeedTypes = Types.SpeedTypes.NORMAL
+signal speed_changed(value : Types.SpeedTypes)
 
 func initialize(starting_room, player, room_manager : RoomManager) -> String:
 	self.player = player
@@ -60,30 +61,55 @@ func process_command(input : String) -> String:
 			
 func go(second_word : String) -> String:
 	if second_word == "":
+		change_speed_by_enum(Types.SpeedTypes.NONE)
 		return Types.wrap_system_text("Ir aonde?")
 	
 	if current_room.exits.keys().has(second_word):
 		if !current_room.check_exit_locked(second_word):
+			change_speed_by_enum(current_speed)
 			var change_response = change_room(current_room.exits[second_word].get_other_room(current_room))
 			return "\n".join(PackedStringArray(["Você foi para " + Types.wrap_location_text(second_word), change_response]))
 		else:
+			change_speed_by_enum(Types.SpeedTypes.NONE)
 			return "A saída para " + Types.wrap_location_text(second_word) + " está " + Types.wrap_system_text("bloqueada!")
 	else:	
+		change_speed_by_enum(Types.SpeedTypes.NONE)
 		return Types.wrap_system_text("Essa não é uma direção válida...")
 
 func change_speed(second_word : String) -> String:
 	if second_word == "":
 		return Types.wrap_system_text("lenta, normal ou rápida?")
 	
-	if second_word in ["lenta", "normal", "rápida"]:
-		speed_changed.emit(second_word)
+	var speed_type : Types.SpeedTypes
+	
+	if second_word in ["lenta", "normal", "rápida", "nula"]:
+		match second_word:
+			"lenta":
+				speed_type = Types.SpeedTypes.SLOW   # Lento
+			"normal":
+				speed_type = Types.SpeedTypes.NORMAL   # Normal
+			"rápida":
+				speed_type = Types.SpeedTypes.FAST   # Rápido
+			"nula":
+				speed_type = Types.SpeedTypes.NONE   # Rápido
+			_:
+				speed_type = Types.SpeedTypes.NONE  # Valor default (normal)
+				
+		change_current_text_speed(speed_type)
+		change_speed_by_enum(speed_type)
 		return "Velocidade alterada para " + Types.wrap_system_text(second_word)
 	else:
 		return "Esse valor de velocidade não é válido. Escolha entre lenta, normal ou rápida"
-		
+	
+func change_speed_by_enum(new_speed : Types.SpeedTypes):
+	speed_changed.emit(new_speed)
+	
+func change_current_text_speed(new_speed : Types.SpeedTypes):
+	current_speed = new_speed
 		
 func take(second_word : String) -> String:
 	if second_word == "":
+		change_speed_by_enum(Types.SpeedTypes.NONE)
 		return Types.wrap_system_text("Pegar o que?")
 		
 	var item_wanted : Item
@@ -93,16 +119,21 @@ func take(second_word : String) -> String:
 	if item_wanted != null:
 		current_room.remove_item(item_wanted)
 		player.take_item(item_wanted)
+		change_speed_by_enum(current_speed)
 		return "Você pegou " + Types.wrap_item_text(item_wanted.item_name)
 		
+	change_speed_by_enum(current_speed)
 	return Types.wrap_system_text("Aqui não tem nenhum item com esse nome...")
 	
 func describe_item(second_word : String, third_word : String = "") -> String:	
 	if second_word == "":
+		change_speed_by_enum(Types.SpeedTypes.NONE)
 		return Types.wrap_system_text("Descrever o que?")
 		
 	var item_wanted : Item
 	var item_wanted_name : String
+	
+	change_speed_by_enum(current_speed)
 	
 	if third_word == "":
 		item_wanted_name = second_word.to_lower()
@@ -122,6 +153,7 @@ func describe_item(second_word : String, third_word : String = "") -> String:
 	
 	
 func drop(second_word : String) -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
 		return Types.wrap_system_text("Dropar o que?")
 		
@@ -131,11 +163,13 @@ func drop(second_word : String) -> String:
 	
 	if item_wanted != null:
 		current_room.add_item(item_wanted)
+		change_speed_by_enum(current_speed)
 		return player.drop_item(item_wanted)
 	else:
 		return Types.wrap_system_text("Você não tem esse item no seu inventário.")
 	
 func use(second_word : String, third_word : String) -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
 		return Types.wrap_system_text("Usar o que?")
 		
@@ -151,6 +185,7 @@ func use(second_word : String, third_word : String) -> String:
 			Types.ItemTypes.KEY:
 				if current_room.exits.keys().has(third_word):
 					player.drop_item(item_wanted)
+					change_speed_by_enum(current_speed)
 					return current_room.unlock_exit(third_word, current_room)
 					
 				else:
@@ -161,6 +196,7 @@ func use(second_word : String, third_word : String) -> String:
 	return Types.wrap_system_text("Você não tem esse item no seu inventário.")
 	
 func give(second_word : String, third_word : String) -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
 		return Types.wrap_system_text("Dar o que?")
 		
@@ -179,6 +215,8 @@ func give(second_word : String, third_word : String) -> String:
 				npc_wanted.receive_quest_item()
 				
 				var reward : Item
+				change_speed_by_enum(current_speed)
+				
 				if npc_wanted.reward_item != null:
 					reward = npc_wanted.give_reward_to_player()
 					player.take_item(reward, false)
@@ -193,66 +231,99 @@ func give(second_word : String, third_word : String) -> String:
 	return Types.wrap_system_text("This is not a valid item from your inventory.")
 	
 func talk(second_word : String) -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	if second_word == "":
 		return Types.wrap_system_text("Talk to whom?")
 		
 	var npc_wanted : NPC
+	var return_string : String = ""
 	
 	npc_wanted = current_room.is_npc_on_room(second_word.to_lower())
 		
 	if npc_wanted != null:
+		change_speed_by_enum(current_speed)
 		var npc_type : Types.NPCTypes = npc_wanted.get_type()
+		
+		
 		match npc_type:
 			
-			Types.NPCTypes.SCIENTIST:
-				room_manager.connect_exit("SalaCientista", "oeste", "ArmazemCientista")
-				room_manager.connect_exit("SalaCientista", "norte", "Pocilga")
-				current_room.remove_npc(npc_wanted)
-				return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) + "\n" + current_room.get_exits_description()
+			Types.NPCTypes.GIVE_QUEST:
+				if !npc_wanted.has_talked_to_npc:
+					return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) # + "\n" + current_room.get_exits_description()
+					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\" \n" + player.add_quest(npc_wanted.quest_related) + "\n" + current_room.get_exits_description()
 			
-			Types.NPCTypes.NEED_TRANSLATOR:
-				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				
-				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				if item_wanted != null:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
-				
+			Types.NPCTypes.COMPLETE_QUEST:
+				if !npc_wanted.has_talked_to_npc:
+					var quest : Quest = npc_wanted.quest_related
+					return_string += player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+					#return player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+			
+			#Types.NPCTypes.NEED_TRANSLATOR:
+				#var item_wanted : Item
+				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				#
+				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				#if item_wanted != null:
+					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
+				#
 			Types.NPCTypes.NEED_ITEM:
-				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-				if player_has_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
 				
-			Types.NPCTypes.ARTIO_GIRAFFE:
+				#verifica se tem o item
+				
 				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-			
-				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				item_wanted = player.has_item_on_inventory(npc_wanted.required_item.item_name, true)
+				
 				if item_wanted != null:
-					if !npc_wanted.has_given_reward:
+					#verifica se item eh do tipo tradutor
+					if npc_wanted.required_item.item_type == Types.ItemTypes.TRANSLATOR:
+						#se for, pegue o translated dialog
+						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
+						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\""
+					
+					else:
+						#se nao for, adicione o dialogo extra
+						return_string += Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
+						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
+				
+					if npc_wanted.reward_item != null and !npc_wanted.has_given_reward:
 						room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
 						npc_wanted.has_given_reward = true
-						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
-					else:
-						return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
-					
+						return_string += "\n" + current_room.get_items_description()
 				
-			Types.NPCTypes.PERISSO_EPONA:
-				var item_wanted : Item
-				item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
-			
-				# DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
-				if item_wanted != null:
-					room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
-					current_room.remove_npc(npc_wanted)
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
-			
-			Types.NPCTypes.ARMALDO:
-				var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				#var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				#if player_has_item:
+				#	return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\""
 				
-				if !player_has_item:
-					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
-	
+			#Types.NPCTypes.ARTIO_GIRAFFE:
+				#var item_wanted : Item
+				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+			#
+				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				#if item_wanted != null:
+					#if !npc_wanted.has_given_reward:
+						#room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
+						#npc_wanted.has_given_reward = true
+						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
+					#else:
+						#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_items_description()
+					#
+				#
+			#Types.NPCTypes.PERISSO_EPONA:
+				#var item_wanted : Item
+				#item_wanted = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+			#
+				## DIALOGUE IF THE PLAYER HAS THE TRANSLATOR	
+				#if item_wanted != null:
+					#room_manager.connect_exit("Estabulo", "leste", "ExposicaoMar1")
+					#current_room.remove_npc(npc_wanted)
+					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_translated_dialog() + "\"" + "\n" + current_room.get_exits_description()
+			#
+			#Types.NPCTypes.ARMALDO:
+				#var player_has_item = player.has_item_on_inventory(npc_wanted.quest_item.item_name, true)
+				#
+				#if !player_has_item:
+					#return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + npc_wanted.get_extra_dialog() + "\"" + "\n" + player.take_item(npc_wanted.give_reward_to_player())
+	#
 								
 			Types.NPCTypes.SEAL_PUP:
 				var quest : Quest = npc_wanted.quest_related
@@ -283,27 +354,47 @@ func talk(second_word : String) -> String:
 				elif !player_has_quest and item_wanted == null and npc_given_item:
 					return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_post_dialog()
 			
-			Types.NPCTypes.ROGER:
-				if !npc_wanted.has_talked_to_npc:
-					var quest : Quest = npc_wanted.quest_related
-					return player.remove_quest(quest) + "\n"+ Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
 			_:
 				pass
+		
+		if npc_wanted.paths_to_unlock.size() > 0:
+			var paths_keys = npc_wanted.paths_to_unlock.keys()
+			for key in paths_keys:
+				#room_manager.connect_exit(current_room.room_name, str(key) , npc_wanted.paths_to_unlock[key])
+				#return_string += "\n" + current_room.get_exits_description()
+				return_string += "\n" + room_manager.connect_exit(current_room.room_name, str(key) , npc_wanted.paths_to_unlock[key])
 				
-		return Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+		if npc_wanted.disappear_after_talk:
+			current_room.remove_npc(npc_wanted)
+			return_string += "\n" + current_room.remove_npc(npc_wanted)
+			
+		# doesnt need item to reward
+		if npc_wanted.reward_item != null and npc_wanted.required_item == null and !npc_wanted.has_given_reward:
+			room_manager.add_item(current_room, npc_wanted.reward_item.item_name)
+			npc_wanted.has_given_reward = true
+			return_string += "\n" + current_room.get_items_description()
+		
+		
+		if return_string == "":		
+			return_string = Types.wrap_npc_text(npc_wanted.npc_name) + ": \"" + npc_wanted.get_dialog() + "\""
+		return return_string
 	
 	return Types.wrap_system_text("Essa pessoa não está aqui!")
 	
 func inventory() -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	return player.get_inventory()
 	
 func quests() -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	return player.get_quests()
 	
 func exits() -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	return current_room.get_exits_description()
 	
 func help() -> String:
+	change_speed_by_enum(Types.SpeedTypes.NONE)
 	return "\n".join(PackedStringArray([
 		"Você pode usar os comandos abaixo: ",
 		" ir " + Types.wrap_location_text("[direção ou local]") + ",",
@@ -322,6 +413,8 @@ func help() -> String:
 	]))
 	
 func change_room(new_room : Room) -> String:
+	change_speed_by_enum(current_speed)
+	
 	if current_room != null:
 		if current_room.audio != new_room.audio and new_room.audio != null:
 			new_room.play_audio()

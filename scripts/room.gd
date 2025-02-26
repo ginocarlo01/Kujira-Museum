@@ -34,8 +34,9 @@ func remove_item(item: Item):
 func add_npc(npc: NPC):
 	npcs.append(npc)
 	
-func remove_npc(npc: NPC):
+func remove_npc(npc: NPC) -> String:
 	npcs.erase(npc)
+	return Types.wrap_npc_text(npc.npc_name) + " " + "desapareceu..."
 	
 func get_full_description() -> String:
 	var full_description = PackedStringArray([get_room_description()])

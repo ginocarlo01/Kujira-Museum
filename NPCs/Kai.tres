@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_0oydw")
 npc_name = "Kai"
+type = 14
 initial_dialog = "toc reeeenc"
 post_quest_dialog = ""
 translated_dialog = "Finalmente você pode me entender! Meu nome é @NPCKai@END, depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
 extra_dialog = ""
-quest_item = ExtResource("1_rqop5")
-type = 13
+required_item = ExtResource("1_rqop5")
+paths_to_unlock = {}
+disappear_after_talk = false

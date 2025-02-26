@@ -7,10 +7,12 @@
 [resource]
 script = ExtResource("1_mybyk")
 npc_name = "Girafona"
+type = 14
 initial_dialog = "nfwiufw jdjdadjq jxjxjxjx zzzz"
 post_quest_dialog = ""
 translated_dialog = "Acho que me transferiram para a sala errada… E ainda me deixaram com uma @ITEMchave@END… Vou deixar ela ali no meio da grama, se quiser pegar para você hahaha…"
 extra_dialog = ""
-quest_item = ExtResource("1_0jx2d")
+required_item = ExtResource("1_0jx2d")
 reward_item = ExtResource("2_xomhe")
-type = 3
+paths_to_unlock = {}
+disappear_after_talk = false

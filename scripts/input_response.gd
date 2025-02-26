@@ -5,7 +5,7 @@ extends MarginContainer
 @onready var response_label = $Rows/Response
 
 # Função que vai animar a escrita do texto
-func set_text(response: String, input: String = "", speed: String = "normal") -> void:
+func set_text(response: String, input: String = "", speed: Types.SpeedTypes = Types.SpeedTypes.NORMAL) -> bool:
 	# Se o input não for vazio, define o texto do input_label
 	if input == "":
 		input_label.queue_free()
@@ -14,21 +14,23 @@ func set_text(response: String, input: String = "", speed: String = "normal") ->
 	
 	# Define a velocidade para cada tipo
 	var delay_time: float
-	match speed:
-		"lenta":
-			delay_time = 0.1    # Lento
-		"normal":
-			delay_time = 0.05   # Normal
-		"rápida":
-			delay_time = 0.02   # Rápido
-		"none":
-			delay_time = 0.0   # Rápido
-		_:
-			delay_time = 0.05   # Valor default (normal)
-	
+	delay_time = Types.SpeedValues[speed]
+	#match speed:
+		#"lenta":
+			#delay_time = 0.1    # Lento
+		#"normal":
+			#delay_time = 0.05   # Normal
+		#"rápida":
+			#delay_time = 0.02   # Rápido
+		#"none":
+			#delay_time = 0.0   # Rápido
+		#_:
+			#delay_time = 0.05   # Valor default (normal)
+	#
 	# Limpa o texto anterior e inicia a animação
 	response_label.text = ""
 	await _animate_text(response, delay_time)
+	return true
 
 
 # Função que processa todo o texto de uma vez (respeitando as regras de formatação)

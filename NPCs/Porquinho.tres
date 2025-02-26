@@ -6,9 +6,11 @@
 [resource]
 script = ExtResource("1_t17tn")
 npc_name = "Porquinho"
+type = 14
 initial_dialog = "ronc ronc ronquinho"
 post_quest_dialog = ""
 translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o @LOCATIONnorte@END"
 extra_dialog = ""
-quest_item = ExtResource("1_4xdus")
-type = 13
+required_item = ExtResource("1_4xdus")
+paths_to_unlock = {}
+disappear_after_talk = false
