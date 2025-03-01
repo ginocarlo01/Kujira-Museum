@@ -223,11 +223,11 @@ func give(second_word : String, third_word : String) -> String:
 				else:
 					return player.give_item(item_wanted) + " para " + Types.wrap_npc_text(third_word) 
 			else:
-				return Types.wrap_system_text("This person doesn't need this item")
+				return Types.wrap_system_text("Essa pessoa não precisa deste item")
 				
-		return Types.wrap_system_text("There no person with this name in this room")
+		return Types.wrap_system_text("Não tem ninguém aqui com esse nome")
 			
-	return Types.wrap_system_text("This is not a valid item from your inventory.")
+	return Types.wrap_system_text("Esse não é um item válido do seu inventário.")
 	
 func talk(second_word : String) -> String:
 	change_speed_by_enum(Types.SpeedTypes.NONE)

@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("1_oobos")
 npc_name = "Indohyus"
-type = 15
+type = 2
 initial_dialog = "Sou o lendário Indohyus. Muitos predadores tentaram me assassinar, mas graças a minha agilidade, fugia para os mares e eles desistiam de me perseguir. Bons tempos… Agora estou velho e mal consigo me locomover. Se você conseguir achar um @ITEMdocumento@END para mim, seria incrível. Ele tem dados sobre minhas pesquisas, mas acabei perdendo ele por perto."
 post_quest_dialog = "Obrigado pelo documento, meu querido humano. Você parece um ser curioso, então te darei algo novo para aprender... Eu e as baleias temos várias semelhanças, mas poucos sabem disso. Somos muito próximos, tem várias baleias que almoçam na casa da minha vó de domingo e um de meus primos já até deixou herança pra uma baleia. Pois é, bem próximos mesmo."
 translated_dialog = ""

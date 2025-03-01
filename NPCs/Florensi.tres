@@ -6,11 +6,12 @@
 [resource]
 script = ExtResource("1_xvhcr")
 npc_name = "Florensi"
-type = 14
+type = 1
 initial_dialog = "Olááááá, meu nome completo é Homo floresiensis, mas pode me chamar de Florensi mesmo. Vivo nesta ilha em muita paz, espero nunca ser morto por seres de maior estatura que eu."
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = " Não acredito que você tem uma @ITEMconchinha@END no seu inventário. Que item incrível !! Meus parabéns por explorar a praia, você é uma pessoa aventureira."
 required_item = ExtResource("1_k5kqi")
 paths_to_unlock = {}
+can_unlock_path = true
 disappear_after_talk = false

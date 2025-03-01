@@ -1,37 +1,33 @@
 extends MarginContainer
+class_name Input_Response
 
 @onready var zebra = $Zebra
 @onready var input_label = $Rows/InputHistory
 @onready var response_label = $Rows/Response
 
+var finished_set_text : bool = false
+var cancel_animation : bool = false
+
+func cancel_text_animation():
+	cancel_animation = true
+
 # Função que vai animar a escrita do texto
 func set_text(response: String, input: String = "", speed: Types.SpeedTypes = Types.SpeedTypes.NORMAL) -> bool:
+	cancel_animation = false
+	
 	# Se o input não for vazio, define o texto do input_label
 	if input == "":
 		input_label.queue_free()
 	else:
 		input_label.text = " > " + input
 	
-	# Define a velocidade para cada tipo
 	var delay_time: float
 	delay_time = Types.SpeedValues[speed]
-	#match speed:
-		#"lenta":
-			#delay_time = 0.1    # Lento
-		#"normal":
-			#delay_time = 0.05   # Normal
-		#"rápida":
-			#delay_time = 0.02   # Rápido
-		#"none":
-			#delay_time = 0.0   # Rápido
-		#_:
-			#delay_time = 0.05   # Valor default (normal)
-	#
-	# Limpa o texto anterior e inicia a animação
+
 	response_label.text = ""
 	await _animate_text(response, delay_time)
+	finished_set_text = true
 	return true
-
 
 # Função que processa todo o texto de uma vez (respeitando as regras de formatação)
 func _process_all_text(text: String) -> String:
@@ -47,7 +43,7 @@ func _animate_text(text: String, delay_time: float) -> void:
 		return
 	
 	while i < text.length():
-		if Input.is_key_pressed(KEY_CTRL):
+		if Input.is_key_pressed(KEY_CTRL) or cancel_animation:
 			response_label.text = _process_all_text(text)
 			return
 
@@ -64,7 +60,7 @@ func _animate_text(text: String, delay_time: float) -> void:
 			# 2. Captura e anima o texto entre o ']' e o próximo '['
 			var middle_text: String = ""
 			while i < text.length() and text[i] != '[':
-				if Input.is_key_pressed(KEY_CTRL):
+				if Input.is_key_pressed(KEY_CTRL) or cancel_animation:
 					response_label.text = _process_all_text(text)
 					return
 

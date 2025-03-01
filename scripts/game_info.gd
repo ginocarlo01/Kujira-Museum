@@ -13,6 +13,7 @@ extends PanelContainer
 var should_zebra := false
 
 const INPUT_RESPONSE = preload("res://scenes/input_response.tscn")
+var last_input_response : Input_Response = null
 
 func _ready() -> void:
 	scrollbar.changed.connect(_handle_scrollbar_changed)
@@ -21,6 +22,7 @@ func _ready() -> void:
 # Public Functions:
 func create_response(response_text : String, fast_response = false) -> bool:
 	var response = INPUT_RESPONSE.instantiate()
+	
 	_add_response_to_history(response)
 	if fast_response: 
 		return await response.set_text(response_text, "", Types.SpeedTypes.NONE)
@@ -44,6 +46,11 @@ func _delete_history_beyond_limit():
 		history_rows.get_children()[0].queue_free()
 
 func _add_response_to_history(response: Control):
+	#TODO: parar texto antes de comecar o novo
+	if last_input_response != null:
+		if !last_input_response.finished_set_text:
+			last_input_response.cancel_text_animation()
+	last_input_response = response
 	history_rows.add_child(response)
 	if !should_zebra:
 		response.zebra.hide()
