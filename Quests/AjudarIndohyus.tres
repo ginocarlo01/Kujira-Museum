@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://dq8jglifj4gdy"]
+
+[ext_resource type="Script" path="res://scripts/Quest.gd" id="1_ko0y2"]
+
+[resource]
+script = ExtResource("1_ko0y2")
+quest_name = "Ajudar o Indohyus"
+quest_description = "Ajude essa lenda a conseguir seu documento de volta"

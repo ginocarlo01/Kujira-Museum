@@ -10,13 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Godot Retro Text Adventure"
+config/name="Kujira Museum"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Visual/image2vector.svg"
 
 [autoload]
 
+SoundManager="*res://scripts/globals/Sound_manager.gd"
 Types="*res://scripts/globals/Types.gd"
 
 [rendering]

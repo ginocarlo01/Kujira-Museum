@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://m2o3ripka4j7"]
+
+[ext_resource type="Texture2D" uid="uid://c4aauffijegne" path="res://NPC_pictures/porquinho.png" id="1_1k8oy"]
+[ext_resource type="Resource" uid="uid://bso3537aw26ko" path="res://Items/translator_arti.tres" id="1_4xdus"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_t17tn"]
+
+[resource]
+script = ExtResource("1_t17tn")
+npc_name = "Porquinho"
+type = 1
+initial_dialog = "ronc ronc ronquinho"
+post_quest_dialog = ""
+translated_dialog = "Papai ! Papai ! Vou passear pela saída secreta. Vou para o @LOCATIONnorte@END"
+extra_dialog = ""
+required_item = ExtResource("1_4xdus")
+paths_to_unlock = {}
+can_unlock_path = false
+disappear_after_talk = false
+picture = ExtResource("1_1k8oy")

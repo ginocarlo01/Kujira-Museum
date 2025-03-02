@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2bdos3uc656x"]
+
+[ext_resource type="Script" path="res://scripts/game_info.gd" id="1_j35b5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dls55"]
+bg_color = Color(0.336497, 0.346106, 0.308281, 1)
+
+[node name="GameInfo" type="PanelContainer"]
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dls55")
+script = ExtResource("1_j35b5")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HistoryRows" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20

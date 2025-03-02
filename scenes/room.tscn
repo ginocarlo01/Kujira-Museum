@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://currxaw7xo502"]
 
 [ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_dbqja"]
-[ext_resource type="Script" path="res://room.gd" id="1_my3ek"]
+[ext_resource type="Script" path="res://scripts/room.gd" id="1_my3ek"]
 
 [node name="Room" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 200)

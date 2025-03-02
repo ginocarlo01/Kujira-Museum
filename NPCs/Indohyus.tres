@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=6 format=3 uid="uid://cmwjdlcx0e1fw"]
+
+[ext_resource type="Resource" uid="uid://d08t1u6onh7d" path="res://Items/Documento.tres" id="1_8sagv"]
+[ext_resource type="Texture2D" uid="uid://dltm445r6qcvh" path="res://NPC_pictures/indo.png" id="1_npx4w"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_oobos"]
+[ext_resource type="Resource" uid="uid://lbof3mro76wt" path="res://Items/ChaveCuriosos.tres" id="2_maj80"]
+[ext_resource type="Resource" uid="uid://dq8jglifj4gdy" path="res://Quests/AjudarIndohyus.tres" id="2_vk8fi"]
+
+[resource]
+script = ExtResource("1_oobos")
+npc_name = "Indohyus"
+type = 2
+initial_dialog = "Sou o lendário Indohyus. Muitos predadores tentaram me assassinar, mas graças a minha agilidade, fugia para os mares e eles desistiam de me perseguir. Bons tempos… Agora estou velho e mal consigo me locomover. Se você conseguir achar um @ITEMdocumento@END para mim, seria incrível. Ele tem dados sobre minhas pesquisas, mas acabei perdendo ele por perto."
+post_quest_dialog = "Obrigado pelo documento, meu querido humano. Você parece um ser curioso, então te darei algo novo para aprender... Eu e as baleias temos várias semelhanças, mas poucos sabem disso. Somos muito próximos, tem várias baleias que almoçam na casa da minha vó de domingo e um de meus primos já até deixou herança pra uma baleia. Pois é, bem próximos mesmo."
+translated_dialog = ""
+extra_dialog = ""
+quest_related = ExtResource("2_vk8fi")
+quest_item = ExtResource("1_8sagv")
+reward_for_quest_item = ExtResource("2_maj80")
+paths_to_unlock = {}
+can_unlock_path = true
+disappear_after_talk = false
+picture = ExtResource("1_npx4w")

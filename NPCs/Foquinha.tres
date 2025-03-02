@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=5 format=3 uid="uid://d3a6hwghpdp6d"]
+
+[ext_resource type="Resource" uid="uid://c1ogboyijcqmy" path="res://Items/Tesoura.tres" id="1_8lcns"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_uw2g2"]
+[ext_resource type="Texture2D" uid="uid://7g0obewwqsk8" path="res://NPC_pictures/foquinha.png" id="1_yawce"]
+[ext_resource type="Resource" uid="uid://0fhmjksdfjtd" path="res://Quests/AjudarFoquinha.tres" id="2_5fqkn"]
+
+[resource]
+script = ExtResource("1_uw2g2")
+npc_name = "Foquinha"
+type = 2
+initial_dialog = "Olá !!! Eu preciso de sua ajuda. Como sou uma filhotinha, tenho muitos pelos, o que me deixa lenta na hora de nadar. Eu quero cortar meus pelinhos, mas só minha mãe tem a @ITEMtesoura@END. Tem como você falar com ela??? Por favor !!!"
+post_quest_dialog = "Finalmente posso nadar rapidamente! Obrigado … Como recompensa, agora você pode ir para a @LOCATIONpraia@END"
+translated_dialog = ""
+extra_dialog = ""
+quest_related = ExtResource("2_5fqkn")
+quest_item = ExtResource("1_8lcns")
+paths_to_unlock = {
+"praia": ["Praia", "oeste"]
+}
+can_unlock_path = false
+disappear_after_talk = false
+picture = ExtResource("1_yawce")

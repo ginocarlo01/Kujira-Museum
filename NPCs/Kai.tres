@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://bsjegfdx27wkb"]
+
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_0oydw"]
+[ext_resource type="Texture2D" uid="uid://cl0x15i3qdaet" path="res://NPC_pictures/kai.png" id="1_q4g3n"]
+[ext_resource type="Resource" uid="uid://chtgy4wbjbnlk" path="res://Items/translator_peri.tres" id="1_rqop5"]
+
+[resource]
+script = ExtResource("1_0oydw")
+npc_name = "Kai"
+type = 1
+initial_dialog = "toc reeeenc"
+post_quest_dialog = ""
+translated_dialog = "Finalmente você pode me entender! Meu nome é @NPCKai@END, depois de me perder, nunca mais vi meu dono Arren e vim parar neste local. Mas estou gostando! Tem vários animais e eu posso falar com eles, inclusive com a minha amiga Epona. "
+extra_dialog = ""
+required_item = ExtResource("1_rqop5")
+paths_to_unlock = {}
+can_unlock_path = true
+disappear_after_talk = false
+picture = ExtResource("1_q4g3n")

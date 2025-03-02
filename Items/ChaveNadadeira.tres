@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bqr58kq3kghpx"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_jcxtk"]
+
+[resource]
+script = ExtResource("1_jcxtk")
+item_name = "Nadadeira dorsal"
+item_type = 1
+use_value_description = "As baleias tinham nadadeiras como essas. Tente usar em um barco. "

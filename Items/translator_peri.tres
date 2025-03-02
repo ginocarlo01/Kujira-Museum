@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://chtgy4wbjbnlk"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_t8gql"]
+
+[resource]
+script = ExtResource("1_t8gql")
+item_name = "Tradutor Perissodáctilo"
+item_type = 3
+use_value_description = "Ajuda a traduzir as falas dos animais que possuem números ímpares de dedos"

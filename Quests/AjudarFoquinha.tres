@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://0fhmjksdfjtd"]
+
+[ext_resource type="Script" path="res://scripts/Quest.gd" id="1_hne3x"]
+
+[resource]
+script = ExtResource("1_hne3x")
+quest_name = "Ajudar a Foquinha"
+quest_description = "Foquinha pediu para você falar com a mãe dela, você deve procurar a mãe e ajudar foquinha."

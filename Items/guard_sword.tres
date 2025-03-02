@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://chetv7dkon64e"]
-
-[ext_resource type="Script" path="res://scripts/Item.gd" id="1_dhlrw"]
-
-[resource]
-script = ExtResource("1_dhlrw")
-item_name = "sword"
-item_type = 1
-use_value_description = "Use value description"

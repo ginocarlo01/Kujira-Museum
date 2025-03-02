@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://b58vd8f4uag46"]
+
+[ext_resource type="Texture2D" uid="uid://dr8oaqpb1q5w5" path="res://NPC_pictures/roger.png" id="1_bl6at"]
+[ext_resource type="Script" path="res://scripts/NPC.gd" id="1_dy2wd"]
+[ext_resource type="Resource" uid="uid://cjiqp2paojqhy" path="res://Quests/SalvarRoger.tres" id="1_f37qs"]
+
+[resource]
+script = ExtResource("1_dy2wd")
+npc_name = "Roger Payne"
+type = 2
+initial_dialog = "O que está acontecendo? Quem é você? Estou preocupado, meus experimentos deram errado. Estava pesquisando sobre a origem das baleias… Oh … Oh não … Não consigo sentir meus braços! Me ajude!..."
+post_quest_dialog = "Thanks ! Now you can pass through"
+translated_dialog = ""
+extra_dialog = ""
+quest_related = ExtResource("1_f37qs")
+paths_to_unlock = {
+"norte": ["Pocilga"],
+"oeste": ["Armazém do Cientista"]
+}
+can_unlock_path = true
+disappear_after_talk = true
+picture = ExtResource("1_bl6at")

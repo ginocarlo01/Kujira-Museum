@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bf4n7kk0vwmxi"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_43eip"]
+
+[resource]
+script = ExtResource("1_43eip")
+item_name = "Casca de molusco"
+item_type = 0
+use_value_description = "Um objeto muito lindo que você achou no norte da praia"

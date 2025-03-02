@@ -1,13 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3ifq7sb13vbw"]
+[gd_scene load_steps=17 format=3 uid="uid://b3ifq7sb13vbw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ox0k4"]
 [ext_resource type="Script" path="res://scripts/input.gd" id="1_qo538"]
 [ext_resource type="FontFile" uid="uid://cittna8qf0imp" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="1_w3cli"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_2mk6h"]
-[ext_resource type="Script" path="res://scenes/command_processor.gd" id="2_es8au"]
-[ext_resource type="Script" path="res://room_manager.gd" id="3_5j5y6"]
+[ext_resource type="Script" path="res://scripts/command_processor.gd" id="2_es8au"]
+[ext_resource type="Script" path="res://scripts/globals/Sound_manager.gd" id="2_yvk3h"]
+[ext_resource type="Script" path="res://scripts/room_manager.gd" id="3_5j5y6"]
 [ext_resource type="PackedScene" uid="uid://currxaw7xo502" path="res://scenes/room.tscn" id="3_66d0a"]
 [ext_resource type="PackedScene" uid="uid://d2bdos3uc656x" path="res://scenes/game_info.tscn" id="6_dbgmv"]
+[ext_resource type="AudioStream" uid="uid://cuxsyyntuh5n7" path="res://Soundtrack/pokemongeral.mp3" id="12_u8hwa"]
+[ext_resource type="AudioStream" uid="uid://0qr4lct3jhfd" path="res://Soundtrack/pokemon.mp3" id="13_b31ix"]
+[ext_resource type="AudioStream" uid="uid://fraoc2hy3kbj" path="res://Soundtrack/celeste.mp3" id="14_8xuw1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
 bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
@@ -28,6 +32,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ox0k4")
+initial_text = "Você é um humano e foi em um museu de criaturas aquáticas. De repente, há um grande barulho, a luz apaga e quando acende novamente, todas as pessoas que estavam com você desapareceram. Perdido, você procura as salas do museu para entender o que ocorreu e encontrar uma saída. "
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("2_yvk3h")
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_2mk6h")
@@ -38,60 +46,152 @@ script = ExtResource("2_es8au")
 [node name="RoomManager" type="Node" parent="."]
 script = ExtResource("3_5j5y6")
 
-[node name="House" parent="RoomManager" instance=ExtResource("3_66d0a")]
+[node name="Palco inicial" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = 59.0
 offset_top = -522.0
 offset_right = 309.0
 offset_bottom = -322.0
-room_name = "House"
+room_name = "Palco inicial"
+room_description = "Você está na sala inicial do museu. Na sua frente, modelos de lulas gigantes são engolidos por um grande cachalote. Você fica impressionado com o nível de detalhes nas molduras e por um momento até esquece do fato de que está em um museu."
+audio = ExtResource("12_u8hwa")
 
-[node name="Garden" parent="RoomManager" instance=ExtResource("3_66d0a")]
+[node name="Sala do Cientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -278.0
 offset_top = -523.0
 offset_right = -28.0
 offset_bottom = -323.0
-room_name = "Garden"
-room_description = "There is a gate"
+room_name = "Sala do Cientista"
+room_description = "Você está em uma sala com vários equipamentos científicos. Todos parecem estar quebrados e há vários barulhos de máquinas defeituosas. Algo definitivamente está errado."
 
-[node name="OutsideRoom" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 444.0
-offset_top = -521.0
-offset_right = 694.0
-offset_bottom = -321.0
-room_name = "outside"
-room_description = "This is the outside of the village"
+[node name="Pocilga" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -285.0
+offset_top = -801.0
+offset_right = -35.0
+offset_bottom = -601.0
+room_name = "Pocilga"
+room_description = "Você está em uma sala com muita grama e vários compartimentos para os animais. "
 
-[node name="ShedRoom" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 450.0
-offset_top = -804.0
-offset_right = 700.0
-offset_bottom = -604.0
-room_name = "a shed"
-room_description = "a dusty old shed used for storage"
+[node name="Armazém do Cientista" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -647.0
+offset_top = -510.0
+offset_right = -397.0
+offset_bottom = -310.0
+room_name = "Armazém do Cientista"
+room_description = "Você está em um armazém, o qual provavelmente foi utilizado pelo pesquisador @NPCRoger@END para guardar seus equipamentos."
 
-[node name="Forest" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 821.0
-offset_top = -532.0
-offset_right = 1071.0
-offset_bottom = -332.0
-room_name = "forest"
-room_description = "forest"
+[node name="Estábulo" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -285.0
+offset_top = -1078.0
+offset_right = -35.0
+offset_bottom = -878.0
+room_name = "Estábulo"
+room_description = "Você está em uma sala com vários compartimentos e muito feno. O cheiro dos cavalos é forte por aqui. "
 
-[node name="SmallHouse" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 1165.0
-offset_top = -538.0
-offset_right = 1415.0
-offset_bottom = -338.0
-room_name = "Small House"
-room_description = "its a good house"
+[node name="Armazém dos cavalos" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = -299.0
+offset_top = -1338.0
+offset_right = -25.0
+offset_bottom = -1138.0
+room_name = "Armazém dos cavalos"
+room_description = "Você está em um cômodo sem nenhum ser vivo. Você sente um silêncio estranho. Então, decide procurar pela sala em busca de algo…"
 
-[node name="EndPath" parent="RoomManager" instance=ExtResource("3_66d0a")]
-offset_left = 827.0
-offset_top = -249.0
-offset_right = 1077.0
-offset_bottom = -49.0
-room_name = "End of the Path"
-room_description = "End of the Path"
+[node name="Exposição Marinha 1" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 55.0
+offset_top = -798.0
+offset_right = 305.0
+offset_bottom = -598.0
+room_name = "Exposição Marinha 1"
+room_description = "Você está em um local incrível. De repente, é como se estivesse debaixo da água. Ao mesmo tempo que você está respirando normalmente, você consegue sentir a água em sua pele."
+
+[node name="Exposição Marinha 2" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 442.0
+offset_top = -798.0
+offset_right = 716.0
+offset_bottom = -590.0
+room_name = "Exposição Marinha 2"
+room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça em um quebra-cabeça…"
+
+[node name="Exposição Marinha 3" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 58.0
+offset_top = -1170.0
+offset_right = 332.0
+offset_bottom = -862.0
+room_name = "Exposição Marinha 3"
+room_description = "Você está em um local com vários quadros e painéis interativos. Cada um deles mostra a evolução dos seres vivos. Mas, na verdade, todos se conectam. Eles estão mostrando um caminho até a origem das baleias ! Mas uma parte está apagada, como se faltasse uma peça um quebra-cabeça…"
+
+[node name="Praia" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 828.0
+offset_top = -802.0
+offset_right = 1102.0
+offset_bottom = -494.0
+room_name = "Praia"
+room_description = "Você está na praia. Ao sentir a areia, você se sente confortável e observa o lindo mar. Quando o vento frio bateu em seu rosto, você se lembrou de todos os seres vivos que descobriu até agora, mas também refletiu sobre as pesquisas que foram levadas neste museu misterioso. E como é possível ter uma praia dentro de um museu…"
+
+[node name="Ilha de Flores" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1199.0
+offset_top = -406.0
+offset_right = 1473.0
+offset_bottom = -48.0
+room_name = "Ilha de Flores"
+room_description = "Você está na Ilha de Flores. Aqui há um grande vulcão e várias florestas tropicais. Mitos dizem que aqui vivia uma espécie muito divertida de humanos. "
+
+[node name="Ilha Marôn" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1576.0
+offset_top = -406.0
+offset_right = 1850.0
+offset_bottom = -48.0
+room_name = "Ilha Marôn"
+room_description = "Você está na Ilha Marôn. Há uma grande estátua que lembra um homem pequeno, com óculos e cabelo bem autênticos e uma camisa xadrez. Ele parece estar fazendo um movimento de dança. Ao redor da estátua, há um lago, e nele há vários peixes da família Scombridae. Os peixes parecem entrar e sair da água como se estivessem dançando em homenagem à estátua. "
+audio = ExtResource("13_b31ix")
+
+[node name="Ilha Bugada" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1953.0
+offset_top = -422.0
+offset_right = 2227.0
+offset_bottom = -14.0
+room_name = "Ilha Bugada"
+room_description = "Você está em uma parte da ilha Marôn muito estranha. Tudo começa a falhar, como se a paisagem fosse uma projeção e não algo real. As nuvens começam a se comportar diferentes, como se estivessem sendo controladas. As ondas do mar começam a ir no sentido contrário. Os batimentos do seu coração disparam por medo desses fatores estranhos."
+
+[node name="Sala Final" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 1580.0
+offset_top = 67.0
+offset_right = 1854.0
+offset_bottom = 475.0
+room_name = "Sala Final"
+room_description = "Ao inserir a @ITEMchave jubarte@END em uma porta solta na ilha, um portal se abriu e agora você está em um sala muito semelhante com a sala inicial do museu. Há um vazio, uma escuridão, o que lembra uma grande boca, mas sem dentes. Você está na boca de uma @LOCATIONbaleia jubarte!@END"
+audio = ExtResource("14_8xuw1")
+
+[node name="Casa da praia" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 830.0
+offset_top = -1266.0
+offset_right = 1104.0
+offset_bottom = -908.0
+room_name = "Casa da praia"
+room_description = "Você está no norte da praia. Aqui há uma casa feita de madeira, a qual parece estar abandonada. Apesar disso, ainda há uma cadeira balançando na frente com a brisa do mar. Você entra no local para investigar."
+
+[node name="Fogueira da praia" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 824.0
+offset_top = -403.0
+offset_right = 1098.0
+offset_bottom = -45.0
+room_name = "Fogueira da praia"
+room_description = "Você está no sul da praia. Aqui há uma fogueira, na qual você senta perto e sente o calor em suas mãos. Ao olhar para o horizonte imenso, há um lindo céu, com um sol ensolarado e chuva leve simultaneamente."
+
+[node name="Sala dos curiosos" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 62.0
+offset_top = -1536.0
+offset_right = 336.0
+offset_bottom = -1228.0
+room_name = "Sala dos curiosos"
+room_description = "Você está em uma sala com vários olhos desenhados. O que parecem ser raízes de árvores passam por todas as partes da sala. Esse museu é realmente misterioso, pensa você. No centro da sala, há um trono feito de várias nadadeiras e uma escritura que lembra a palavra “Radiodonta”."
+
+[node name="Sala dos documentos" parent="RoomManager" instance=ExtResource("3_66d0a")]
+offset_left = 434.0
+offset_top = -1164.0
+offset_right = 708.0
+offset_bottom = -856.0
+room_name = "Sala dos documentos"
+room_description = "Você está em uma sala cheia de documentos. Há pilhas e pilhas de folhas, algumas até chegando no teto. Com certeza foram feitas muitas pesquisas aqui, mas qual seria o tema…"
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -115,6 +215,7 @@ theme_override_constants/separation = 20
 
 [node name="GameInfo" parent="Background/MarginContainer/Rows" instance=ExtResource("6_dbgmv")]
 layout_mode = 2
+text_speed = 3
 
 [node name="InputArea" type="PanelContainer" parent="Background/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 60)

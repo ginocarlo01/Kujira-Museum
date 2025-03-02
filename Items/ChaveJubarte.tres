@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://b5f0pxrpkoes4"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_n58yn"]
+
+[resource]
+script = ExtResource("1_n58yn")
+item_name = "Chave Jubarte"
+item_type = 1
+use_value_description = "Talvez essa chave tenha conexão com baleias"

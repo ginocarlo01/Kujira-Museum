@@ -7,7 +7,7 @@ class_name Item
 var use_value = null
 @export var use_value_description := "Use value description"
 
-func initialize(item_name: String, item_type : Types.ItemTypes, use_value):
+func initialize(item_name: String, item_type : Types.ItemTypes, use_value = ""):
 	self.item_name = item_name
 	self.item_type = item_type
 	self.use_value = use_value
