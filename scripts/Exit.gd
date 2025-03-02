@@ -1,10 +1,10 @@
 extends Resource;
 class_name Exit
 
-var room_1 = null
+var room_1 : Room = null
 var room_1_is_locked := false
 
-var room_2 = null
+var room_2 : Room = null
 var room_2_is_locked := false
 
 @export var hidden := false
