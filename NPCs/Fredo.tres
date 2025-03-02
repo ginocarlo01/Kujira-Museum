@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://c2rtndb6xqu4n"]
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://c2rtndb6xqu4n"]
 
 [ext_resource type="Resource" uid="uid://favmlk7aiglh" path="res://Items/Love Spell da Victoria's Secret.tres" id="1_0komh"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_3l7wg"]
+[ext_resource type="Texture2D" uid="uid://bs3ty1axw7jja" path="res://NPC_pictures/frodo.png" id="1_y4mpe"]
 
 [resource]
 script = ExtResource("1_3l7wg")
@@ -15,3 +16,4 @@ required_item = ExtResource("1_0komh")
 paths_to_unlock = {}
 can_unlock_path = true
 disappear_after_talk = false
+picture = ExtResource("1_y4mpe")

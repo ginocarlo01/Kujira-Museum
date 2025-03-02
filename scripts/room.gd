@@ -14,8 +14,7 @@ var items : Array = []
 
 func play_audio():
 	if audio != null:
-		$"../../AudioPlayer".stream = audio
-		$"../../AudioPlayer".play()
+		SoundManager.change_soundtrack(audio)
 	
 func set_room_name(new_name : String):
 	$MarginContainer/Rows/RoomName.text = new_name

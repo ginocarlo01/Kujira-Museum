@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://38xs7nyjhi6j"]
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://38xs7nyjhi6j"]
 
+[ext_resource type="Texture2D" uid="uid://c32kq7fcmvuib" path="res://NPC_pictures/florensi.png" id="1_g36nq"]
 [ext_resource type="Resource" uid="uid://du3oyvwohm6or" path="res://Items/Conchinha.tres" id="1_k5kqi"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_xvhcr"]
 
@@ -15,3 +16,4 @@ required_item = ExtResource("1_k5kqi")
 paths_to_unlock = {}
 can_unlock_path = true
 disappear_after_talk = false
+picture = ExtResource("1_g36nq")

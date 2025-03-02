@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://dgjserc183ib4"]
+[gd_resource type="Resource" script_class="NPC" load_steps=5 format=3 uid="uid://dgjserc183ib4"]
 
 [ext_resource type="Resource" uid="uid://bso3537aw26ko" path="res://Items/translator_arti.tres" id="1_0jx2d"]
+[ext_resource type="Texture2D" uid="uid://d3ie4h08rwlrl" path="res://NPC_pictures/girafona.png" id="1_35i08"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_mybyk"]
 [ext_resource type="Resource" uid="uid://ceut34p8usg2" path="res://Items/Chave Cavalista.tres" id="2_xomhe"]
 
@@ -17,3 +18,4 @@ reward_item = ExtResource("2_xomhe")
 paths_to_unlock = {}
 can_unlock_path = true
 disappear_after_talk = false
+picture = ExtResource("1_35i08")

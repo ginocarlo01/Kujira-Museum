@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3ifq7sb13vbw"]
+[gd_scene load_steps=17 format=3 uid="uid://b3ifq7sb13vbw"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ox0k4"]
 [ext_resource type="Script" path="res://scripts/input.gd" id="1_qo538"]
@@ -12,8 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://cuxsyyntuh5n7" path="res://Soundtrack/pokemongeral.mp3" id="12_u8hwa"]
 [ext_resource type="AudioStream" uid="uid://0qr4lct3jhfd" path="res://Soundtrack/pokemon.mp3" id="13_b31ix"]
 [ext_resource type="AudioStream" uid="uid://fraoc2hy3kbj" path="res://Soundtrack/celeste.mp3" id="14_8xuw1"]
-
-[sub_resource type="AudioStream" id="AudioStream_6tkbf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjdsp"]
 bg_color = Color(0.0666667, 0.266667, 0.0666667, 0.266667)
@@ -35,10 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ox0k4")
 initial_text = "Você é um humano e foi em um museu de criaturas aquáticas. De repente, há um grande barulho, a luz apaga e quando acende novamente, todas as pessoas que estavam com você desapareceram. Perdido, você procura as salas do museu para entender o que ocorreu e encontrar uma saída. "
-
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStream_6tkbf")
-volume_db = -8.602
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("2_yvk3h")
@@ -83,7 +77,7 @@ offset_top = -510.0
 offset_right = -397.0
 offset_bottom = -310.0
 room_name = "Armazém do Cientista"
-room_description = "Você está em um armazém, o qual provavelmente foi utilizado pelo pesquisador Roger para guardar seus equipamentos."
+room_description = "Você está em um armazém, o qual provavelmente foi utilizado pelo pesquisador @NPCRoger@END para guardar seus equipamentos."
 
 [node name="Estábulo" parent="RoomManager" instance=ExtResource("3_66d0a")]
 offset_left = -285.0
@@ -164,7 +158,7 @@ offset_top = 67.0
 offset_right = 1854.0
 offset_bottom = 475.0
 room_name = "Sala Final"
-room_description = "Ao inserir a chave jubarte em uma porta solta na ilha, um portal se abriu e agora você está em um sala muito semelhante com a sala inicial do museu. Há um vazio, uma escuridão, o que lembra uma grande boca, mas sem dentes. Você está na boca de uma baleia jubarte!"
+room_description = "Ao inserir a @ITEMchave jubarte@END em uma porta solta na ilha, um portal se abriu e agora você está em um sala muito semelhante com a sala inicial do museu. Há um vazio, uma escuridão, o que lembra uma grande boca, mas sem dentes. Você está na boca de uma @LOCATIONbaleia jubarte!@END"
 audio = ExtResource("14_8xuw1")
 
 [node name="Casa da praia" parent="RoomManager" instance=ExtResource("3_66d0a")]
@@ -221,6 +215,7 @@ theme_override_constants/separation = 20
 
 [node name="GameInfo" parent="Background/MarginContainer/Rows" instance=ExtResource("6_dbgmv")]
 layout_mode = 2
+text_speed = 3
 
 [node name="InputArea" type="PanelContainer" parent="Background/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 60)

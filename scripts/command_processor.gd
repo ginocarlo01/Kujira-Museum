@@ -6,6 +6,7 @@ var room_manager : RoomManager = null
 
 var current_speed : Types.SpeedTypes = Types.SpeedTypes.NORMAL
 signal speed_changed(value : Types.SpeedTypes)
+signal npc_is_talking(path : String)
 
 func initialize(starting_room, player, room_manager : RoomManager) -> String:
 	self.player = player
@@ -241,6 +242,11 @@ func talk(second_word : String) -> String:
 		
 	if npc_wanted != null:
 		change_speed_by_enum(current_speed)
+		if npc_wanted.picture != null:
+			npc_is_talking.emit(npc_wanted.picture.resource_path)
+		else:
+			npc_is_talking.emit("")
+			
 		var npc_type : Types.NPCTypes = npc_wanted.get_type()
 		
 		match npc_type:
@@ -365,7 +371,7 @@ func change_room(new_room : Room) -> String:
 	change_speed_by_enum(current_speed)
 	
 	if current_room != null:
-		if current_room.audio != new_room.audio and new_room.audio != null:
+		if current_room.audio != new_room.audio and new_room.audio != null and SoundManager.current_room_audio != new_room.audio:
 			new_room.play_audio()
 	else:
 		new_room.play_audio()

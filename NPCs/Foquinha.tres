@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://d3a6hwghpdp6d"]
+[gd_resource type="Resource" script_class="NPC" load_steps=5 format=3 uid="uid://d3a6hwghpdp6d"]
 
 [ext_resource type="Resource" uid="uid://c1ogboyijcqmy" path="res://Items/Tesoura.tres" id="1_8lcns"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_uw2g2"]
+[ext_resource type="Texture2D" uid="uid://7g0obewwqsk8" path="res://NPC_pictures/foquinha.png" id="1_yawce"]
 [ext_resource type="Resource" uid="uid://0fhmjksdfjtd" path="res://Quests/AjudarFoquinha.tres" id="2_5fqkn"]
 
 [resource]
@@ -19,3 +20,4 @@ paths_to_unlock = {
 }
 can_unlock_path = false
 disappear_after_talk = false
+picture = ExtResource("1_yawce")

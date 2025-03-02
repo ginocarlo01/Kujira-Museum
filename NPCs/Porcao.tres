@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://c0ayley5351ei"]
+[gd_resource type="Resource" script_class="NPC" load_steps=4 format=3 uid="uid://c0ayley5351ei"]
 
 [ext_resource type="Resource" uid="uid://bso3537aw26ko" path="res://Items/translator_arti.tres" id="1_a5yv5"]
+[ext_resource type="Texture2D" uid="uid://bc3ejmt0ouosf" path="res://NPC_pictures/porcao.png" id="1_hvx6b"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_i07qk"]
 
 [resource]
@@ -9,9 +10,10 @@ npc_name = "Porcão"
 type = 1
 initial_dialog = "ronc ronc roncão"
 post_quest_dialog = ""
-translated_dialog = "Olá ! Eu sou o porcão. Sei que você deve estar achando tudo estranho, porém falar com os animais é muito divertido. Você está com cara de quem não sabe o que fazer. Fale com o meu filho, talvez ele possa te dar uma dica de onde ir…!"
+translated_dialog = "Olá ! Eu sou o porcão. Sei que você deve estar achando tudo estranho, porém falar com os animais é muito divertido. Você está com cara de quem não sabe o que fazer. Fale com o meu filho @NPCPorquinho@END, talvez ele possa te dar uma dica de onde ir…!"
 extra_dialog = ""
 required_item = ExtResource("1_a5yv5")
 paths_to_unlock = {}
 can_unlock_path = true
 disappear_after_talk = false
+picture = ExtResource("1_hvx6b")

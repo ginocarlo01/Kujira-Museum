@@ -4,14 +4,17 @@ class_name Input_Response
 @onready var zebra = $Zebra
 @onready var input_label = $Rows/InputHistory
 @onready var response_label = $Rows/Response
-
 var finished_set_text : bool = false
 var cancel_animation : bool = false
+var is_npc_talking : bool = false
+var current_text: String = ""
 
 func cancel_text_animation():
 	cancel_animation = true
 
-# Função que vai animar a escrita do texto
+func set_npc_picture(path : String):
+	current_text += "[img]" + path + "[/img] "
+
 func set_text(response: String, input: String = "", speed: Types.SpeedTypes = Types.SpeedTypes.NORMAL) -> bool:
 	cancel_animation = false
 	
@@ -25,17 +28,20 @@ func set_text(response: String, input: String = "", speed: Types.SpeedTypes = Ty
 	delay_time = Types.SpeedValues[speed]
 
 	response_label.text = ""
+	if !is_npc_talking:
+		SoundManager.play_voice(SoundManager.VoiceSounds.typing)
+	else:
+		SoundManager.play_voice(SoundManager.VoiceSounds.talking)
+		
 	await _animate_text(response, delay_time)
+	SoundManager.stop_voice()
 	finished_set_text = true
 	return true
 
-# Função que processa todo o texto de uma vez (respeitando as regras de formatação)
 func _process_all_text(text: String) -> String:
 	return text
 
-# Função que adiciona o texto aos poucos com tratamento especial para trechos delimitados por tags []
 func _animate_text(text: String, delay_time: float) -> void:
-	var current_text: String = ""
 	var i: int = 0
 	
 	if delay_time == 0.0:

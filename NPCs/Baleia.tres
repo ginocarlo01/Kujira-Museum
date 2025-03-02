@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://djvsrmjs7cffj"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://djvsrmjs7cffj"]
 
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_iehiw"]
+[ext_resource type="Texture2D" uid="uid://cw10el5ptxdha" path="res://NPC_pictures/baleia.png" id="1_lxiof"]
 
 [resource]
 script = ExtResource("1_iehiw")
-npc_name = "Baleia Jubarte"
-initial_dialog = "Não ! Não sou herbívoro, na verdade eu sou um carnívoro! Adoro ir em um churrasco com meus manos baleeiros. "
+npc_name = "Baleia"
+type = 0
+initial_dialog = "Não ! Não sou herbívoro, na verdade eu sou um carnívoro! Adoro ir em um churrasco com meus manos baleeiros."
 post_quest_dialog = ""
 translated_dialog = ""
-type = 0
+extra_dialog = ""
+paths_to_unlock = {}
+can_unlock_path = true
+disappear_after_talk = false
+picture = ExtResource("1_lxiof")

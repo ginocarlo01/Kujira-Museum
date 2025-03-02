@@ -19,6 +19,7 @@ class_name NPC
 @export var paths_to_unlock: Dictionary #direction, Room\
 @export var can_unlock_path : bool = true
 @export var disappear_after_talk = false
+@export var picture : Texture2D
 
 var has_received_quest_item := false
 var has_given_reward := false

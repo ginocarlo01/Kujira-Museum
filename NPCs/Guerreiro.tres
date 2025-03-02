@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=5 format=3 uid="uid://bb7pmq2vgxajo"]
+[gd_resource type="Resource" script_class="NPC" load_steps=6 format=3 uid="uid://bb7pmq2vgxajo"]
 
+[ext_resource type="Texture2D" uid="uid://de20mldqhqx72" path="res://NPC_pictures/guerreiro.png" id="1_ila1x"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_kbxec"]
 [ext_resource type="Resource" uid="uid://dr476e8ikrjhv" path="res://Items/Espada.tres" id="1_mhm7w"]
 [ext_resource type="Resource" uid="uid://6k8pfn2bdvb" path="res://Quests/AjudarGuerreiro.tres" id="2_hyw84"]
@@ -19,3 +20,4 @@ reward_for_quest_item = ExtResource("2_xk6ep")
 paths_to_unlock = {}
 can_unlock_path = true
 disappear_after_talk = false
+picture = ExtResource("1_ila1x")

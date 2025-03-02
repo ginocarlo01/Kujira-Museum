@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://dq6favo8q5c0m"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://dq6favo8q5c0m"]
 
+[ext_resource type="Texture2D" uid="uid://dsx4gh2s057ii" path="res://NPC_pictures/hipo.png" id="1_fduw3"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_j78f8"]
 
 [resource]
 script = ExtResource("1_j78f8")
 npc_name = "Hipopótamo"
+type = 0
 initial_dialog = "Opa ! Olha só, um humano, que raridade. Diferente dos outros, você parece ser muito legal. Sabia que todos os meus irmãos são da África? Pois é, poucos sabem dessa curiosidade…"
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = ""
-type = 0
+paths_to_unlock = {}
+can_unlock_path = true
+disappear_after_talk = false
+picture = ExtResource("1_fduw3")

@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="NPC" load_steps=2 format=3 uid="uid://b7lp6lthk8jmk"]
+[gd_resource type="Resource" script_class="NPC" load_steps=3 format=3 uid="uid://b7lp6lthk8jmk"]
 
+[ext_resource type="Texture2D" uid="uid://bo6q3q1vh320s" path="res://NPC_pictures/andrew.png" id="1_bgbv8"]
 [ext_resource type="Script" path="res://scripts/NPC.gd" id="1_jh5dl"]
 
 [resource]
 script = ExtResource("1_jh5dl")
 npc_name = "Andrewsarchus"
+type = 0
 initial_dialog = "Sou o Andrewsarchus. Os mais íntimos me chamam de Andrew, mas nós não somos íntimos assim. Sou um grande pesquisador da Mongólia. Se eu pudesse te dar um ensinamento que resume todas as minhas pesquisas é: “Quanto mais voltamos no tempo, mais semelhantes nós ficamos!”"
 post_quest_dialog = ""
 translated_dialog = ""
 extra_dialog = ""
-type = 0
+paths_to_unlock = {}
+can_unlock_path = true
+disappear_after_talk = false
+picture = ExtResource("1_bgbv8")

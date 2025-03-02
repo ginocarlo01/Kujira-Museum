@@ -11,6 +11,8 @@ extends PanelContainer
 @export var text_speed : Types.SpeedTypes = Types.SpeedTypes.NORMAL
 
 var should_zebra := false
+var is_npc_talking := false
+var npc_picture_path : String
 
 const INPUT_RESPONSE = preload("res://scenes/input_response.tscn")
 var last_input_response : Input_Response = null
@@ -18,12 +20,26 @@ var last_input_response : Input_Response = null
 func _ready() -> void:
 	scrollbar.changed.connect(_handle_scrollbar_changed)
 	command_processor.speed_changed.connect(_set_text_speed)
+	command_processor.npc_is_talking.connect(_npc_is_talking)
+	
+	
+func _npc_is_talking(path : String):
+	npc_picture_path = path
+	is_npc_talking = true
 	
 # Public Functions:
 func create_response(response_text : String, fast_response = false) -> bool:
 	var response = INPUT_RESPONSE.instantiate()
 	
 	_add_response_to_history(response)
+	
+	if is_npc_talking:
+		is_npc_talking = false
+		if npc_picture_path != "":
+			response.set_npc_picture(npc_picture_path)
+		npc_picture_path = ""
+		response.is_npc_talking = true
+	
 	if fast_response: 
 		return await response.set_text(response_text, "", Types.SpeedTypes.NONE)
 	else:
@@ -32,6 +48,11 @@ func create_response(response_text : String, fast_response = false) -> bool:
 func create_response_with_input(response_text : String, input_text : String):
 	var input_response = INPUT_RESPONSE.instantiate()
 	_add_response_to_history(input_response)
+	if is_npc_talking:
+		is_npc_talking = false
+		if npc_picture_path != "":
+			input_response.set_npc_picture(npc_picture_path)
+		input_response.is_npc_talking = true
 	input_response.set_text(response_text, input_text, text_speed)
 
 # Private Functions:
@@ -46,7 +67,6 @@ func _delete_history_beyond_limit():
 		history_rows.get_children()[0].queue_free()
 
 func _add_response_to_history(response: Control):
-	#TODO: parar texto antes de comecar o novo
 	if last_input_response != null:
 		if !last_input_response.finished_set_text:
 			last_input_response.cancel_text_animation()
