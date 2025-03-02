@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Godot Retro Text Adventure"
+config/name="Kujira Museum"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://MPKHZb01.svg"
+config/icon="res://Visual/image2vector.svg"
 
 [autoload]
 
